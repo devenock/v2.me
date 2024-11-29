@@ -1,5 +1,5 @@
 import Link from "next/link"
-import {AiFillGithub, AiFillLinkedin, AiOutlineTwitter} from "react-icons/ai";
+import {AiFillGithub, AiFillLinkedin, AiOutlineGithub, AiOutlineTwitter} from "react-icons/ai";
 
 export default function Footer() {
     return (
@@ -14,14 +14,14 @@ export default function Footer() {
                     </Link>
                 </div>
                 <div className="flex space-x-4">
-                    <Link href="https://linkedin.com" className="hover:opacity-75">
-                        <AiFillLinkedin />
+                    <Link href="https://www.linkedin.com/in/enock-omondi/" className="hover:opacity-75" target="_blank">
+                        <AiFillLinkedin size={24}/>
                     </Link>
-                    <Link href="https://github.com" className="hover:opacity-75">
-                        <AiFillGithub />
+                    <Link href="https://github.com/Trend20" className="hover:opacity-75" target="_blank">
+                        <AiOutlineGithub size={24}/>
                     </Link>
-                    <Link href="https://twitter.com" className="hover:opacity-75">
-                        <AiOutlineTwitter />
+                    <Link href="https://x.com/dev_enock" className="hover:opacity-75" target="_blank">
+                        <AiOutlineTwitter size={24}/>
                     </Link>
                 </div>
             </div>

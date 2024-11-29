@@ -19,7 +19,7 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-     <div className="max-w-screen-xl mx-auto flex flex-col">
+     <div className="max-w-screen-xl mx-auto flex flex-col p-4">
          <Header />
          <main>
              {children}
