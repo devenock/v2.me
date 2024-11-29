@@ -19,11 +19,13 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-      <Header />
-        <main>
-            {children}
-        </main>
-      <Footer />
+     <div className="max-w-screen-xl mx-auto flex flex-col">
+         <Header />
+         <main>
+             {children}
+         </main>
+         <Footer />
+     </div>
       </body>
     </html>
   );
