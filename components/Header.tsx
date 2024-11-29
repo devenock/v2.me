@@ -8,13 +8,13 @@ export default function Header() {
                     ENOCK
                 </Link>
                 <div className="space-x-6">
-                    <Link href="/projects" className="hover:text-gray-600 text-sm">
+                    <Link href="/projects" className="hover:text-gray-600 text-xs">
                         PROJECTS
                     </Link>
-                    <Link href="/blog" className="hover:text-gray-600 text-sm">
+                    <Link href="/blog" className="hover:text-gray-600 text-xs">
                         BLOG
                     </Link>
-                    <Link href="/stack" className="hover:text-gray-600 text-sm">
+                    <Link href="/stack" className="hover:text-gray-600 text-xs">
                         TECH STACK
                     </Link>
                 </div>
