@@ -23,13 +23,12 @@ export default function Description(){
                 <Link href="/projects" className="text-blue-600 hover:underline">
                     projects
                 </Link>{" "}
-                are focused on one thing – to help people learn. You may use these projects to learn about algorithms in
-                JavaScript and get prepared for technical interviews, or to learn Go syntax and start experimenting
+                are focused on helping people learn. You may use these projects to learn Go syntax and start experimenting
                 with CLIs. {" "}
                 <Link href="/blog" className="text-blue-600 hover:underline">
                     articles
                 </Link>{" "}
-                about life, web-development and machine learning.
+                about life, web-development and CLIs.
             </p>
         </div>
     )

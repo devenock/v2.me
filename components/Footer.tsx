@@ -1,15 +1,15 @@
 import Link from "next/link"
-import {AiFillGithub, AiFillLinkedin, AiOutlineGithub, AiOutlineTwitter} from "react-icons/ai";
+import {AiFillLinkedin, AiOutlineGithub, AiOutlineTwitter} from "react-icons/ai";
 
 export default function Footer() {
     return (
         <footer className="py-8">
             <div className="flex w-1/2 justify-between items-center">
                 <div className="flex space-x-4">
-                    <Link href="/subscribe" className="text-gray-600 hover:text-gray-900">
+                    <Link href="#" className="text-gray-600 hover:text-gray-900">
                         Subscribe
                     </Link>
-                    <Link href="/support" className="text-gray-600 hover:text-gray-900">
+                    <Link href="#" className="text-gray-600 hover:text-gray-900">
                         Support
                     </Link>
                 </div>

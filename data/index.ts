@@ -1,6 +1,6 @@
 import { ISkillListItem, SkillLevel } from "@/types";
 
-const skills: ISkillListItem[] = [
+export const skills: ISkillListItem[] = [
     {
         title: "Programming Languages",
         items: [
@@ -143,4 +143,67 @@ const skills: ISkillListItem[] = [
     },
 ];
 
-export default skills;
+
+// projects
+
+export const projects = [
+    {
+        title: "Homemade GPT • JS",
+        icon: "💬",
+        date: "Nov 2024",
+        stars: 61,
+        description: "A minimal TensorFlow.js re-implementation of Karpathy's minGPT (Generative Pre-trained Transformer)",
+        tags: ["GPT", "Transformers", "TensorFlow"],
+        image: "/placeholder.svg?height=400&width=800",
+    },
+    {
+        title: "Micrograd TS",
+        icon: "🤖",
+        date: "Aug 2023",
+        stars: 67,
+        description: "A tiny scalar-valued autograd engine and a neural net on top of it. A TypeScript version of the karpathy/micrograd repo.",
+        tags: ["AI", "ML", "Machine Learning"],
+        image: "/placeholder.svg?height=400&width=800",
+    },
+    {
+        title: "Observations",
+        icon: "👁️",
+        date: "Jun 2023",
+        stars: 0,
+        description: "Subjective graph of observations, assumptions, questions, and interpretations",
+        tags: ["Observations", "Thoughts"],
+        image: "/placeholder.svg?height=400&width=800",
+        hasSource: false,
+    },
+    {
+        title: "Observations",
+        icon: "👁️",
+        date: "Jun 2023",
+        stars: 0,
+        description: "Subjective graph of observations, assumptions, questions, and interpretations",
+        tags: ["Observations", "Thoughts"],
+        image: "/placeholder.svg?height=400&width=800",
+        hasSource: false,
+    },
+    {
+        title: "Observations",
+        icon: "👁️",
+        date: "Jun 2023",
+        stars: 0,
+        description: "Subjective graph of observations, assumptions, questions, and interpretations",
+        tags: ["Observations", "Thoughts"],
+        image: "/placeholder.svg?height=400&width=800",
+        hasSource: false,
+    },
+    {
+        title: "Observations",
+        icon: "👁️",
+        date: "Jun 2023",
+        stars: 0,
+        description: "Subjective graph of observations, assumptions, questions, and interpretations",
+        tags: ["Observations", "Thoughts"],
+        image: "/placeholder.svg?height=400&width=800",
+        hasSource: false,
+    },
+]
+
