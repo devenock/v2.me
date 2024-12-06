@@ -1,4 +1,3 @@
-import SortSelect from "@/components/SortSelect";
 import ProjectCard from "@/components/ProjectCard";
 import {projects} from "@/data";
 
@@ -10,16 +9,7 @@ export default function Page() {
             Here you'll find a collection of my open source projects focused on helping people learn programming,
             algorithms, and machine learning.
             </p>
-            <div className="flex items-center justify-between mb-8">
-                <SortSelect/>
-                <div className="flex items-center gap-2">
-                    <span>Total stars:</span>
-                    <span className="flex items-center font-semibold">
-            ⭐ 244.6K
-          </span>
-                </div>
-            </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-5">
                 {projects.map((project) => (
                     <ProjectCard key={project.title} {...project} />
                 ))}
