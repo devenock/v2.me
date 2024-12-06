@@ -1,4 +1,4 @@
-import { ISkillListItem, SkillLevel } from "@/types";
+import {BlogPost, ISkillListItem, SkillLevel} from "@/types";
 
 export const skills: ISkillListItem[] = [
     {
@@ -206,4 +206,94 @@ export const projects = [
         hasSource: false,
     },
 ]
+
+export const frontendTools = [
+    { name: "Vue", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "React", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "TypeScript", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "JavaScript", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Nuxt", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Tailwind", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Git", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Shopify Liquid", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Formkit", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Node.js", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Redux Toolkit", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Apollo Client", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "MUI", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Pinia", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Directus", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Bootstrap", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Chart.js", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "HTML5", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "CSS3", icon: "/placeholder.svg?height=64&width=64" },
+]
+
+export const backendTools = [
+    { name: "Node.js", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Express", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "PostgreSQL", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "MongoDB", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "GraphQL", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Redis", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Docker", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Nginx", icon: "/placeholder.svg?height=64&width=64" },
+]
+
+export const cloudTools = [
+    { name: "AWS", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Google Cloud", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Azure", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Heroku", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "DigitalOcean", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Cloudflare", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Firebase", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Netlify", icon: "/placeholder.svg?height=64&width=64" },
+]
+
+export const deploymentTools = [
+    { name: "Docker", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Kubernetes", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Jenkins", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "GitLab CI", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "Travis CI", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "CircleCI", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "GitHub Actions", icon: "/placeholder.svg?height=64&width=64" },
+    { name: "ArgoCD", icon: "/placeholder.svg?height=64&width=64" },
+]
+
+export const blogPosts: BlogPost[] = [
+    {
+        id: "system-design-sketches",
+        title: "System Design Sketches",
+        date: "Jul 18, 2024",
+        description: "System design sketches for popular system design interview questions.",
+        image: "/placeholder.svg?height=400&width=600",
+        socialLinks: {
+            facebook: "#",
+            twitter: "#",
+            youtube: "#",
+            whatsapp: "#",
+            uber: "#",
+            medium: "#"
+        }
+    },
+    {
+        id: "micrograd-ts",
+        title: "Micrograd TS",
+        date: "Aug 7, 2023",
+        description: "A TypeScript version of karpathy/micrograd. A tiny scalar-valued autograd engine and a neural net on top of it.",
+        image: "/placeholder.svg?height=400&width=600"
+    },
+    {
+        id: "observations",
+        title: "Observations",
+        date: "Jun 27, 2023",
+        description: "My subjective observations, assumptions, questions, and interpretations about the world around us. Ultimate origin, science, Creator, theories, axioms, consciousness, universe, God's sensor, good vs evil, etc. Don't take it seriously.",
+        image: "/placeholder.svg?height=400&width=600"
+    }
+]
+
+
+
 
