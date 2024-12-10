@@ -212,7 +212,10 @@ export const Languages = [
 export const Frameworks = [
   { name: "React", icon: "/images/react.svg" },
   { name: "NextJS", icon: "/images/nextjs.svg" },
+  { name: "React Native", icon: "/images/reactnt.svg" },
+  { name: "Expo", icon: "/images/expo.svg" },
   { name: "NestJS", icon: "/images/nestjs.svg" },
+  { name: "Gin", icon: "/images/gin.png" },
   { name: "Node.js", icon: "/images/nodejs.svg" },
   { name: "Express", icon: "/images/express.svg" },
   { name: "Redux Toolkit", icon: "/images/redux.svg" },
@@ -229,7 +232,6 @@ export const Databases = [
 
 export const Tools = [
   { name: "AWS", icon: "/images/aws.svg" },
-  { name: "Google Cloud", icon: "/images/gcp.svg" },
   { name: "Vercel", icon: "/images/vercel.svg" },
   { name: "DigitalOcean", icon: "/images/docean.svg" },
   { name: "Firebase", icon: "/images/firebase.svg" },
@@ -242,7 +244,7 @@ export const Tools = [
   { name: "Jenkins", icon: "/images/jenkins.svg" },
   { name: "GitLab CI", icon: "/images/gitlab.svg" },
   { name: "CircleCI", icon: "/images/circleci.svg" },
-  { name: "GitHub Actions", icon: "/images/githubactions.svg" },
+  { name: "GitHub Actions", icon: "/images/gh.svg" },
 ];
 
 export const blogPosts: BlogPost[] = [
