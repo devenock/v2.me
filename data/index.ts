@@ -228,7 +228,6 @@ export const Databases = [
   { name: "PostgreSQL", icon: "/images/postgresql.svg" },
   { name: "MongoDB", icon: "/images/mongodb.svg" },
   { name: "MySQL", icon: "/images/mysql.svg" },
-  { name: "MySQL", icon: "/images/mysql.svg" },
 ];
 
 export const Tools = [
