@@ -10,7 +10,8 @@ interface BlogPostPageProps {
 }
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = blogPosts.find((post) => post.id === params.id);
+  const { id } = params as { id: string };
+  const post = blogPosts.find((post) => post.id === id);
 
   if (!post) {
     notFound();

@@ -249,7 +249,7 @@ export const Tools = [
 
 export const blogPosts: BlogPost[] = [
   {
-    id: "system-design-sketches",
+    id: "1",
     title: "System Design Sketches",
     date: "Jul 18, 2024",
     description:
@@ -265,7 +265,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    id: "micrograd-ts",
+    id: "2",
     title: "Micrograd TS",
     date: "Aug 7, 2023",
     description:
@@ -273,7 +273,7 @@ export const blogPosts: BlogPost[] = [
     image: "/placeholder.svg?height=400&width=600",
   },
   {
-    id: "observations",
+    id: "3",
     title: "Observations",
     date: "Jun 27, 2023",
     description:
