@@ -14,6 +14,9 @@ export default function Header() {
           <Link href="/stack" className="hover:text-gray-600 text-xs">
             TECH STACK
           </Link>
+          <Link href="/blog" className="hover:text-gray-600 text-xs">
+            BLOGS
+          </Link>
         </div>
       </nav>
     </header>
