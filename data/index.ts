@@ -1,4 +1,4 @@
-import { BlogPost, ISkillListItem, SkillLevel } from "@/types";
+import { ISkillListItem, SkillLevel } from "@/types";
 
 export const skills: ISkillListItem[] = [
   {
@@ -245,39 +245,4 @@ export const Tools = [
   { name: "GitLab CI", icon: "/images/gitlab.svg" },
   { name: "CircleCI", icon: "/images/circleci.svg" },
   { name: "GitHub Actions", icon: "/images/gh.svg" },
-];
-
-export const blogPosts: BlogPost[] = [
-  {
-    id: "1",
-    title: "System Design Sketches",
-    date: "Jul 18, 2024",
-    description:
-      "System design sketches for popular system design interview questions.",
-    image: "/placeholder.svg?height=400&width=600",
-    socialLinks: {
-      facebook: "#",
-      twitter: "#",
-      youtube: "#",
-      whatsapp: "#",
-      uber: "#",
-      medium: "#",
-    },
-  },
-  {
-    id: "2",
-    title: "Micrograd TS",
-    date: "Aug 7, 2023",
-    description:
-      "A TypeScript version of karpathy/micrograd. A tiny scalar-valued autograd engine and a neural net on top of it.",
-    image: "/placeholder.svg?height=400&width=600",
-  },
-  {
-    id: "3",
-    title: "Observations",
-    date: "Jun 27, 2023",
-    description:
-      "My subjective observations, assumptions, questions, and interpretations about the world around us. Ultimate origin, science, Creator, theories, axioms, consciousness, universe, God's sensor, good vs evil, etc. Don't take it seriously.",
-    image: "/placeholder.svg?height=400&width=600",
-  },
 ];
