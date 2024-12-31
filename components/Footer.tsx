@@ -7,7 +7,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <footer className="py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-wrap justify-between items-center">
         <div className="w-full sm:w-auto text-center sm:text-left mb-4 sm:mb-0">
           <p>© {new Date().getFullYear()}. devenock. All rights reserved.</p>

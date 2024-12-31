@@ -22,12 +22,16 @@ export default function Description() {
         <Link href="/projects" className="text-blue-600 hover:underline">
           projects
         </Link>{" "}
-        are focused on helping people learn. You may use these projects to learn
-        Go syntax and start experimenting with CLIs.{" "}
-        <Link href="/blog" className="text-blue-600 hover:underline">
+        are focused on helping people learn how to build scalable applications
+        and upskill. You can also use these projects to learn different
+        application architecture and syntax. You can start by exploring my{" "}
+        <Link
+          href="https://medium.com/@enockomondi305"
+          className="text-blue-600 hover:underline"
+        >
           articles
         </Link>{" "}
-        about life, web-development and CLIs.
+        about life, web-development and scalable systems.
       </p>
     </div>
   );
