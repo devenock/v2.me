@@ -17,15 +17,15 @@ export default function Header() {
         <div className="flex space-x-4 mt-3 sm:mt-0">
           <Link
             href="/projects"
-            className="hover:text-gray-600 text-xs sm:text-sm"
+            className="hover:text-gray-600 uppercase font-bold text-xs sm:text-sm"
           >
-            PROJECTS
+            Projects
           </Link>
           <Link
             href="/stack"
-            className="hover:text-gray-600 text-xs sm:text-sm"
+            className="hover:text-gray-600 uppercase text-xs font-bold sm:text-sm"
           >
-            TECH STACK
+            Tech Stack
           </Link>
         </div>
       </nav>
