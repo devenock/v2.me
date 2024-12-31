@@ -8,22 +8,26 @@ interface Tool {
 interface ToolsGridProps {
   tools: Tool[];
 }
-
 export function ToolsGrid({ tools }: ToolsGridProps) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 justify-items-center">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-8">
       {tools.map((tool) => (
-        <div key={tool.name} className="flex flex-col items-center gap-3">
-          <div className="w-16 h-16 flex items-center justify-center">
+        <div
+          key={tool.name}
+          className="flex flex-col items-center gap-2 md:gap-3"
+        >
+          <div className="w-12 h-12 sm:w-16 sm:h-16">
             <Image
-              width={100}
-              height={100}
+              width={64}
+              height={64}
               src={tool.icon}
               alt={tool.name}
-              className="w-full h-full object-contain"
+              className="object-contain"
             />
           </div>
-          <span className="text-sm font-medium text-center">{tool.name}</span>
+          <span className="text-xs sm:text-sm font-medium text-center">
+            {tool.name}
+          </span>
         </div>
       ))}
     </div>

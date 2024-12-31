@@ -4,19 +4,28 @@ import { Databases, Frameworks, Languages, Tools } from "@/data";
 
 export default function Stack() {
   return (
-    <div className="min-h-screen py-5">
+    <div className="min-h-screen py-5 px-4 md:px-0">
       <Tabs defaultValue="languages" className="w-full">
-        <TabsList className="w-full mx-auto mb-12 py-6 h-auto gap-2">
-          <TabsTrigger value="languages" className="flex-1 text-lg py-3 px-6">
+        <TabsList className="flex flex-wrap justify-center gap-2 mb-12">
+          <TabsTrigger
+            value="languages"
+            className="text-sm md:text-lg py-2 px-4"
+          >
             Programming Languages
           </TabsTrigger>
-          <TabsTrigger value="frameworks" className="flex-1 text-lg py-3 px-6">
+          <TabsTrigger
+            value="frameworks"
+            className="text-sm md:text-lg py-2 px-4"
+          >
             Frameworks & Libraries
           </TabsTrigger>
-          <TabsTrigger value="databases" className="flex-1 text-lg py-3 px-6">
+          <TabsTrigger
+            value="databases"
+            className="text-sm md:text-lg py-2 px-4"
+          >
             Databases
           </TabsTrigger>
-          <TabsTrigger value="tools" className="flex-1 text-lg py-3 px-6">
+          <TabsTrigger value="tools" className="text-sm md:text-lg py-2 px-4">
             Tools
           </TabsTrigger>
         </TabsList>
