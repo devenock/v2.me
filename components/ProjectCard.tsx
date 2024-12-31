@@ -26,8 +26,8 @@ interface ProjectCardProps {
 export default function ProjectCard({
   title,
   icon,
-  date,
-  stars,
+  // date,
+  // stars,
   description,
   tags,
   image,
@@ -67,7 +67,7 @@ export default function ProjectCard({
       <CardFooter className="p-4 gap-2">
         {hasDemo && (
           <Link
-            href={liveUrl}
+            href={liveUrl || "#"}
             target="_blank"
             className="flex-1 flex items-center w-1/4 justify-center shadow-md rounded-md px-3 py-4 text-sm md:text-base"
           >
@@ -77,7 +77,7 @@ export default function ProjectCard({
         )}
         {hasSource && (
           <Link
-            href={githubUrl}
+            href={githubUrl || "#"}
             target="_blank"
             className="flex-1 flex items-center w-1/4 justify-center shadow-md rounded-md px-3 py-4 text-sm md:text-base"
           >
