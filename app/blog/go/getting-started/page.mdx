@@ -1,0 +1,124 @@
+import AnimatedName from "../../../../components/AnimatedName";
+
+export const metadata = {
+    title: 'Product Engineers',
+    description:
+        'Product Engineers work backwards from the desired product experience to the set of technologies that enable it.',
+    alternates: {
+        canonical: '/n/product-engineers',
+    },
+};
+
+# Scalability
+
+<AnimatedName />
+
+# Getting Started with Go
+
+Go, also known as Golang, is an open-source programming language created by Google. Known for its simplicity, efficiency, and strong support for concurrency, Go is an excellent choice for building scalable applications, microservices, and more.
+
+In this guide, we'll walk you through setting up Go and writing your first program.
+
+---
+
+## Prerequisites
+
+Before you start, ensure that you have:
+
+- A computer with Windows, macOS, or Linux.
+- Basic knowledge of programming concepts.
+
+## Step 1: Installing Go
+
+To install Go, follow these steps:
+
+1. Visit the [official Go website](https://golang.org/dl/).
+2. Download the installer for your operating system.
+3. Run the installer and follow the prompts.
+
+To verify the installation:
+
+```bash
+$ go version
+```
+
+You should see the installed version of Go.
+
+## Step 2: Setting Up Your Environment
+
+1. Create a directory for your Go projects:
+
+```bash
+$ mkdir go-projects
+$ cd go-projects
+```
+
+2. Set up your workspace by defining the `GOPATH`. Add the following to your shell profile (`.bashrc`, `.zshrc`, or equivalent):
+
+```bash
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+```
+
+Reload your shell configuration:
+
+```bash
+$ source ~/.bashrc
+```
+
+## Step 3: Writing Your First Go Program
+
+Create a new file named `main.go` in your project directory:
+
+To run your program:
+
+```bash
+$ go run main.go
+```
+
+You should see:
+
+```
+Hello, World!
+```
+
+## Step 4: Compiling and Running Your Program
+
+Go allows you to compile your code into a standalone binary:
+
+```bash
+$ go build main.go
+$ ./main
+```
+
+The compiled binary can be executed directly without needing the Go runtime installed on the target system.
+
+## Step 5: Exploring Go Modules
+
+Go uses modules for dependency management. To initialize a new module:
+
+```bash
+$ go mod init your-module-name
+```
+
+This creates a `go.mod` file, which tracks your project's dependencies.
+
+To add external packages, use:
+
+```bash
+$ go get <package-name>
+```
+
+## Conclusion
+
+Congratulations! You've taken your first steps with Go. From here, you can explore more advanced topics, such as:
+
+- Concurrency with Goroutines and Channels.
+- Building web servers with the `net/http` package.
+- Creating APIs using frameworks like Gin.
+
+To continue learning, check out the [official Go documentation](https://golang.org/doc/) and experiment with building small projects.
+
+---
+
+Happy coding!

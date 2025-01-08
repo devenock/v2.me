@@ -27,6 +27,12 @@ export default function Header() {
           >
             Tech Stack
           </Link>
+          <Link
+            href="/blog"
+            className="hover:text-gray-600 uppercase text-xs font-bold sm:text-sm"
+          >
+            Blog
+          </Link>
         </div>
       </nav>
     </header>
