@@ -4,7 +4,7 @@ export default function NameTransition() {
       <span className="sr-only">Enock Omondi</span>
       <span aria-hidden="true" className="block overflow-hidden group relative">
         <span className="inline-block transition-all duration-300 ease-in-out group-hover:-translate-y-full whitespace-nowrap">
-          {"Lee Robinson".split("").map((letter, index) => (
+          {"Enock Omondi".split("").map((letter, index) => (
             <span
               key={index}
               className="inline-block"
