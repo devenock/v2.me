@@ -112,7 +112,7 @@ code {
   font-size: 14px;
   padding: 0.2em 0.4em;
   border-radius: 0.3em;
-  /*background-color: var(--color-gray-100);*/
+  background-color: var(--sh-comment);
 }
 
 pre code {
@@ -136,9 +136,9 @@ pre code span {
   font-weight: 500;
 }
 
-/*hr {*/
-/*  color: var(--color-gray-200);*/
-/*}*/
+hr {
+  color: var(--sh-comment);
+}
 
 /* Remove Safari input shadow on mobile */
 input[type='text'],
@@ -156,14 +156,14 @@ table {
 }
 
 .transition-element {
-  view-transition-name: lee;
+  view-transition-name: enock;
 }
 
-/*::view-transition-old(lee) {*/
+/*::view-transition-old(enock) {*/
 /*  animation: fade-out 0.8s ease-in-out;*/
 /*}*/
 
-/*::view-transition-new(lee) {*/
+/*::view-transition-new(enock) {*/
 /*  animation: fade-in-up 0.4s ease-in-out;*/
 /*}*/
 
