@@ -1,6 +1,5 @@
 import React, { ComponentPropsWithoutRef } from "react";
-// import { Link } from "next-view-transitions";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { highlight } from "sugar-high";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "./lib/utils";
@@ -102,7 +101,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ className, ...props }: any) => (
       <h3
         className={cn(
-          "heading mt-8 scroll-m-[10px] text-gray-800  mb-3 text-[1.375rem] font-semibold tracking-tight",
+          "heading mt-16 scroll-m-[10px] text-gray-800  mb-3 text-[1.375rem] font-semibold tracking-tight",
           className,
         )}
         {...props}
@@ -138,7 +137,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     p: ({ className, ...props }: any) => (
       <p
         className={cn(
-          "text-gray-800 leading-snug [&:not(:first-child)]:mt-6",
+          "text-gray-800 leading-snug [&:not(:first-child)]:mt-16",
           className,
         )}
         {...props}
