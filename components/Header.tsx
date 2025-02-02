@@ -6,13 +6,7 @@ export default function Header() {
     <header className="py-3 px-4 sm:px-6 lg:px-8">
       <nav className="flex flex-wrap items-center justify-between">
         <Link href="/" className="w-28 sm:w-32">
-          <Image
-            src="/logo.png"
-            alt="logo"
-            width={100}
-            height={100}
-            layout="responsive"
-          />
+          <Image src="/logo.png" alt="logo" width={100} height={100} />
         </Link>
         <div className="flex space-x-4 mt-3 sm:mt-0">
           <Link
