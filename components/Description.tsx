@@ -10,8 +10,17 @@ export default function Description() {
         <IoBriefcaseOutline className="mr-3" />
         Software Engineer
       </p>
-      <p className="mb-1">Founder @Locate</p>
-      <p className="mb-4">4+ years of full-stack experience</p>
+      {/*<p className="mb-1 flex items-center">*/}
+      {/*  Building{" "}*/}
+      {/*  <Link*/}
+      {/*    className="ml-2.5"*/}
+      {/*    href={"https://github.com/devenock/SQLift"}*/}
+      {/*    target="_blank"*/}
+      {/*  >*/}
+      {/*    @SQLift*/}
+      {/*  </Link>*/}
+      {/*</p>*/}
+      <p className="mb-4">5+ years of full-stack experience</p>
       <p className="text-gray-600 mb-6">
         <span>📍 Nairobi, Kenya • 🇰🇪</span>
       </p>
@@ -25,10 +34,7 @@ export default function Description() {
         are focused on helping people learn how to build scalable applications
         and upskill. You can also use these projects to learn different
         application architecture and syntax. You can start by exploring my{" "}
-        <Link
-          href="https://medium.com/@enockomondi305"
-          className="text-blue-600 hover:underline"
-        >
+        <Link href="/blog" className="text-blue-600 hover:underline">
           articles
         </Link>{" "}
         about life, web-development and scalable systems.
