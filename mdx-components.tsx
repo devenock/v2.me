@@ -1,5 +1,5 @@
 import React, { ComponentPropsWithoutRef } from "react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { highlight } from "sugar-high";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "./lib/utils";
@@ -14,24 +14,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <strong className={cn("font-medium", className)} {...props} />
     ),
     a: ({ className, href, children, ...props }: any) => {
+      const baseClass = "text-blue-500 hover:text-blue-700";
       if (href?.startsWith("/")) {
         return (
-          <Link
-            href={href}
-            className={cn("text-blue-500 hover:text-blue-700", className)}
-            {...props}
-          >
+          <Link href={href} className={cn(baseClass, className)} {...props}>
             {children}
           </Link>
         );
       }
       if (href?.startsWith("#")) {
         return (
-          <a
-            href={href}
-            className={cn("text-blue-500 hover:text-blue-700", className)}
-            {...props}
-          >
+          <a href={href} className={cn(baseClass, className)} {...props}>
             {children}
           </a>
         );
@@ -41,7 +34,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className={cn("text-blue-500 hover:text-blue-700", className)}
+          className={cn(baseClass, className)}
           {...props}
         >
           {children}

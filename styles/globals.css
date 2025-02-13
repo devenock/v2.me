@@ -159,14 +159,6 @@ table {
   view-transition-name: enock;
 }
 
-/*::view-transition-old(enock) {*/
-/*  animation: fade-out 0.8s ease-in-out;*/
-/*}*/
-
-/*::view-transition-new(enock) {*/
-/*  animation: fade-in-up 0.4s ease-in-out;*/
-/*}*/
-
 @keyframes fade-out {
   0% {
     transform: translateY(0) translateX(-0.2px);
