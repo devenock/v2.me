@@ -30,7 +30,7 @@ export default function RootLayout({
           <MDXProvider>
             <div className="max-w-screen-xl mx-auto flex flex-col p-4 sm:p-6 lg:p-8">
               <Header />
-              <main className="flex-grow">{children}</main>
+              <main className="flex-grow pt-6">{children}</main>
               <Footer />
               <Analytics />
             </div>
