@@ -3,7 +3,7 @@ import Link from "next/link";
 import { highlight } from "sugar-high";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "./lib/utils";
-import { ArrowRight } from "lucide-react";
+import { Diamond } from "lucide-react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -14,7 +14,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <strong className={cn("font-medium", className)} {...props} />
     ),
     a: ({ className, href, children, ...props }: any) => {
-      const baseClass = "text-blue-500 hover:text-blue-700";
+      const baseClass =
+        "text-blue-600 font-semibold hover:text-gray-700 hover:underline";
       if (href?.startsWith("/")) {
         return (
           <Link href={href} className={cn(baseClass, className)} {...props}>
@@ -158,13 +159,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     li: ({ className, ...props }: any) => (
       <li
         className={cn(
-          "custom-white m-0 mt-2 pl-1 text-blue-500 hover:text-blue-70 flex items-start gap-2 p-0",
+          "custom-white m-0 mt-2 pl-1 items-center text-blue-500 hover:text-blue-70 flex gap-2 p-0",
           className,
         )}
         {...props}
       >
         <div className="w-[16px]">
-          <ArrowRight size={16} color="blue" style={{ marginTop: "7px" }} />
+          <Diamond size={16} color="grey" style={{ marginTop: "0px" }} />
         </div>
 
         <div>{props.children}</div>
