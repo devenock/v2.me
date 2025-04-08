@@ -6,20 +6,20 @@ export default function Description() {
   return (
     <div className="flex-1 px-4 sm:px-6 lg:px-8">
       <h1 className="text-2xl sm:text-4xl font-bold mb-2">ENOCK OMONDI</h1>
-      <p className="text-gray-600 mb-4 flex items-center">
+      <p className="text-gray-600 mb-2 flex items-center">
         <IoBriefcaseOutline className="mr-3" />
-        Software Engineer
+        Software && Cloud Engineer
       </p>
-      {/*<p className="mb-1 flex items-center">*/}
-      {/*  Building{" "}*/}
-      {/*  <Link*/}
-      {/*    className="ml-2.5"*/}
-      {/*    href={"https://github.com/devenock/SQLift"}*/}
-      {/*    target="_blank"*/}
-      {/*  >*/}
-      {/*    @SQLift*/}
-      {/*  </Link>*/}
-      {/*</p>*/}
+      <p className="mb-2 flex items-center">
+        Building{" "}
+        <Link
+          className="ml-2.5"
+          href={"https://github.com/devenock/SQLift"}
+          target="_blank"
+        >
+          @PolishIQ
+        </Link>
+      </p>
       <p className="mb-4">5+ years of full-stack experience</p>
       <p className="text-gray-600 mb-6">
         <span>📍 Nairobi, Kenya • 🇰🇪</span>

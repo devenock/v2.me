@@ -7,7 +7,7 @@ export default function Home() {
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div className="w-48 h-48 sm:w-64 sm:h-64 relative rounded-full overflow-hidden shrink-0">
           <Image
-            src="/images/icon.jpeg"
+            src="/images/profile.jpg"
             alt="Enock Omondi"
             fill
             className="object-cover"
