@@ -20,7 +20,7 @@ export default function Header() {
               <Link
                 href={item.url}
                 key={item.url}
-                className={`${isActive ? "active" : ""} [&.active]:text-gray-600 hover:text-gray-600 capitalize text-xs font-bold sm:text-sm`}
+                className={`${isActive ? "active" : ""} [&.active]:text-gray-600 hover:text-gray-600 uppercase text-xs font-bold sm:text-sm`}
               >
                 {item.name}
               </Link>
