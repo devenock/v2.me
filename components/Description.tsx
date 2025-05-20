@@ -13,11 +13,11 @@ export default function Description() {
       <p className="mb-2 flex items-center">
         Building{" "}
         <Link
-          className="ml-2.5"
-          href={"https://github.com/devenock/SQLift"}
+          className="ml-2 text-blue-600 font-semibold"
+          href={"https://www.qonvasight.com/"}
           target="_blank"
         >
-          @PolishIQ
+          QonvaSight
         </Link>
       </p>
       <p className="mb-4">5+ years of full-stack experience</p>
