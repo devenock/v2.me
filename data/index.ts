@@ -246,7 +246,5 @@ export const Tools = [
 ];
 
 export const navData = [
-  { url: "/projects", name: "Projects" },
   { url: "/blog", name: "Blog" },
-  // { url: "/stack", name: "Tech Stack" },
 ];

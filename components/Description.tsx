@@ -8,16 +8,16 @@ export default function Description() {
       <h1 className="text-2xl sm:text-4xl font-bold mb-2">ENOCK OMONDI</h1>
       <p className="text-gray-600 mb-2 flex items-center">
         <IoBriefcaseOutline className="mr-3" />
-        Software && Cloud Engineer
+        Software && DevOps Engineer
       </p>
       <p className="mb-2 flex items-center">
         Building{" "}
         <Link
           className="ml-2 text-blue-600 font-semibold"
-          href={"https://www.qonvasight.com/"}
+          href={"https://www.eventparlour.com/"}
           target="_blank"
         >
-          QonvaSight
+          @EventParlour
         </Link>
       </p>
       <p className="mb-4">5+ years of full-stack experience</p>
@@ -28,7 +28,7 @@ export default function Description() {
       <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
         Hi there! I&lsquo;m Enock. I work as a full-time software engineer. In
         my spare time I do open-sourcing. Most of my open-source{" "}
-        <Link href="/projects" className="text-blue-600 hover:underline">
+        <Link target="_blank" href="https://github.com/devenock" className="text-blue-600 hover:underline">
           projects
         </Link>{" "}
         are focused on helping people learn how to build scalable applications
