@@ -16,18 +16,24 @@ export default function Description() {
       </p>
       <Socials />
       <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
-        Hi there! I&lsquo;m Enock. I work as a full-time software engineer. In
-        my spare time I do open-sourcing. Most of my open-source{" "}
-        <Link target="_blank" href="https://github.com/devenock" className="text-blue-600 hover:underline">
+        Hi there! I&lsquo;m Enock, a Software & DevOps Engineer with over 5 years of
+        full-stack experience. I build scalable, reliable applications — and in
+        my spare time, I contribute to open-source projects that help developers
+        level up. My work focuses on system architecture, DevOps practices, and
+        building resilient, production-ready systems. I also write about DevOps,
+        cloud infrastructure, web development, and navigating life as a software
+        engineer.
+      </p>
+      <p className="mt-1 text-gray-800 text-sm sm:text-base leading-relaxed">
+        👉 Dive into my{" "}  <Link
+          target="_blank"
+          href="https://github.com/devenock"
+          className="text-blue-600 hover:underline"
+        >
           projects
-        </Link>{" "}
-        are focused on helping people learn how to build scalable applications
-        and upskill. You can also use these projects to learn different
-        application architecture and syntax. You can start by exploring my{" "}
-        <Link href="/blog" className="text-blue-600 hover:underline">
+        </Link>{" "} or check out my latest{" "} <Link href="/blog" className="text-blue-600 hover:underline">
           articles
-        </Link>{" "}
-        about life, web-development and scalable systems.
+        </Link>{" "} to learn more.
       </p>
     </div>
   );
