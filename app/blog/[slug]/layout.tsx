@@ -1,7 +1,5 @@
 "use client";
 
-import { BlogLayout } from "@/components/BlogLayout";
-
 export default function BlogPostLayout({
   children,
 }: {

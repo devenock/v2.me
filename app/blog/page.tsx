@@ -8,10 +8,6 @@ export const metadata = {
 
 export default async function BlogPage() {
   const blogs = await getAllBlogs();
-  
-  // Debug information
-  console.log('Found blogs:', blogs.length);
-  console.log('Blogs:', blogs);
 
   if (blogs.length === 0) {
     return (

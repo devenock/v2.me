@@ -1,16 +1,16 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 // In-memory storage for demo purposes
 // In a real app, you'd use a database
-let blogData = new Map();
+const blogData = new Map();
 
 export async function POST(
-  request: Request,
-  { params }: { params: { slug: string } }
+  request: NextRequest,
+  context: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = params;
-  const { action, comment } = await request.json();
+  const { slug } = await context.params;
+  const { action, content } = await request.json();
   const cookieStore = await cookies();
   const userId = cookieStore.get('userId')?.value || 'anonymous';
 
@@ -33,13 +33,12 @@ export async function POST(
       }
       break;
     case 'comment':
-      if (comment) {
+      if (content) {
         data.comments.push({
           id: Date.now().toString(),
           author: userId,
-          content: comment,
-          date: new Date().toISOString(),
-          avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}`
+          content: content,
+          date: new Date().toISOString()
         });
       }
       break;
@@ -52,15 +51,16 @@ export async function POST(
     likes: data.likes.size,
     comments: data.comments,
     shares: data.shares,
-    hasLiked: data.likes.has(userId)
+    isLiked: data.likes.has(userId),
+    isShared: false // For demo purposes
   });
 }
 
 export async function GET(
-  request: Request,
-  { params }: { params: { slug: string } }
+  request: NextRequest,
+  context: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = params;
+  const { slug } = await context.params;
   const cookieStore = await cookies();
   const userId = cookieStore.get('userId')?.value || 'anonymous';
 
@@ -78,6 +78,7 @@ export async function GET(
     likes: data.likes.size,
     comments: data.comments,
     shares: data.shares,
-    hasLiked: data.likes.has(userId)
+    isLiked: data.likes.has(userId),
+    isShared: false // For demo purposes
   });
 } 

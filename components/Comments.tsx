@@ -1,61 +1,72 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Textarea } from '@/components/ui/textarea';
 
 interface Comment {
   id: string;
   author: string;
   content: string;
   date: string;
-  avatar?: string;
 }
 
 interface CommentsProps {
   comments: Comment[];
-  onComment: (comment: string) => Promise<void>;
-  onCommentsChange: React.Dispatch<React.SetStateAction<Comment[]>>;
+  onComment: (comment: string) => void;
 }
 
-export function Comments({ comments, onComment, onCommentsChange }: CommentsProps) {
+export function Comments({ comments, onComment }: CommentsProps) {
   const [newComment, setNewComment] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!newComment.trim()) return;
-
-    await onComment(newComment);
-    setNewComment('');
+    if (newComment.trim()) {
+      onComment(newComment);
+      setNewComment('');
+    }
   };
 
   return (
-    <div className="mt-12 space-y-8">
-      <h2 className="text-2xl font-bold text-gray-900">Comments</h2>
+    <div className="mt-8">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">Comments</h3>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <Textarea
-          placeholder="Add a comment..."
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          className="min-h-[100px]"
-        />
-        <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
-          Post Comment
-        </Button>
+      {/* Comment Form */}
+      <form onSubmit={handleSubmit} className="mb-6">
+        <div className="flex gap-3">
+          <Avatar className="w-8 h-8">
+            <AvatarImage src="/avatar.jpg" />
+            <AvatarFallback>U</AvatarFallback>
+          </Avatar>
+          <div className="flex-1">
+            <Textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Add a comment..."
+              className="min-h-[80px] resize-none"
+            />
+            <button
+              type="submit"
+              disabled={!newComment.trim()}
+              className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Post Comment
+            </button>
+          </div>
+        </div>
       </form>
 
-      <div className="space-y-6">
+      {/* Comments List */}
+      <div className="space-y-4">
         {comments.map((comment) => (
-          <div key={comment.id} className="flex space-x-4">
-            <Avatar>
-              <AvatarImage src={comment.avatar} />
+          <div key={comment.id} className="flex gap-3">
+            <Avatar className="w-8 h-8">
+              <AvatarImage src="/avatar.jpg" />
               <AvatarFallback>{comment.author[0]}</AvatarFallback>
             </Avatar>
-            <div className="flex-1 space-y-1">
-              <div className="flex items-center space-x-2">
-                <p className="font-medium text-gray-900">{comment.author}</p>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="font-medium text-gray-900">{comment.author}</span>
                 <span className="text-sm text-gray-500">{comment.date}</span>
               </div>
               <p className="text-gray-700">{comment.content}</p>

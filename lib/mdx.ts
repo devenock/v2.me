@@ -62,7 +62,7 @@ function extractMetadata(content: string): { title: string; description: string;
 
 function cleanContent(content: string): string {
   // Remove the metadata export
-  let cleaned = content.replace(/export const metadata = {[^}]+};?\n?/, '');
+  const cleaned = content.replace(/export const metadata = {[^}]+};?\n?/, '');
   
   // Keep the imports and component usage
   return cleaned.trim();
