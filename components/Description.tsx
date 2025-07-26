@@ -10,16 +10,6 @@ export default function Description() {
         <IoBriefcaseOutline className="mr-3" />
         Software && DevOps Engineer
       </p>
-      <p className="mb-2 flex items-center">
-        Building{" "}
-        <Link
-          className="ml-2 text-blue-600 font-semibold"
-          href={"https://www.eventparlour.com/"}
-          target="_blank"
-        >
-          @EventParlour
-        </Link>
-      </p>
       <p className="mb-4">5+ years of full-stack experience</p>
       <p className="text-gray-600 mb-6">
         <span>📍 Nairobi, Kenya • 🇰🇪</span>
