@@ -8,32 +8,36 @@ export default function Description() {
       <h1 className="text-2xl sm:text-4xl font-bold mb-2">ENOCK OMONDI</h1>
       <p className="text-gray-600 mb-2 flex items-center">
         <IoBriefcaseOutline className="mr-3" />
-        Software && DevOps Engineer
+        Senior Software Engineer
       </p>
-      <p className="mb-4">5+ years of full-stack experience</p>
+      <p className="mb-4">6+ years of full-stack experience</p>
       <p className="text-gray-600 mb-6">
         <span>📍 Nairobi, Kenya • 🇰🇪</span>
       </p>
       <Socials />
       <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
-        Hi there! I&lsquo;m Enock, a Software & DevOps Engineer with over 5 years of
-        full-stack experience. I build scalable, reliable applications — and in
-        my spare time, I contribute to open-source projects that help developers
+        Hi there! I&lsquo;m Enock, a Software Engineer with over 6 years of
+        full-stack experience. I build scalable, reliable applications. In my
+        spare time, I contribute to open-source projects that help developers
         level up. My work focuses on system architecture, DevOps practices, and
-        building resilient, production-ready systems. I also write about DevOps,
-        cloud infrastructure, web development, and navigating life as a software
+        building resilient, production-ready systems. I also write about Backend
+        Systems, Golang, web development, and navigating life as a software
         engineer.
       </p>
       <p className="mt-1 text-gray-800 text-sm sm:text-base leading-relaxed">
-        👉 Dive into my{" "}  <Link
+        👉 Dive into my{" "}
+        <Link
           target="_blank"
           href="https://github.com/devenock"
           className="text-blue-600 hover:underline"
         >
           projects
-        </Link>{" "} or check out my latest{" "} <Link href="/blog" className="text-blue-600 hover:underline">
+        </Link>{" "}
+        or check out my latest{" "}
+        <Link href="/blog" className="text-blue-600 hover:underline">
           articles
-        </Link>{" "} to learn more.
+        </Link>{" "}
+        to learn more.
       </p>
     </div>
   );

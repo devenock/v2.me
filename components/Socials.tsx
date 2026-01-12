@@ -1,12 +1,6 @@
 import Link from "next/link";
-import {
-  AiFillLinkedin,
-  AiOutlineGithub,
-  AiOutlineMedium,
-  AiOutlineTwitter,
-} from "react-icons/ai";
-import { FaHashnode } from "react-icons/fa6";
-
+import { AiFillLinkedin, AiOutlineGithub } from "react-icons/ai";
+import { FaXTwitter } from "react-icons/fa6";
 export default function Socials() {
   return (
     <div className="flex gap-4 mb-8">
@@ -29,21 +23,7 @@ export default function Socials() {
         className="hover:opacity-75"
         target="_blank"
       >
-        <AiOutlineTwitter size={24} />
-      </Link>
-      <Link
-        href="https://medium.com/@enockomondi305"
-        className="hover:opacity-75"
-        target="_blank"
-      >
-        <AiOutlineMedium size={24} />
-      </Link>
-      <Link
-        href="https://hashnode.com/@DevEnock"
-        className="hover:opacity-75"
-        target="_blank"
-      >
-        <FaHashnode size={24} />
+        <FaXTwitter size={24} />
       </Link>
     </div>
   );
