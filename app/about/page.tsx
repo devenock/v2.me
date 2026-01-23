@@ -123,25 +123,27 @@ export default function About() {
                   {skillGroup.title}
                 </h3>
                 <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
-                  {skillGroup.items.map((skill) => {
-                    // Map /skills/ paths to /images/ since icons are in /images/
-                    const iconPath = skill.icon.replace("/skills/", "/images/");
-                    return (
-                      <div
-                        key={skill.title}
-                        className="flex flex-col items-center justify-center aspect-square p-2 bg-gray-50 rounded-lg hover:bg-gray-100 hover:shadow-sm transition-all duration-200 group cursor-default"
-                        title={skill.title}
-                      >
-                        <Image
-                          src={iconPath}
-                          alt={skill.title}
-                          width={28}
-                          height={28}
-                          className="object-contain w-7 h-7"
-                        />
-                      </div>
-                    );
-                  })}
+                  {skillGroup.items
+                    .filter((skill) => skill.icon)
+                    .map((skill) => {
+                      // Map /skills/ paths to /images/ since icons are in /images/
+                      const iconPath = skill.icon!.replace("/skills/", "/images/");
+                      return (
+                        <div
+                          key={skill.title}
+                          className="flex flex-col items-center justify-center aspect-square p-2 bg-gray-50 rounded-lg hover:bg-gray-100 hover:shadow-sm transition-all duration-200 group cursor-default"
+                          title={skill.title}
+                        >
+                          <Image
+                            src={iconPath}
+                            alt={skill.title}
+                            width={28}
+                            height={28}
+                            className="object-contain w-7 h-7"
+                          />
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             ))}
