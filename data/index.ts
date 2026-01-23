@@ -246,5 +246,7 @@ export const Tools = [
 ];
 
 export const navData = [
+  { url: "/about", name: "About" },
+  // { url: "/projects", name: "Projects" },
   { url: "/blog", name: "Blog" },
 ];
