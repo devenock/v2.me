@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { format, isValid, parseISO } from "date-fns";
 
 interface Blog {
   slug: string;
@@ -14,6 +15,13 @@ interface Blog {
 
 interface BlogListProps {
   blogs: Blog[];
+}
+
+function formatBlogDate(date: string) {
+  const parsed = parseISO(date);
+  if (isValid(parsed)) return format(parsed, "MMM d, yyyy");
+  const fallback = new Date(date);
+  return isValid(fallback) ? format(fallback, "MMM d, yyyy") : date;
 }
 
 export function BlogList({ blogs }: BlogListProps) {
@@ -65,7 +73,7 @@ export function BlogList({ blogs }: BlogListProps) {
                   {blog.category}
                 </span>
                 <span className="text-xs text-muted-foreground">
-                  {blog.date}
+                  {formatBlogDate(blog.date)}
                 </span>
               </div>
               <h2 className="text-lg font-semibold text-foreground

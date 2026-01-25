@@ -12,18 +12,16 @@ export default function ImageWithCaption({
   src,
   alt,
   caption,
-  width,
-  height,
 }: ImageWithCaptionProps) {
   return (
     <figure className="my-8 w-full">
-      <div className="relative w-full max-w-4xl mx-auto">
+      <div className="relative w-full max-w-4xl mx-auto aspect-video overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
         <Image
           src={src}
           alt={alt}
-          width={width}
-          height={height}
-          className="rounded-lg w-full h-auto object-cover"
+          fill
+          sizes="(min-width: 1024px) 896px, 100vw"
+          className="object-cover"
         />
       </div>
       {caption && (
