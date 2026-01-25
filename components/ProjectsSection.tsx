@@ -12,10 +12,10 @@ export default function ProjectsSection() {
   return (
     <section aria-label="Projects">
       <div className="flex items-baseline justify-between gap-4">
-        <h2 className="text-2xl font-bold text-gray-900">Projects</h2>
+        <h2 className="text-2xl font-bold text-foreground">Projects</h2>
         <Link
           href="/projects"
-          className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+          className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
         >
           View all
         </Link>
@@ -25,14 +25,14 @@ export default function ProjectsSection() {
         {featured.map((project) => (
           <div
             key={project.title}
-            className="rounded-xl border border-gray-200/70 bg-white/60 p-6 shadow-sm"
+            className="rounded-xl border border-border/60 bg-card/50 p-6 shadow-sm"
           >
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-foreground">
                   {project.title}
                 </h3>
-                <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                   {project.description}
                 </p>
               </div>
@@ -40,7 +40,7 @@ export default function ProjectsSection() {
                 href={getProjectUrl(project)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                className="shrink-0 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 View →
               </Link>

@@ -7,7 +7,7 @@ export default function Socials() {
     <div className="flex gap-4 mb-8">
       <Link
         href="https://www.linkedin.com/in/enock-omondi/"
-        className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+        className="text-muted-foreground hover:text-foreground transition-colors duration-200"
         target="_blank"
         aria-label="LinkedIn"
       >
@@ -15,7 +15,7 @@ export default function Socials() {
       </Link>
       <Link
         href="https://github.com/devenock"
-        className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+        className="text-muted-foreground hover:text-foreground transition-colors duration-200"
         target="_blank"
         aria-label="GitHub"
       >
@@ -23,7 +23,7 @@ export default function Socials() {
       </Link>
       <Link
         href="https://x.com/dev_enock"
-        className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+        className="text-muted-foreground hover:text-foreground transition-colors duration-200"
         target="_blank"
         aria-label="X (Twitter)"
       >
