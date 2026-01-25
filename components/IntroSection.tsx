@@ -22,28 +22,37 @@ export default function IntroSection() {
                 <span className="text-gray-900 font-medium">
                   Senior Software Engineer
                 </span>
-                , where I focus on backend systems and production-ready
-                architecture.
+                , where I focus on backend systems and production-ready systems.
               </p>
               <p>
                 When I&apos;m not shipping code, I&apos;m deepening my systems
-                understanding — currently transitioning into{" "}
+                understanding — transitioning into a{" "}
                 <span className="text-gray-900 font-medium">
-                  Software Architecture
+                  Software Architect
                 </span>{" "}
-                by designing scalable, resilient platforms and sharing what I
-                learn along the way.
+                role by designing scalable, resilient platforms and sharing what
+                I learn along the way. I&apos;m also building{" "}
+                <Link
+                  href="https://github.com/devenock/d_weaver"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-900 font-medium underline underline-offset-4 decoration-gray-300 hover:decoration-gray-500 hover:text-gray-900/80 transition-colors"
+                >
+                  dweaver
+                </Link>
+                , an open-source diagramming tool using{" "}
+                <span className="text-gray-900 font-medium">Go</span>.
               </p>
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-600">
               <Link
-                href="mailto:enock.omondi@gmail.com"
+                href="mailto:enockomondi305@gmail.com"
                 className="inline-flex items-center gap-2 hover:text-gray-900 transition-colors"
               >
                 <IoMailOutline className="h-4 w-4" />
                 <span className="underline underline-offset-4 decoration-gray-300 hover:decoration-gray-500">
-                  enock.omondi@gmail.com
+                  enockomondi305@gmail.com
                 </span>
               </Link>
               <Link
