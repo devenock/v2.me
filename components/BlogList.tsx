@@ -37,8 +37,8 @@ export function BlogList({ blogs }: BlogListProps) {
             onClick={() => setSelectedCategory(category)}
             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors
               ${selectedCategory === category
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-foreground text-background'
+                : 'bg-muted text-muted-foreground hover:text-foreground'
               }`}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -57,25 +57,25 @@ export function BlogList({ blogs }: BlogListProps) {
           >
             <Link 
               href={`/blog/${blog.slug}`}
-              className="block p-4 rounded-lg border border-gray-200 hover:border-blue-500 
-                transition-all duration-200 hover:shadow-md group"
+              className="block p-4 rounded-lg border border-border/60 bg-card/30 hover:bg-card/50
+                transition-all duration-200 hover:shadow-sm group"
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-blue-600">
+                <span className="text-xs font-medium text-muted-foreground">
                   {blog.category}
                 </span>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-muted-foreground">
                   {blog.date}
                 </span>
               </div>
-              <h2 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 
+              <h2 className="text-lg font-semibold text-foreground
                 transition-colors duration-200 mb-1">
                 {blog.title}
               </h2>
-              <p className="text-sm text-gray-600 line-clamp-2 mb-2">
+              <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
                 {blog.description}
               </p>
-              <div className="flex items-center text-blue-600 text-xs font-medium">
+              <div className="flex items-center text-foreground/80 text-xs font-medium">
                 Read more
                 <svg
                   className="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform"

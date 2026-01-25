@@ -147,6 +147,31 @@ export const skills: ISkillListItem[] = [
 
 export const projects = [
   {
+    title: "dweaver",
+    icon: "/images/go.svg",
+    date: "2026",
+    stars: 0,
+    description: "Modern, easy-to-use open-source diagramming tool.",
+    tags: ["Go", "TypeScript", "Open Source", "Diagramming"],
+    image: "/images/automate.png",
+    hasSource: true,
+    hasDemo: false,
+    githubUrl: "https://github.com/devenock/d_weaver",
+  },
+  {
+    title: "Event Management API",
+    icon: "/icons/api.svg",
+    date: "2026",
+    stars: 0,
+    description:
+      "A robust API for managing events and ticket bookings (in progress).",
+    tags: ["Go", "gRPC", "PostgreSQL", "JWT", "RBAC"],
+    image: "/images/api-testdoc.png",
+    hasSource: true,
+    hasDemo: false,
+    githubUrl: "",
+  },
+  {
     title: "Vendre",
     icon: "/icons/cart.svg",
     date: "Nov 2024",
@@ -245,8 +270,103 @@ export const Tools = [
   { name: "GitHub Actions", icon: "/images/gh.svg" },
 ];
 
+// experience (used on landing page)
+export const experiences = [
+  {
+    company: "Altech Group",
+    roles: [
+      {
+        title: "Senior Software Engineer",
+        dates: "Dec 2024 — Present",
+        highlights: [
+          "Building high-performance microservices for the PAYGO platform using Golang and NestJS, improving response time by 40%.",
+          "Leading CI/CD implementation with GitHub Actions and Jenkins, reducing deployment time by 70%.",
+          "Built reusable React component libraries, streamlining wallet and transaction interfaces across platforms.",
+          "Leading cross-functional agile and remote teams, ensuring on-time delivery of mission-critical features.",
+          "Integrating secure payment wallet systems into PAYGO platform, processing 10K+ daily transactions.",
+          "Developing responsive React gaming dashboard with real-time analytics, improving player engagement by 35%.",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Riverbank Solutions Limited",
+    roles: [
+      {
+        title: "Software Engineer",
+        dates: "April 2023 — August 2024",
+        highlights: [
+          "Spearheaded the development of Zed Payments portal's, employing NextJS and NodeJs to enhance visual appeal, foster modular code, and accelerate performance by 40%.",
+          "Implemented design thinking approaches to identify user pain points and develop innovative solutions, improving user satisfaction by 50%.",
+          "Led cross-functional collaboration to define product goals and translate user needs into actionable development tasks.",
+          "Implemented Docker containerization, reducing deployment time by 60% across environments.",
+        ],
+      },
+    ],
+  },
+  {
+    company: "ZED Payments",
+    roles: [
+      {
+        title: "Senior Frontend Engineer",
+        dates: "April 2023 — August 2024",
+        highlights: [
+          "Developed highly responsive user-interface components using React concepts, improving accessibility by 30%.",
+          "Optimized front-end performance by streamlining CSS code, reducing load time by 40% and increasing overall performance by 25%.",
+          "Conducted thorough bug identification and resolution, enhancing web functionality and speed by 50%.",
+          "Developed ChatGPT prompts for customer service automation, improving response time by 45%.",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Whrrl Tech",
+    roles: [
+      {
+        title: "Software Engineer",
+        dates: "June 2022 — August 2023",
+        highlights: [
+          "Engineered and tested RESTful APIs using Go and NestJS to dynamically serve data to a React front-end handling over 20,000 concurrent users, ensuring robust performance and responsiveness at scale.",
+          "Facilitated agile product development processes, leading to a 70% improvement in code quality and team productivity.",
+          "Developed and launched the official BruFinance mobile application using React Native and Expo, enhancing user engagement and streamlining financial services.",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Mortgage Ezy",
+    roles: [
+      {
+        title: "Software Engineer",
+        dates: "June 2021 — May 2022",
+        highlights: [
+          "Implemented a robust testing strategy by writing unit tests for various React components, contributing to enhanced application performance by an impressive 50%.",
+          "Re-architected a multi-page dashboard into a single-page web app, resulting in a remarkable 50% improvement in user experience.",
+          "Collaborated with cross-functional teams to design and implement features, ensuring seamless performance across iOS and Android platforms.",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Outgrowify",
+    roles: [
+      {
+        title: "Frontend Developer",
+        dates: "October 2019 — April 2021",
+        highlights: [
+          "Collaborated with UX designers to translate wireframes and mockups into responsive web applications, ensuring pixel-perfect implementation and cross-browser compatibility.",
+          "Integrated RESTful APIs endpoints with the frontend, implementing efficient state management solutions using Redux to handle complex data flows.",
+          "Participated in code reviews, fostering best practices in React development and improving team productivity by 20%.",
+        ],
+      },
+    ],
+  },
+];
+
 export const navData = [
   // { url: "/about", name: "About" },
   // { url: "/projects", name: "Projects" },
   { url: "/blog", name: "Blog" },
+  // TODO: Replace with your Google Docs resume link.
+  { url: "https://docs.google.com/document/d/REPLACE_ME/edit", name: "Resume", external: true },
 ];
