@@ -147,6 +147,31 @@ export const skills: ISkillListItem[] = [
 
 export const projects = [
   {
+    title: "dweaver",
+    icon: "/images/go.svg",
+    date: "2026",
+    stars: 0,
+    description: "Modern, easy-to-use open-source diagramming tool.",
+    tags: ["Go", "TypeScript", "Open Source", "Diagramming"],
+    image: "/images/automate.png",
+    hasSource: true,
+    hasDemo: false,
+    githubUrl: "https://github.com/devenock/d_weaver",
+  },
+  {
+    title: "Event Management API",
+    icon: "/icons/api.svg",
+    date: "2026",
+    stars: 0,
+    description:
+      "A robust API for managing events and ticket bookings (in progress).",
+    tags: ["Go", "gRPC", "PostgreSQL", "JWT", "RBAC"],
+    image: "/images/api-testdoc.png",
+    hasSource: true,
+    hasDemo: false,
+    githubUrl: "",
+  },
+  {
     title: "Vendre",
     icon: "/icons/cart.svg",
     date: "Nov 2024",

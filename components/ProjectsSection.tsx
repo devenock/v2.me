@@ -7,18 +7,15 @@ function getProjectUrl(project: (typeof projects)[number]) {
 }
 
 export default function ProjectsSection() {
-  const featured = projects.slice(0, 2);
+  const featuredOrder = ["dweaver", "Vendre", "Apitestdoc", "Event Management API"] as const;
+  const featured = featuredOrder
+    .map((title) => projects.find((p) => p.title === title))
+    .filter((p): p is (typeof projects)[number] => Boolean(p));
 
   return (
     <section aria-label="Projects">
       <div className="flex items-baseline justify-between gap-4">
         <h2 className="text-2xl font-bold text-foreground">Projects</h2>
-        <Link
-          href="/projects"
-          className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-        >
-          View all
-        </Link>
       </div>
 
       <div className="mt-6 grid gap-6">
