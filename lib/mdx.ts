@@ -37,7 +37,8 @@ function getAllFiles(dir: string): string[] {
 
 function extractMetadata(content: string): { title: string; description: string; date?: string } {
   // First try to find Next.js metadata
-  const metadataMatch = content.match(/export const metadata = {([^}]+)}/);
+  // Use a non-greedy multiline match so nested objects (e.g. alternates) don't break parsing
+  const metadataMatch = content.match(/export const metadata\s*=\s*\{([\s\S]*?)\}\s*;?/);
   if (metadataMatch) {
     const metadataStr = metadataMatch[1];
     const titleMatch = metadataStr.match(/title:\s*['"]([^'"]+)['"]/);
@@ -47,7 +48,7 @@ function extractMetadata(content: string): { title: string; description: string;
     return {
       title: titleMatch ? titleMatch[1] : 'Untitled',
       description: descriptionMatch ? descriptionMatch[1] : 'No description available',
-      date: dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0],
+      date: dateMatch ? dateMatch[1] : undefined,
     };
   }
 
@@ -56,16 +57,23 @@ function extractMetadata(content: string): { title: string; description: string;
   return {
     title: data.title || 'Untitled',
     description: data.description || 'No description available',
-    date: data.date || new Date().toISOString().split('T')[0],
+    date: data.date || undefined,
   };
 }
 
 function cleanContent(content: string): string {
   // Remove the metadata export
-  const cleaned = content.replace(/export const metadata = {[^}]+};?\n?/, '');
+  const cleaned = content.replace(/export const metadata\s*=\s*\{[\s\S]*?\}\s*;?\n?/, '');
   
   // Keep the imports and component usage
   return cleaned.trim();
+}
+
+function normalizeDate(dateStr: string | undefined, fallback: Date): string {
+  if (!dateStr) return fallback.toISOString();
+  const parsed = new Date(dateStr);
+  if (Number.isNaN(parsed.getTime())) return fallback.toISOString();
+  return parsed.toISOString();
 }
 
 export async function getAllBlogs(): Promise<Blog[]> {
@@ -74,6 +82,8 @@ export async function getAllBlogs(): Promise<Blog[]> {
   const blogs = files.map((filePath) => {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { title, description, date } = extractMetadata(fileContents);
+    const stat = fs.statSync(filePath);
+    const fileDate = stat.birthtimeMs && stat.birthtimeMs > 0 ? stat.birthtime : stat.mtime;
     
     // Get the relative path from the blog directory
     const relativePath = path.relative(blogDirectory, filePath);
@@ -86,7 +96,7 @@ export async function getAllBlogs(): Promise<Blog[]> {
     return {
       slug,
       title,
-      date: date || new Date().toISOString().split('T')[0],
+      date: normalizeDate(date, fileDate),
       category: path.dirname(slug),
       description,
       content: cleanContent(fileContents),
@@ -113,11 +123,13 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
 
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { title, description, date } = extractMetadata(fileContents);
+    const stat = fs.statSync(filePath);
+    const fileDate = stat.birthtimeMs && stat.birthtimeMs > 0 ? stat.birthtime : stat.mtime;
 
     return {
       slug,
       title,
-      date: date || new Date().toISOString().split('T')[0],
+      date: normalizeDate(date, fileDate),
       category: path.dirname(slug),
       description,
       content: cleanContent(fileContents),

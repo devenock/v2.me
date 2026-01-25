@@ -4,6 +4,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import { highlight } from 'sugar-high';
 import React from 'react';
+import { format, isValid, parseISO } from "date-fns";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -89,6 +90,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const parsedDate = parseISO(blog.date);
+  const displayDate = isValid(parsedDate)
+    ? format(parsedDate, "MMM d, yyyy")
+    : blog.date;
+
   const mdxSource = await serialize(blog.content, {
     mdxOptions: {
       development: process.env.NODE_ENV === 'development',
@@ -102,7 +108,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
             <span className="font-medium text-blue-600">{blog.category}</span>
             <span>•</span>
-            <time dateTime={blog.date}>{blog.date}</time>
+            <time dateTime={blog.date}>{displayDate}</time>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             {blog.title}
