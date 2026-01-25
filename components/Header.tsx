@@ -18,13 +18,17 @@ export default function Header() {
         </Link>
         <div className="flex items-center space-x-6 sm:space-x-8 mt-3 sm:mt-0">
           {navData.map((item) => {
-            const isActive = 
-              pathname === item.url || 
-              (item.url !== "/" && pathname.startsWith(item.url + "/"));
+            const isInternal = item.url.startsWith("/");
+            const isActive =
+              isInternal &&
+              (pathname === item.url ||
+                (item.url !== "/" && pathname.startsWith(item.url + "/")));
             return (
               <Link
                 href={item.url}
                 key={item.url}
+                target={isInternal ? undefined : "_blank"}
+                rel={isInternal ? undefined : "noopener noreferrer"}
                 className={`
                   relative uppercase text-xs font-semibold sm:text-sm
                   transition-all duration-200 ease-in-out
