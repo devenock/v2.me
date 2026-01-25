@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
 import MDXProvider from "../components/mdx-provider";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devenock.co.ke"),
@@ -26,7 +32,7 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        <body className="antialiased bg-gray-100">
+        <body className={`${inter.className} antialiased bg-gray-100 text-gray-900`}>
           <MDXProvider>
             <div className="max-w-screen-xl mx-auto flex flex-col p-4 sm:p-6 lg:p-8">
               <Header />
