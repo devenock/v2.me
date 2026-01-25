@@ -245,8 +245,43 @@ export const Tools = [
   { name: "GitHub Actions", icon: "/images/gh.svg" },
 ];
 
+// experience (used on landing page)
+// NOTE: Replace placeholder content with your real experience bullets.
+export const experiences = [
+  {
+    company: "Your Company",
+    roles: [
+      {
+        title: "Senior Software Engineer",
+        dates: "2024 — Present",
+        highlights: [
+          "Designed and shipped backend services focused on scalability, reliability, and observability.",
+          "Improved system performance and reduced operational overhead through targeted refactors and automation.",
+          "Collaborated across product and engineering to deliver production-ready systems aligned with business goals.",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Previous Company",
+    roles: [
+      {
+        title: "Software Engineer",
+        dates: "2021 — 2024",
+        highlights: [
+          "Built APIs and internal tools that streamlined workflows and improved developer experience.",
+          "Implemented CI/CD improvements and deployment automation to increase delivery velocity.",
+          "Contributed to architecture decisions around data modeling, caching, and service boundaries.",
+        ],
+      },
+    ],
+  },
+];
+
 export const navData = [
   // { url: "/about", name: "About" },
   // { url: "/projects", name: "Projects" },
   { url: "/blog", name: "Blog" },
+  // TODO: Replace with your Google Docs resume link.
+  { url: "https://docs.google.com/document/d/REPLACE_ME/edit", name: "Resume", external: true },
 ];

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Description from "@/components/Description";
+import ExperienceSection from "@/components/ExperienceSection";
+import ProjectsSection from "@/components/ProjectsSection";
 
 export default function Home() {
   return (
@@ -14,6 +16,11 @@ export default function Home() {
           />
         </div>
         <Description />
+      </div>
+
+      <div className="mt-16 max-w-4xl mx-auto space-y-16">
+        <ExperienceSection />
+        <ProjectsSection />
       </div>
     </div>
   );
