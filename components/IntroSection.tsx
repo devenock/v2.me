@@ -39,17 +39,24 @@ export default function IntroSection() {
                   Software Architect
                 </span>{" "}
                 role by designing scalable, resilient platforms and sharing what
-                I learn along the way. I&apos;m also building{" "}
-                <Link
-                  href="https://github.com/devenock/d_weaver"
+                I learn along the way. 
+              </p>
+
+              <p>
+                You can find some of my work on <Link
+                  href="https://github.com/devenock"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-900 font-medium underline underline-offset-4 decoration-gray-300 hover:decoration-gray-500 hover:text-gray-900/80 transition-colors"
                 >
-                  dweaver
-                </Link>
-                , an open-source diagramming tool using{" "}
-                <span className="text-gray-900 font-medium">Go</span>.
+                  GitHub
+                </Link> or read about my articles <Link
+                  href="/blog"
+                  rel="noopener noreferrer"
+                  className="text-gray-900 font-medium underline underline-offset-4 decoration-gray-300 hover:decoration-gray-500 hover:text-gray-900/80 transition-colors"
+                >
+                  here
+                </Link>.
               </p>
             </div>
 
