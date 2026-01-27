@@ -11,7 +11,7 @@ export default function Home() {
 
       <div className="mt-16 max-w-4xl mx-auto space-y-16">
         {/* <ExperienceSection /> */}
-        <ProjectsSection />
+        {/* <ProjectsSection /> */}
       </div>
     </div>
   );
