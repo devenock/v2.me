@@ -21,8 +21,16 @@ export default function IntroSection() {
                 I work as a{" "}
                 <span className="text-gray-900 font-medium">
                   Senior Software Engineer
-                </span>
-                , where I focus on backend systems and production-ready systems.
+                </span> at{" "}
+                <Link
+                  href="https://www.altech-rdc.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-900 font-medium underline underline-offset-4 decoration-gray-300 hover:decoration-gray-500 hover:text-gray-900/80 transition-colors"
+                >
+                  Altech Group
+                </Link>
+                , where I focus on backend and production-ready systems.
               </p>
               <p>
                 When I&apos;m not shipping code, I&apos;m deepening my systems
