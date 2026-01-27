@@ -1,6 +1,6 @@
 import IntroSection from "@/components/IntroSection";
-import ExperienceSection from "@/components/ExperienceSection";
-import ProjectsSection from "@/components/ProjectsSection";
+// import ExperienceSection from "@/components/ExperienceSection";
+// import ProjectsSection from "@/components/ProjectsSection";
 
 export default function Home() {
   return (
@@ -10,8 +10,8 @@ export default function Home() {
       </div>
 
       <div className="mt-16 max-w-4xl mx-auto space-y-16">
-        <ExperienceSection />
-        <ProjectsSection />
+        {/* <ExperienceSection /> */}
+        {/* <ProjectsSection /> */}
       </div>
     </div>
   );

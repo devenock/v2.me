@@ -18,37 +18,38 @@ export default function ProjectsSection() {
         <h2 className="text-2xl font-bold text-foreground">Projects</h2>
       </div>
 
-      <div className="mt-6 grid gap-6">
+      <div className="mt-6 space-y-4">
         {featured.map((project) => (
           <div
             key={project.title}
-            className="rounded-xl border border-border/60 bg-card/50 p-6 shadow-sm"
+            className="group rounded-lg border border-gray-200 bg-white/60 p-5 transition-all duration-200 hover:border-gray-300 hover:bg-white hover:shadow-sm"
           >
             <div className="flex items-start justify-between gap-4">
-              <div className="min-w-0">
-                <h3 className="text-lg font-semibold text-foreground">
-                  {project.title}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+              <div className="min-w-0 flex-1">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-950 transition-colors">
+                    {project.title}
+                  </h3>
+                  <Link
+                    href={getProjectUrl(project)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 text-xs font-medium text-gray-500 hover:text-gray-900 transition-colors whitespace-nowrap"
+                  >
+                    View →
+                  </Link>
+                </div>
+                <p className="mt-1.5 text-sm text-gray-600 leading-relaxed">
                   {project.description}
                 </p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {project.tags.slice(0, 6).map((tag) => (
+                    <Badge key={tag} variant="secondary" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-              <Link
-                href={getProjectUrl(project)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                View →
-              </Link>
-            </div>
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              {project.tags.slice(0, 6).map((tag) => (
-                <Badge key={tag} variant="secondary">
-                  {tag}
-                </Badge>
-              ))}
             </div>
           </div>
         ))}
