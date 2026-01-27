@@ -1,6 +1,6 @@
 import IntroSection from "@/components/IntroSection";
 // import ExperienceSection from "@/components/ExperienceSection";
-import ProjectsSection from "@/components/ProjectsSection";
+// import ProjectsSection from "@/components/ProjectsSection";
 
 export default function Home() {
   return (
