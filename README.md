@@ -1,0 +1,1 @@
+Inspiration on minimalism: https://alanyang.com/
