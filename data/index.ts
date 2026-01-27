@@ -367,6 +367,5 @@ export const navData = [
   // { url: "/about", name: "About" },
   // { url: "/projects", name: "Projects" },
   { url: "/blog", name: "Blog" },
-  // TODO: Replace with your Google Docs resume link.
-  { url: "https://docs.google.com/document/d/REPLACE_ME/edit", name: "Resume", external: true },
+  { url: "https://docs.google.com/document/d/1OaVbbR2J91AN8g7fFlnqSnA50u819qYixI2vHwaOWw0/edit?usp=sharing", name: "Resume", external: true },
 ];
