@@ -239,3 +239,8 @@ table {
     @apply bg-background text-foreground;
   }
 }
+
+/* Rounded favicon styling */
+link[rel="icon"] {
+  border-radius: 20%;
+}

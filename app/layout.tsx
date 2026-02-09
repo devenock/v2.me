@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     template: "%s | Enock Omondi",
   },
   description: "FullStack Developer",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.png",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
