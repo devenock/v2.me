@@ -181,3 +181,50 @@ func updatesHandler(w http.ResponseWriter, r *http.Request) {
 resp, err := http.Get("https://api.example.com/updates?wait=30")
 // ... then immediately long-poll again for next batch
 ```
+
+## Server-Sent Events and Push: Server-Initiated Delivery
+
+When the server has new data and the client can hold an open connection, **push** avoids repeated client requests.
+
+**Server-Sent Events (SSE)**: The client opens a **single, long-lived HTTP connection**; the server **pushes** events as they happen (one-way, server → client). Simple, text-based, and auto-reconnecting in browsers. Ideal for live feeds, notifications, and progress updates.
+
+**Push (in general)**: Any mechanism where the **server initiates** delivery—SSE, WebSocket server messages, push notifications (e.g. FCM, APNs). Reduces polling and keeps clients up to date with lower latency and less wasted traffic.
+
+Therefore, when you need **live updates** and the client can maintain a connection, **SSE or push** is often better than polling or long polling; reserve request-response for discrete, on-demand operations.
+
+**SSE server (push events over one connection):**
+
+```go
+func sseHandler(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "text/event-stream")
+    w.Header().Set("Cache-Control", "no-cache")
+    flusher, _ := w.(http.Flusher)
+    for {
+        select {
+        case event := <-eventCh:
+            fmt.Fprintf(w, "data: %s\n\n", event)
+            flusher.Flush()
+        case <-r.Context().Done():
+            return
+        }
+    }
+}
+```
+
+**SSE client (read stream):**
+
+```go
+req, _ := http.NewRequestWithContext(ctx, "GET", "https://api.example.com/events", nil)
+req.Header.Set("Accept", "text/event-stream")
+resp, err := http.DefaultClient.Do(req)
+if err != nil {
+    log.Fatal(err)
+}
+defer resp.Body.Close()
+scanner := bufio.NewScanner(resp.Body)
+for scanner.Scan() {
+    if strings.HasPrefix(scanner.Text(), "data: ") {
+        handleEvent(scanner.Text()[6:])
+    }
+}
+```
