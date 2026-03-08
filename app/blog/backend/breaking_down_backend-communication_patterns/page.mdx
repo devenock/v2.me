@@ -133,3 +133,51 @@ defer resp.Body.Close()
 var order Order
 json.NewDecoder(resp.Body).Decode(&order)
 ```
+
+## Polling and Long Polling: Client-Initiated Checks
+
+When the server cannot or should not push, the client can **ask repeatedly** for updates.
+
+**Polling**: The client sends requests at **fixed intervals** (e.g. every 5 seconds). Simple, but wasteful when nothing has changed and adds latency (up to one interval) before the client sees new data.
+
+**Long polling**: The client sends **one** request; the server **holds it open** until it has new data (or a timeout). The client then gets a response and may immediately send another long poll. This reduces empty responses and often improves perceived latency compared to short-interval polling.
+
+Both patterns keep **initiative on the client** and work through firewalls and proxies that allow outbound HTTP but not arbitrary server push. Use them when you cannot use SSE or WebSockets, but prefer long polling over tight polling when you need near-real-time updates without full push.
+
+**Polling (client asks at fixed intervals):**
+
+```go
+ticker := time.NewTicker(5 * time.Second)
+defer ticker.Stop()
+for range ticker.C {
+    resp, err := http.Get("https://api.example.com/updates")
+    if err != nil {
+        continue
+    }
+    var updates []Update
+    json.NewDecoder(resp.Body).Decode(&updates)
+    resp.Body.Close()
+    for _, u := range updates {
+        handleUpdate(u)
+    }
+}
+```
+
+**Long polling (server holds request until data or timeout):**
+
+```go
+// Server: hold until data ready or context cancelled
+func updatesHandler(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+    select {
+    case data := <-updatesCh:
+        json.NewEncoder(w).Encode(data)
+    case <-ctx.Done():
+        w.WriteHeader(http.StatusRequestTimeout)
+    }
+}
+
+// Client: one request that may wait a long time
+resp, err := http.Get("https://api.example.com/updates?wait=30")
+// ... then immediately long-poll again for next batch
+```
