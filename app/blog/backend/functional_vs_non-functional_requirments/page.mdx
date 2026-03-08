@@ -58,3 +58,26 @@ Therefore, understanding both types is important because **functional requiremen
 - **Compliance** – Legal, regulatory, industry standards.
 - **Interoperability** – Integration with other systems and formats.
 - **Observability & Operability** – Logging, metrics, alerting, operations.
+
+---
+
+## Functional Requirements: What the System Does
+
+Functional requirements define the **behavior** of the system. They are **verifiable** in terms of inputs and outputs: given a certain action or input, the system produces a defined result.
+
+- **User-facing features:** Login, signup, profile edit, search, checkout, dashboard.
+- **Business logic:** Discount rules, approval workflows, eligibility checks.
+- **Integrations:** "The system syncs orders to the warehouse API every 5 minutes."
+- **Data and reporting:** "Admins can export a CSV of orders for the last 30 days."
+
+They are typically captured as **user stories** ("As a user, I can reset my password so that I can regain access"), **use cases**, or **feature specifications**. Verification is done through **functional tests** and **acceptance criteria**: if the feature behaves as specified, the functional requirement is met. Missing or vague functional requirements lead to scope creep, rework, and products that do not match stakeholder expectations.
+
+## Non-Functional Requirements: Why They Matter
+
+Non-functional requirements define **qualities and constraints** that apply to the system as a whole or to many features. They rarely map to a single button or API; they cross-cut the architecture and affect **how** you build, not only **what** you build.
+
+- Without clear NFRs, teams argue about "fast enough" or "secure enough" with no shared definition.
+- NFRs drive technology and design choices: databases, caching, auth, monitoring, deployment.
+- Ignored NFRs show up in production as outages, slow pages, security incidents, or costly rewrites.
+
+Therefore, treating NFRs as first-class requirements—written down, prioritized, and measurable—prevents a common mistake: **building the right features with the wrong qualities**.
