@@ -1,0 +1,27 @@
+import AnimatedName from "../../../../components/AnimatedName";
+import ImageWithCaption from "../../../../components/ImageWithCaption";
+
+export const metadata = {
+    title: 'Breaking Down Backend Communication Patterns',
+    description:
+        'A practical guide to push, polling, long polling, SSE, pub/sub, request-response, and synchronous vs asynchronous communication in backend systems.',
+    date: '2026-01-25',
+    alternates: {
+        canonical: '/blog/backend/breaking_down_backend-communication_patterns',
+    },
+};
+
+# Breaking Down Backend Communication Patterns
+
+<AnimatedName />
+
+<ImageWithCaption 
+  src="/images/design.png" 
+  alt="Backend communication patterns and data flow" 
+  width={1800} 
+  height={300} 
+/>
+
+As backend engineers, we spend most of our time **designing APIs**, **orchestrating services**, and **moving data** between components. It is always easy to assume that communication is **"just HTTP"** yet the way clients and servers exchange data—**synchronous or asynchronous**, **request-response or push**, **polling or events**—shapes latency, scalability, and reliability.
+
+This is where **communication patterns** become more than jargon but rather a practical toolkit for **choosing the right contract** between producers and consumers, **reducing wasted work**, and **building systems that scale**.
