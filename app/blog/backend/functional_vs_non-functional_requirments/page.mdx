@@ -195,3 +195,41 @@ Compliance is non-negotiable in many domains; it affects data handling, retentio
 - "Deployments are automated; rollback is a one-click or one-command operation."
 
 Without observability NFRs, production issues are hard to detect and fix. They drive logging, metrics, tracing, alerting, and runbooks.
+
+## Specifying NFRs: SLAs, SLOs, and SLIs
+
+Non-functional requirements are most useful when they are **measurable** and **tracked**.
+
+- **SLI (Service Level Indicator):** A metric that reflects the quality of the service (e.g. "percentage of requests with latency &lt; 200 ms").
+- **SLO (Service Level Objective):** A target for an SLI (e.g. "99% of requests &lt; 200 ms over 30 days").
+- **SLA (Service Level Agreement):** A commitment to a client, often with consequences if not met (e.g. "99.9% uptime or service credits").
+
+Writing NFRs as SLOs (with clear SLIs) makes them testable and reviewable. Example: "Availability SLO: 99.9% successful requests per month (SLI: successful / total requests)."
+
+## How Functional and Non-Functional Requirements Work Together
+
+Functional and non-functional requirements are **complementary**. A feature (functional) must also meet the relevant NFRs: the login flow must be **secure**, **fast enough**, and **available**. NFRs often apply to many features: "all APIs" must meet latency and auth requirements.
+
+- **Prioritization:** Both can be prioritized (e.g. MoSCoW). NFRs should not be deprioritized by default.
+- **Trade-offs:** Sometimes an NFR constrains a functional requirement (e.g. "real-time" may be relaxed to "near real-time" to meet cost or complexity constraints).
+- **Validation:** Functional requirements are checked with acceptance tests; NFRs with performance tests, security tests, and operational reviews.
+
+Therefore, a complete requirements set includes **what** the system does (functional) and **how well** it does it (non-functional), with both reflected in design and testing.
+
+## Common Mistakes and How to Avoid Them
+
+- **Only documenting features:** Capture NFRs explicitly (performance, security, availability, etc.) and link them to design and tests.
+- **Vague NFRs:** Replace "fast" with "p95 latency &lt; 200 ms"; replace "secure" with concrete auth, encryption, and compliance requirements.
+- **Treating NFRs as optional:** Treat them as first-class requirements; prioritize and track them.
+- **No measurable targets:** Define SLIs and SLOs where possible so progress and regressions are visible.
+- **Ignoring trade-offs:** Document known trade-offs (e.g. consistency vs latency, cost vs redundancy) so decisions are explicit.
+
+Avoiding these mistakes improves alignment between stakeholders, architecture, and production reality.
+
+---
+
+## Conclusion
+
+Functional requirements define **what** the system does; non-functional requirements define **how well** it does it. Both are essential for building systems that are correct, usable, secure, scalable, and operable.
+
+From **performance** and **scalability** to **availability**, **security**, **maintainability**, and **observability**, NFRs shape architecture and operations. Writing them down, making them measurable, and validating them alongside functional requirements helps you move from **shipping features** to **shipping systems that meet user and business needs in the long run**.
