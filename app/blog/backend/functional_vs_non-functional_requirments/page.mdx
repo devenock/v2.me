@@ -1,0 +1,60 @@
+import AnimatedName from "../../../../components/AnimatedName";
+import ImageWithCaption from "../../../../components/ImageWithCaption";
+
+export const metadata = {
+    title: 'Functional vs Non-Functional Requirements: A Complete Guide',
+    description:
+        'What functional and non-functional requirements are, how they differ, and how to capture and specify performance, security, scalability, availability, and more.',
+    date: '2026-01-26',
+    alternates: {
+        canonical: '/blog/backend/functional_vs_non-functional_requirments',
+    },
+};
+
+# Functional vs Non-Functional Requirements: A Complete Guide
+
+<AnimatedName />
+
+<ImageWithCaption 
+  src="/images/design.png" 
+  alt="Requirements: functional and non-functional" 
+  width={1800} 
+  height={300} 
+/>
+
+As backend engineers and product builders, we spend most of our time turning **what the system must do** and **how well it must do it** into designs and code. It is easy to focus only on **features**—login, checkout, reports—and treat everything else as an afterthought. Yet **performance**, **security**, **availability**, and **scalability** are not optional extras; they are specified by **non-functional requirements** and often decide whether the system succeeds or fails in production.
+
+This is where the distinction between **functional** and **non-functional** requirements becomes more than theory: it shapes how we write specs, prioritize work, and validate that the system meets both user needs and business constraints.
+
+## What Functional and Non-Functional Requirements Really Are
+
+**Functional requirements** describe *what* the system does: the behaviors, features, and capabilities that users and other systems can observe. They answer: "What can the user or the system do?" Examples: "The user can log in with email and password," "The API returns the order by ID," "The system sends a confirmation email when payment succeeds."
+
+**Non-functional requirements (NFRs)** describe *how well* the system does what it does: the qualities and constraints that apply across features. They answer: "How fast? How secure? How available? How scalable?" Examples: "The API responds within 200 ms under normal load," "Data at rest is encrypted," "The system is available 99.9% of the time."
+
+Therefore, understanding both types is important because **functional requirements** define the product; **non-functional requirements** define whether the product is usable, reliable, and sustainable in the real world.
+
+---
+
+## Requirements at a Glance
+
+**Functional (what the system does)**
+
+- Features, user actions, business rules, integrations, data inputs and outputs.
+- Captured in user stories, use cases, and feature specs.
+- Verified by functional and acceptance tests.
+
+**Non-functional (how well it does it)**
+
+- **Performance** – Latency, throughput, response time.
+- **Scalability** – Ability to handle growth in load or data.
+- **Availability & Reliability** – Uptime, failure tolerance, mean time to recovery.
+- **Security** – Authentication, authorization, encryption, compliance.
+- **Usability** – Ease of use, accessibility, clarity.
+- **Maintainability** – Ease of change, readability, testability.
+- **Portability & Compatibility** – Platforms, browsers, APIs, versions.
+- **Recoverability** – Backup, restore, disaster recovery.
+- **Capacity & Resource efficiency** – Resource limits, cost.
+- **Compliance** – Legal, regulatory, industry standards.
+- **Interoperability** – Integration with other systems and formats.
+- **Observability & Operability** – Logging, metrics, alerting, operations.
