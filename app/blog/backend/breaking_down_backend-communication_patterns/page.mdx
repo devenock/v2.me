@@ -94,3 +94,42 @@ go func() {
 body := <-resultCh
 processOrder(body)
 ```
+
+## Request-Response: The Classic Pattern
+
+Request-response is the **synchronous** pattern we use every day: one request, one response. REST and gRPC are built on it.
+
+- Clear contract: request in, response out.
+- Easy to debug and test.
+- Client blocks until the server answers; timeouts and connection limits apply.
+
+When an API feels slow or clients hit timeouts, the issue may be:
+- **Long-running work** that should be async (e.g. job queue + webhook).
+- **Heavy payloads** that could be streamed or paginated.
+- **Backend** not optimized for the chosen pattern.
+
+So request-response is ideal when the **response can be produced quickly** and the client **needs it immediately**; otherwise, consider async or push.
+
+**Server (handler):**
+
+```go
+func orderHandler(w http.ResponseWriter, r *http.Request) {
+    orderID := r.URL.Query().Get("id")
+    order := fetchOrder(orderID) // blocking lookup
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(order)
+}
+```
+
+**Client (one request, one response):**
+
+```go
+req, _ := http.NewRequest("GET", "https://api.example.com/order?id=123", nil)
+resp, err := http.DefaultClient.Do(req)
+if err != nil {
+    log.Fatal(err)
+}
+defer resp.Body.Close()
+var order Order
+json.NewDecoder(resp.Body).Decode(&order)
+```
