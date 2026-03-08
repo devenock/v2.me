@@ -51,3 +51,46 @@ Therefore, understanding these patterns is important because backend systems liv
 **Push** – Server **initiates** delivery of data to the client (e.g. push notifications, SSE, WebSockets server-to-client).
 
 **Pub/Sub (Publish-Subscribe)** – Producers **publish** messages to a topic or channel; **subscribers** receive them without knowing the producer; decoupled, often **async**.
+
+
+## Synchronous vs Asynchronous: The Foundation
+
+Most backend work starts with a simple question: does the caller need an **immediate answer** or can it **continue and get the result later**?
+
+- **Synchronous**: The client sends a request and **waits** until the server responds. Simple, easy to reason about, but the client is blocked and the connection is held.
+- **Asynchronous**: The client sends a request and **does not wait**; the server may process in the background and respond later (e.g. via callback, webhook, or another channel). Better for long-running work and resource use, but adds complexity and eventual consistency.
+
+Therefore, understanding **sync vs async** prevents a common mistake: **using a blocking pattern when the system would be simpler and more scalable with async or push**.
+
+**Sync (blocking) in Go:** the caller waits for the result.
+
+```go
+// Synchronous: block until response
+resp, err := http.Get("https://api.example.com/order/123")
+if err != nil {
+    log.Fatal(err)
+}
+defer resp.Body.Close()
+body, _ := io.ReadAll(resp.Body)
+// use body only after Get() returns
+processOrder(body)
+```
+
+**Async (non-blocking):** fire the work and get the result later via channel or callback.
+
+```go
+// Asynchronous: do not block; handle result when ready
+resultCh := make(chan []byte, 1)
+go func() {
+    resp, err := http.Get("https://api.example.com/order/123")
+    if err != nil {
+        return
+    }
+    defer resp.Body.Close()
+    body, _ := io.ReadAll(resp.Body)
+    resultCh <- body
+}()
+// ... do other work ...
+body := <-resultCh
+processOrder(body)
+```
