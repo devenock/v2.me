@@ -277,3 +277,29 @@ for msg := range ps.Subscribe("orders") {
 ```
 
 In production you'd typically use a broker (e.g. Redis Streams, NATS, Kafka) instead of in-memory channels, but the **publish** and **subscribe** contract is the same.
+
+## Choosing the Right Pattern
+
+No single pattern fits every scenario. A few heuristics:
+
+- **Need an immediate result?** → **Request-response (sync)**.
+- **Long-running or one-way work?** → **Async** (job queue, webhook, or callback).
+- **Client must "check" for updates and cannot hold a connection?** → **Polling** or **long polling**.
+- **Server has a stream of updates and client can hold a connection?** → **SSE** or **push**.
+- **Multiple consumers, decoupling, events?** → **Pub/sub**.
+
+Backend engineers who understand these patterns can avoid **over-polling**, **blocking when async would scale**, and **tight coupling** when pub/sub would simplify the system.
+
+## Patterns in Practice: They Often Coexist
+
+Real systems mix patterns: a **REST API** for request-response, **SSE** for live dashboard updates, **pub/sub** for order or event processing, and **async jobs** for emails and reports. The same service might expose both sync endpoints and async or push channels.
+
+Understanding each pattern—**synchronous vs asynchronous**, **request-response**, **polling**, **long polling**, **SSE**, **push**, and **pub/sub**—helps you choose the right one per use case and document expectations for latency, consistency, and failure handling.
+
+---
+
+## Conclusion
+
+Backend communication patterns are not just theory. For backend engineers, they are a **practical toolkit** that improves API design, reduces wasted work, and makes systems easier to scale and operate.
+
+Your APIs may start with request-response, but production reality often needs **polling**, **long polling**, **SSE**, **push**, and **pub/sub** in the right places. Understanding these patterns helps you move from **writing endpoints** to **engineering resilient, efficient backend communication**.
