@@ -81,3 +81,47 @@ Non-functional requirements define **qualities and constraints** that apply to t
 - Ignored NFRs show up in production as outages, slow pages, security incidents, or costly rewrites.
 
 Therefore, treating NFRs as first-class requirements—written down, prioritized, and measurable—prevents a common mistake: **building the right features with the wrong qualities**.
+
+---
+
+## Performance: Latency, Throughput, Response Time
+
+**Performance** NFRs specify how quickly and how much work the system can do.
+
+- **Response time / Latency:** "The API responds within 200 ms for p95 under normal load." "Search results appear within 1 second."
+- **Throughput:** "The system processes 1,000 orders per minute." "The API supports 500 concurrent users."
+- **Resource usage:** "The service uses at most 512 MB RAM under typical load."
+
+These are specified in measurable terms (percentiles, concurrency, requests per second). They influence choices such as caching, indexing, connection pooling, and async processing. Vague goals like "it should be fast" are not testable; "p95 latency &lt; 200 ms" is.
+
+## Scalability
+
+**Scalability** is the ability of the system to handle **growth**—in users, traffic, data volume, or complexity—without a proportional increase in cost or a drop in performance.
+
+- "The system supports 10x current traffic without architectural change."
+- "Adding more application nodes increases request capacity linearly."
+- "The database can grow to 100 GB without degrading query performance."
+
+Scalability is often split into **horizontal** (add more nodes) and **vertical** (add more resources to a node). It affects stateless design, data partitioning, caches, and queues. Defining scalability targets early helps avoid redesigns when load grows.
+
+## Availability and Reliability
+
+**Availability** is the proportion of time the system is up and usable (e.g. 99.9% uptime). **Reliability** is the system's ability to perform correctly over time and under failure (e.g. no data loss, correct results).
+
+- **Availability:** "The API is available 99.9% of the time per month." "Scheduled maintenance is excluded and communicated."
+- **Reliability:** "Successful payments are never lost." "At least once delivery for order events."
+- **Mean time to recovery (MTTR):** "Recovery from a failed deployment takes less than 15 minutes."
+
+These drive redundancy, health checks, failover, graceful degradation, and incident response. They are often expressed in **SLAs** (contractual) or **SLOs** (internal targets).
+
+## Security
+
+**Security** NFRs cover confidentiality, integrity, and availability of data and access.
+
+- **Authentication:** "Users authenticate via SSO or email/password with rate limiting."
+- **Authorization:** "Users see only their own data; admins have role-based access."
+- **Encryption:** "Data in transit uses TLS 1.3; sensitive data at rest is encrypted."
+- **Compliance:** "The system meets PCI-DSS for payment data" or "GDPR for personal data."
+- **Audit:** "Sensitive actions are logged for audit."
+
+Security requirements influence auth mechanisms, encryption, logging, and compliance controls. They should be explicit and testable (e.g. penetration tests, compliance audits).
