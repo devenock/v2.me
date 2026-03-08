@@ -125,3 +125,73 @@ These drive redundancy, health checks, failover, graceful degradation, and incid
 - **Audit:** "Sensitive actions are logged for audit."
 
 Security requirements influence auth mechanisms, encryption, logging, and compliance controls. They should be explicit and testable (e.g. penetration tests, compliance audits).
+
+## Usability and User Experience
+
+**Usability** and **UX** NFRs describe how easy and effective the system is for its users.
+
+- "First-time users can complete checkout without help."
+- "The UI meets WCAG 2.1 Level AA for accessibility."
+- "Error messages are clear and suggest a next step."
+- "The API returns meaningful error codes and messages."
+
+These apply to both UIs and APIs (e.g. clear docs, consistent status codes). They are validated through usability testing, accessibility checks, and API reviews.
+
+## Maintainability and Modifiability
+
+**Maintainability** is how easily the system can be corrected, improved, or adapted.
+
+- "New payment providers can be added without changing core order logic."
+- "Code is covered by unit and integration tests; critical paths have at least 80% coverage."
+- "Deployment is automated and repeatable; rollback is possible within minutes."
+- "Dependencies are kept up to date; no critical known vulnerabilities."
+
+Modifiability and clean architecture reduce the cost of change and the risk of regressions. They are supported by testing, documentation, and modular design.
+
+## Portability, Compatibility, and Interoperability
+
+- **Portability:** "The service runs on Linux in Docker; no OS-specific assumptions."
+- **Compatibility:** "The API supports the last two major versions; deprecated fields are announced 6 months in advance."
+- **Interoperability:** "The system exchanges data with Partner X via the agreed JSON schema and OAuth2."
+
+These reduce lock-in and integration friction. They are verified by compatibility tests, contract tests, and integration tests with partners.
+
+## Recoverability and Disaster Recovery
+
+**Recoverability** and **disaster recovery (DR)** define how the system recovers from failures or disasters.
+
+- "Database backups are taken daily; point-in-time restore is possible within 24 hours."
+- "RTO (Recovery Time Objective) is 4 hours; RPO (Recovery Point Objective) is 1 hour."
+- "DR runbooks are documented and tested at least once a year."
+
+RTO and RPO drive backup strategy, replication, and DR procedures. Without them, recovery is ad hoc and risky.
+
+## Capacity and Resource Efficiency
+
+**Capacity** and **resource efficiency** NFRs set limits and cost expectations.
+
+- "The service runs within a defined budget (e.g. CPU, memory, egress)."
+- "Batch jobs complete within the allocated time window and do not starve online traffic."
+- "Idle resources are scaled down to reduce cost."
+
+These influence scaling policies, resource quotas, and cost monitoring.
+
+## Compliance and Legal
+
+**Compliance** NFRs come from law, regulation, or industry standards.
+
+- "Personal data is processed in line with GDPR (retention, consent, rights)."
+- "Financial data is handled according to PCI-DSS (or local equivalent)."
+- "Audit logs are retained for 7 years as required by regulation."
+
+Compliance is non-negotiable in many domains; it affects data handling, retention, and audit trails.
+
+## Observability and Operability
+
+**Observability** and **operability** define how the system can be monitored and operated.
+
+- "All services emit structured logs and metrics (latency, errors, throughput)."
+- "Critical failures trigger alerts within 5 minutes; dashboards reflect current health."
+- "Deployments are automated; rollback is a one-click or one-command operation."
+
+Without observability NFRs, production issues are hard to detect and fix. They drive logging, metrics, tracing, alerting, and runbooks.
