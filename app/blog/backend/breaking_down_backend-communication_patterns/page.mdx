@@ -25,3 +25,29 @@ export const metadata = {
 As backend engineers, we spend most of our time **designing APIs**, **orchestrating services**, and **moving data** between components. It is always easy to assume that communication is **"just HTTP"** yet the way clients and servers exchange data—**synchronous or asynchronous**, **request-response or push**, **polling or events**—shapes latency, scalability, and reliability.
 
 This is where **communication patterns** become more than jargon but rather a practical toolkit for **choosing the right contract** between producers and consumers, **reducing wasted work**, and **building systems that scale**.
+
+## What Backend Communication Patterns Really Are
+
+**Backend communication patterns** are the recurring ways in which clients and servers (or services) exchange data: who initiates, who waits, and how often data flows. No single pattern fits every use case; each trades off **latency**, **simplicity**, **resource usage**, and **coupling**.
+
+Therefore, understanding these patterns is important because backend systems live and die by how well they communicate, and the right pattern explains when to block, when to poll, when to push, and when to publish events.
+
+---
+
+## Communication Patterns at a Glance
+
+**Synchronous** – Client sends a request and **blocks** until the server responds.
+
+**Asynchronous** – Client sends a request and **does not block**; the response (or result) may arrive later or be handled via callback.
+
+**Request-Response** – One request, one response; the classic **sync** pattern (e.g. REST, gRPC).
+
+**Polling** – Client **repeatedly asks** the server: "Any new data?" at fixed intervals.
+
+**Long Polling** – Client asks once; server **holds the request open** until it has data (or timeout), then responds.
+
+**Server-Sent Events (SSE)** – Server **pushes** a stream of events to the client over a single, long-lived connection.
+
+**Push** – Server **initiates** delivery of data to the client (e.g. push notifications, SSE, WebSockets server-to-client).
+
+**Pub/Sub (Publish-Subscribe)** – Producers **publish** messages to a topic or channel; **subscribers** receive them without knowing the producer; decoupled, often **async**.
