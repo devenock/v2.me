@@ -228,3 +228,52 @@ for scanner.Scan() {
     }
 }
 ```
+
+## Pub/Sub: Decoupled, Event-Driven Communication
+
+**Publish-Subscribe** decouples producers from consumers: producers **publish** messages to a topic or channel; **subscribers** receive only the messages they care about, without knowing who produced them.
+
+- **Asynchronous** by nature: publishers do not wait for subscribers to process.
+- **Scalable**: add subscribers without changing publishers; message brokers (e.g. Kafka, RabbitMQ) handle distribution.
+- **Resilient**: subscribers can be offline and catch up (depending on broker and retention).
+
+Use pub/sub when multiple consumers need the same events, when you want **loose coupling** and **async processing**, and when ordering or delivery guarantees (at-least-once, exactly-once) are important to design for.
+
+**In-memory pub/sub with channels (conceptually the same as a broker):**
+
+```go
+type PubSub struct {
+    subs map[string][]chan string
+    mu   sync.RWMutex
+}
+
+func (ps *PubSub) Publish(topic, msg string) {
+    ps.mu.RLock()
+    defer ps.mu.RUnlock()
+    for _, ch := range ps.subs[topic] {
+        select {
+        case ch <- msg:
+        default:
+            // subscriber slow; skip or buffer
+        }
+    }
+}
+
+func (ps *PubSub) Subscribe(topic string) <-chan string {
+    ch := make(chan string, 1)
+    ps.mu.Lock()
+    ps.subs[topic] = append(ps.subs[topic], ch)
+    ps.mu.Unlock()
+    return ch
+}
+
+// Publisher (async; does not wait for subscribers)
+ps.Publish("orders", `{"id":"123","status":"shipped"}`)
+
+// Subscriber
+for msg := range ps.Subscribe("orders") {
+    handleOrderEvent(msg)
+}
+```
+
+In production you'd typically use a broker (e.g. Redis Streams, NATS, Kafka) instead of in-memory channels, but the **publish** and **subscribe** contract is the same.
