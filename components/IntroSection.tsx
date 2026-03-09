@@ -20,7 +20,7 @@ export default function IntroSection() {
                 <span className="text-gray-900 font-medium">Enock Omondi</span>.
                 I work as a{" "}
                 <span className="text-gray-900 font-medium">
-                  Senior Software Engineer
+                  Lead Software Engineer
                 </span> at{" "}
                 <Link
                   href="https://www.altech-rdc.com/"
@@ -39,7 +39,7 @@ export default function IntroSection() {
                   Software Architect
                 </span>{" "}
                 by designing scalable, resilient platforms and sharing what
-                I learn along the way. 
+                I learn along the way.
               </p>
 
               <p>
