@@ -1,8 +1,9 @@
 import createMDX from "@next/mdx";
+import remarkGfm from "remark-gfm";
 
 const withMDX = createMDX({
   options: {
-    // Removed all plugins for minimal config
+    remarkPlugins: [remarkGfm],
   },
 });
 
@@ -13,6 +14,8 @@ const nextConfig = {
   experimental: {
     mdxRs: false, // Keep MDX RS disabled for now
   },
+  // Hide the floating Next.js (N) dev indicator in the corner; errors still surface normally
+  devIndicators: false as const,
   // Optionally, add any other Next.js config below
 };
 
