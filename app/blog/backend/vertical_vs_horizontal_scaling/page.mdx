@@ -16,32 +16,32 @@ export const metadata = {
 
 <AnimatedName />
 
-As backend engineers, we spend much of our time designing systems that can **handle growth**—more users, more traffic, more data. It is easy to say "we'll scale" without being clear *how*: **add more CPU and RAM to the same machine** or **add more machines**. The first is **vertical scaling** (scale up); the second is **horizontal scaling** (scale out). Each has different costs, limits, and implications for architecture and operations.
+As backend engineers, we spend much of our time designing systems that can handle growth—more users, more traffic, more data. It is easy to say "we'll scale" without being clear *how*: add more CPU and RAM to the same machine, or add more machines. The first is <Term>vertical scaling</Term> (scale up); the second is <Term>horizontal scaling</Term> (scale out). Each has different costs, limits, and implications for architecture and operations.
 
-This is where understanding **vertical vs horizontal scaling** becomes more than vocabulary: it shapes capacity planning, cost, resilience, and how you design stateless services, databases, and deployment pipelines.
+This is where understanding vertical vs horizontal scaling becomes more than vocabulary: it shapes capacity planning, cost, resilience, and how you design stateless services, databases, and deployment pipelines.
 
 ## What Vertical and Horizontal Scaling Really Are
 
-**Vertical scaling (scale up)** means increasing the **resources of a single node**: more CPU cores, more RAM, faster disk, or a bigger instance type. The application and its deployment topology stay largely the same; you run the same software on a larger machine. The ceiling is the **maximum size of a single machine** and the **cost curve** of big instances.
+<Term variant="neutral">Vertical scaling (scale up)</Term> means increasing the resources of a single node: more CPU cores, more RAM, faster disk, or a bigger instance type. The application and its deployment topology stay largely the same; you run the same software on a larger machine. The ceiling is the maximum size of a single machine and the cost curve of big instances.
 
-**Horizontal scaling (scale out)** means adding **more nodes** to the system—more application servers, more database replicas, more workers—and distributing load across them. The ceiling is **how well your architecture supports distribution**: stateless app servers scale out easily; stateful or single-writer components often need redesign (e.g. sharding, replication) to scale out.
+<Term variant="neutral">Horizontal scaling (scale out)</Term> means adding more nodes to the system—more application servers, more database replicas, more workers—and distributing load across them. The ceiling is how well your architecture supports distribution: stateless app servers scale out easily; stateful or single-writer components often need redesign (e.g. sharding, replication) to scale out.
 
-Therefore, understanding both approaches is important because **vertical scaling** is simpler and often the first step; **horizontal scaling** is how most systems eventually grow, but it requires design choices that are hard to retrofit later.
+Therefore, understanding both approaches is important because vertical scaling is simpler and often the first step; horizontal scaling is how most systems eventually grow, but it requires design choices that are hard to retrofit later.
 
 ---
 
 ## Scaling at a Glance
 
-**Vertical scaling (scale up)**
+<Term variant="neutral">Vertical scaling (scale up)</Term>
 
-- Add CPU, RAM, or disk to **one** machine.
+- Add CPU, RAM, or disk to one machine.
 - Same code, same topology; usually minimal config change.
 - Limited by the largest instance or hardware available; cost per unit of capacity often rises at the high end.
 - Single point of failure unless you add redundancy elsewhere.
 
-**Horizontal scaling (scale out)**
+<Term variant="neutral">Horizontal scaling (scale out)</Term>
 
-- Add **more** machines or containers; load is spread across them.
+- Add more machines or containers; load is spread across them.
 - Requires stateless design, load balancing, and often data distribution (replication, sharding).
 - Can grow by adding more nodes; often better cost scaling for commodity hardware.
 - Improves resilience (multiple nodes) but adds operational and architectural complexity.
@@ -50,35 +50,35 @@ Therefore, understanding both approaches is important because **vertical scaling
 
 ## Vertical Scaling: Scale Up
 
-**Vertical scaling** is increasing the capacity of a **single** server or instance: bigger CPU, more RAM, faster or larger storage. You keep one (or a few) nodes and make each one more powerful.
+Vertical scaling is increasing the capacity of a single server or instance: bigger CPU, more RAM, faster or larger storage. You keep one (or a few) nodes and make each one more powerful.
 
 - **Pros:** Simple to implement—often a config or instance-type change. No change to application architecture. No need for load balancers or distributed logic. Easier to reason about and debug (one box). Good for workloads that do not parallelize well (e.g. single-threaded or tightly coupled).
 - **Cons:** Hard ceiling—you cannot exceed the largest machine or instance your provider offers. Cost often grows non-linearly (e.g. 2x resources can cost more than 2x). Single point of failure unless you run multiple scaled-up nodes (which is then scaling out for redundancy). Upgrades may require restarts or migration.
 
-Vertical scaling is ideal when **load is moderate**, **growth is predictable**, and you want to **minimize operational and architectural complexity**. Many systems start here and move to horizontal scaling when they hit limits or need higher availability.
+Vertical scaling is ideal when load is moderate, growth is predictable, and you want to minimize operational and architectural complexity. Many systems start here and move to horizontal scaling when they hit limits or need higher availability.
 
 ## Horizontal Scaling: Scale Out
 
-**Horizontal scaling** is adding **more** nodes (servers, containers, processes) and distributing work across them. Capacity grows by adding more units instead of making one unit bigger.
+Horizontal scaling is adding more nodes (servers, containers, processes) and distributing work across them. Capacity grows by adding more units instead of making one unit bigger.
 
-- **Pros:** Can grow beyond the limits of a single machine. Often better cost scaling with commodity instances. Improves **availability**—multiple nodes mean failure of one does not necessarily take down the system. Enables **rolling updates** and zero-downtime deployments when combined with load balancing.
-- **Cons:** Requires **stateless** or carefully managed state (e.g. session store, shared nothing). Needs **load balancing** and often **service discovery**. Data layers (databases, caches) may need **replication**, **sharding**, or **partitioning**. More moving parts means more operational and observability complexity.
+- **Pros:** Can grow beyond the limits of a single machine. Often better cost scaling with commodity instances. Improves availability—multiple nodes mean failure of one does not necessarily take down the system. Enables rolling updates and zero-downtime deployments when combined with load balancing.
+- **Cons:** Requires stateless or carefully managed state (e.g. session store, shared nothing). Needs load balancing and often service discovery. Data layers (databases, caches) may need replication, sharding, or partitioning. More moving parts means more operational and observability complexity.
 
-Horizontal scaling is ideal when you need **high availability**, **elastic growth**, or **cost-effective** growth at scale. Most cloud-native and microservice architectures are designed to scale out.
+Horizontal scaling is ideal when you need high availability, elastic growth, or cost-effective growth at scale. Most cloud-native and microservice architectures are designed to scale out.
 
 ## Vertical vs Horizontal: A Direct Comparison
 
 | Aspect | Vertical (scale up) | Horizontal (scale out) |
 |--------|---------------------|------------------------|
-| **Change** | Bigger single node | More nodes |
-| **Complexity** | Low | Higher (load balancing, distribution) |
-| **Ceiling** | Single-machine max | Theoretically high (architecture-dependent) |
-| **Cost at scale** | Often steeper (big instances) | Often flatter (many small instances) |
-| **Failure domain** | One node | Spread across nodes |
-| **State** | Easier to keep on one box | Requires stateless design or shared state |
-| **Typical use** | Early stage, simple apps, monoliths | High traffic, HA, cloud-native |
+| Change | Bigger single node | More nodes |
+| Complexity | Low | Higher (load balancing, distribution) |
+| Ceiling | Single-machine max | Theoretically high (architecture-dependent) |
+| Cost at scale | Often steeper (big instances) | Often flatter (many small instances) |
+| Failure domain | One node | Spread across nodes |
+| State | Easier to keep on one box | Requires stateless design or shared state |
+| Typical use | Early stage, simple apps, monoliths | High traffic, HA, cloud-native |
 
-Choosing between them (or combining them) depends on **current and expected load**, **availability requirements**, **cost**, and **how much you can change the architecture**.
+Choosing between them (or combining them) depends on current and expected load, availability requirements, cost, and how much you can change the architecture.
 
 ## When to Prefer Vertical Scaling
 
@@ -88,7 +88,7 @@ Choosing between them (or combining them) depends on **current and expected load
 - **Limited engineering bandwidth:** You want to avoid load balancers, service discovery, and distributed state for now.
 - **Predictable, bounded growth:** You know the upper bound and it fits within a single large instance.
 
-Vertical scaling is a **valid and often optimal** choice until you hit machine limits, need higher availability, or need to grow beyond what one node can provide.
+Vertical scaling is a valid and often optimal choice until you hit machine limits, need higher availability, or need to grow beyond what one node can provide.
 
 ## When to Prefer Horizontal Scaling
 
@@ -98,15 +98,15 @@ Vertical scaling is a **valid and often optimal** choice until you hit machine l
 - **Zero-downtime deployments:** Rolling updates across a pool of nodes.
 - **Global or multi-region:** Traffic and data are distributed by design.
 
-Horizontal scaling is the **default direction** for systems that must be highly available and grow with demand. It usually requires stateless app tiers, load balancing, and a plan for scaling the data layer (replication, sharding, or managed services).
+Horizontal scaling is the default direction for systems that must be highly available and grow with demand. It usually requires stateless app tiers, load balancing, and a plan for scaling the data layer (replication, sharding, or managed services).
 
 ## Combining Vertical and Horizontal Scaling
 
-In practice, **both** are used. You might:
+In practice, both are used. You might:
 
-- **Scale out** the application layer (many app instances behind a load balancer) and **scale up** the database (larger instance until you need read replicas or sharding).
-- **Scale up** within a tier (e.g. bigger containers) while also **scaling out** (more containers) as load grows.
-- Use **vertical scaling** for stateful or hard-to-distribute components and **horizontal scaling** for stateless APIs and workers.
+- Scale out the application layer (many app instances behind a load balancer) and scale up the database (larger instance until you need read replicas or sharding).
+- Scale up within a tier (e.g. bigger containers) while also scaling out (more containers) as load grows.
+- Use vertical scaling for stateful or hard-to-distribute components and horizontal scaling for stateless APIs and workers.
 
 The goal is to match the scaling strategy to each component's constraints and to your availability and cost goals.
 
@@ -126,4 +126,4 @@ Without these, adding more nodes may not improve performance or availability and
 
 **Vertical scaling** is scaling up—bigger single nodes. **Horizontal scaling** is scaling out—more nodes. Vertical is simpler and often the right first step; horizontal is how systems typically grow for high availability and elastic capacity.
 
-Understanding both helps you choose the right strategy per component and stage: start with vertical where it fits, design for horizontal where you need resilience and growth, and combine both as your system evolves. That way you move from **"we'll scale"** to **scaling in a way that is predictable, cost-effective, and aligned with your architecture**.
+Understanding both helps you choose the right strategy per component and stage: start with vertical where it fits, design for horizontal where you need resilience and growth, and combine both as your system evolves. That way you move from "we'll scale" to scaling in a way that is predictable, cost-effective, and aligned with your architecture.
