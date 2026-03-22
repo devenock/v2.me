@@ -1,20 +1,18 @@
-"use client";
-
-import React, { useState } from "react";
 import Link from "next/link";
 import { format, isValid, parseISO } from "date-fns";
+import type { Blog } from "@/lib/mdx";
+import { blogListHref } from "@/lib/blogListUrl";
+import { BlogPagination } from "@/components/BlogPagination";
+import { cn } from "@/lib/utils";
 
-interface Blog {
-  slug: string;
-  title: string;
-  date: string;
-  category: string;
-  description: string;
-}
-
-interface BlogListProps {
+export type BlogListProps = {
   blogs: Blog[];
-}
+  /** Includes `all` plus sorted unique categories from the full index */
+  categories: string[];
+  selectedCategory: string;
+  currentPage: number;
+  totalPages: number;
+};
 
 function formatBlogDate(date: string) {
   const parsed = parseISO(date);
@@ -23,38 +21,49 @@ function formatBlogDate(date: string) {
   return isValid(fallback) ? format(fallback, "MMM d, yyyy") : date;
 }
 
-export function BlogList({ blogs }: BlogListProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+function categoryLabel(category: string) {
+  if (category === "all") return "All";
+  return category.charAt(0).toUpperCase() + category.slice(1);
+}
 
-  const categories = ["all", ...new Set(blogs.map((blog) => blog.category))];
-
-  const filteredBlogs =
-    selectedCategory === "all"
-      ? blogs
-      : blogs.filter((blog) => blog.category === selectedCategory);
+/**
+ * Blog index list (server-rendered). Category + pagination use URL search params.
+ */
+export function BlogList({
+  blogs,
+  categories,
+  selectedCategory,
+  currentPage,
+  totalPages,
+}: BlogListProps) {
+  const filterLinkClass = (active: boolean) =>
+    cn(
+      "rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+      active
+        ? "bg-foreground text-background"
+        : "bg-muted text-muted-foreground hover:text-foreground"
+    );
 
   return (
     <div>
       <div className="mb-6 flex flex-wrap gap-2">
-        {categories.map((category) => (
-          <button
-            key={category}
-            type="button"
-            onClick={() => setSelectedCategory(category)}
-            className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors
-              ${
-                selectedCategory === category
-                  ? "bg-foreground text-background"
-                  : "bg-muted text-muted-foreground hover:text-foreground"
-              }`}
-          >
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </button>
-        ))}
+        {categories.map((category) => {
+          const active = selectedCategory === category;
+          return (
+            <Link
+              key={category}
+              href={blogListHref(1, category)}
+              className={filterLinkClass(active)}
+              aria-current={active ? "true" : undefined}
+            >
+              {categoryLabel(category)}
+            </Link>
+          );
+        })}
       </div>
 
       <div className="space-y-3">
-        {filteredBlogs.map((blog) => (
+        {blogs.map((blog) => (
           <div
             key={blog.slug}
             className="rounded-lg border border-border/60 bg-card/30 transition-all duration-200 hover:bg-card/50 hover:shadow-sm"
@@ -95,6 +104,12 @@ export function BlogList({ blogs }: BlogListProps) {
           </div>
         ))}
       </div>
+
+      <BlogPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        category={selectedCategory}
+      />
     </div>
   );
 }
