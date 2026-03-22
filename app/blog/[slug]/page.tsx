@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import { highlight } from 'sugar-high';
 import React from 'react';
 import { format, isValid, parseISO } from "date-fns";
+import { MdxPreWithCopy } from "@/components/MdxPreWithCopy";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -22,11 +23,10 @@ const components = {
       />
     );
   },
-  pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre
-      className={`my-4 overflow-x-auto rounded-lg bg-gray-900 p-4 ${className || ''}`}
-      {...props}
-    />
+  pre: ({ className, children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
+    <MdxPreWithCopy className={className} {...props}>
+      {children}
+    </MdxPreWithCopy>
   ),
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
