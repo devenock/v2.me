@@ -1,5 +1,4 @@
 import AnimatedName from "../../../../components/AnimatedName";
-import ImageWithCaption from "../../../../components/ImageWithCaption";
 
 export const metadata = {
     title: 'Vertical vs Horizontal Scaling: What Backend Engineers Need to Know',
@@ -14,13 +13,6 @@ export const metadata = {
 # Vertical vs Horizontal Scaling: What Backend Engineers Need to Know
 
 <AnimatedName />
-
-<ImageWithCaption 
-  src="/images/design.png" 
-  alt="Vertical and horizontal scaling" 
-  width={1800} 
-  height={300} 
-/>
 
 As backend engineers, we spend much of our time designing systems that can **handle growth**—more users, more traffic, more data. It is easy to say "we'll scale" without being clear *how*: **add more CPU and RAM to the same machine** or **add more machines**. The first is **vertical scaling** (scale up); the second is **horizontal scaling** (scale out). Each has different costs, limits, and implications for architecture and operations.
 
