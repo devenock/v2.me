@@ -1,16 +1,18 @@
 import AnimatedName from "../../../../components/AnimatedName";
+import { BlogPostHeader } from "@/components/BlogPostHeader";
 
 export const metadata = {
     title: 'Comprehensive Guide to Nginx',
     description:
         'Comprehensive Guide to Nginx: Installation, Configuration, and Best Practices',
     date: '2025-06-24',
+    readingMinutes: 9,
     alternates: {
         canonical: '/blog/graphql/concepts',
     },
 };
 
-# Comprehensive Guide to Nginx
+<BlogPostHeader title={metadata.title} date={metadata.date} minutes={metadata.readingMinutes} />
 
 <AnimatedName />
 
