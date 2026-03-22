@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import Link from "next/link";
 import { format, isValid, parseISO } from "date-fns";
 
 interface Blog {
@@ -25,28 +24,28 @@ function formatBlogDate(date: string) {
 }
 
 export function BlogList({ blogs }: BlogListProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  
-  // Get unique categories from blogs
-  const categories = ['all', ...new Set(blogs.map(blog => blog.category))];
-  
-  // Filter blogs based on selected category
-  const filteredBlogs = selectedCategory === 'all' 
-    ? blogs 
-    : blogs.filter(blog => blog.category === selectedCategory);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  const categories = ["all", ...new Set(blogs.map((blog) => blog.category))];
+
+  const filteredBlogs =
+    selectedCategory === "all"
+      ? blogs
+      : blogs.filter((blog) => blog.category === selectedCategory);
 
   return (
     <div>
-      {/* Category Filter */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="mb-6 flex flex-wrap gap-2">
         {categories.map((category) => (
           <button
             key={category}
+            type="button"
             onClick={() => setSelectedCategory(category)}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors
-              ${selectedCategory === category
-                ? 'bg-foreground text-background'
-                : 'bg-muted text-muted-foreground hover:text-foreground'
+            className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors
+              ${
+                selectedCategory === category
+                  ? "bg-foreground text-background"
+                  : "bg-muted text-muted-foreground hover:text-foreground"
               }`}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -54,21 +53,14 @@ export function BlogList({ blogs }: BlogListProps) {
         ))}
       </div>
 
-      {/* Blog List */}
       <div className="space-y-3">
         {filteredBlogs.map((blog) => (
-          <motion.div
+          <div
             key={blog.slug}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            className="rounded-lg border border-border/60 bg-card/30 transition-all duration-200 hover:bg-card/50 hover:shadow-sm"
           >
-            <Link 
-              href={`/blog/${blog.slug}`}
-              className="block p-4 rounded-lg border border-border/60 bg-card/30 hover:bg-card/50
-                transition-all duration-200 hover:shadow-sm group"
-            >
-              <div className="flex items-center justify-between mb-2">
+            <Link href={`/blog/${blog.slug}`} className="group block p-4">
+              <div className="mb-2 flex items-center justify-between">
                 <span className="text-xs font-medium text-muted-foreground">
                   {blog.category}
                 </span>
@@ -76,20 +68,20 @@ export function BlogList({ blogs }: BlogListProps) {
                   {formatBlogDate(blog.date)}
                 </span>
               </div>
-              <h2 className="text-lg font-semibold text-foreground
-                transition-colors duration-200 mb-1">
+              <h2 className="mb-1 text-lg font-semibold text-foreground transition-colors duration-200">
                 {blog.title}
               </h2>
-              <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
+              <p className="mb-2 line-clamp-2 text-sm text-muted-foreground">
                 {blog.description}
               </p>
-              <div className="flex items-center text-foreground/80 text-xs font-medium">
+              <div className="flex items-center text-xs font-medium text-foreground/80">
                 Read more
                 <svg
-                  className="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform"
+                  className="ml-1 h-3 w-3 transform transition-transform group-hover:translate-x-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden
                 >
                   <path
                     strokeLinecap="round"
@@ -100,9 +92,9 @@ export function BlogList({ blogs }: BlogListProps) {
                 </svg>
               </div>
             </Link>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
   );
-} 
+}
