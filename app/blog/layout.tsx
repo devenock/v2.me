@@ -1,3 +1,5 @@
+import { BlogScrollToTop } from "@/components/BlogScrollToTop";
+
 export default function BlogLayout({
   children,
 }: {
@@ -13,6 +15,7 @@ export default function BlogLayout({
           {children}
         </div>
       </div>
+      <BlogScrollToTop />
     </div>
   );
 }
