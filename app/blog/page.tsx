@@ -21,8 +21,8 @@ export default async function BlogPage({
   if (allBlogs.length === 0) {
     return (
       <>
-        <h1 className="mb-2 text-4xl font-bold text-gray-900">Blog</h1>
-        <p className="mb-8 text-xl text-gray-600">
+        <h1 className="mb-2 text-4xl font-bold text-foreground">Blog</h1>
+        <p className="mb-8 text-xl text-muted-foreground">
           No blog posts found. Please add some MDX files in the app/blog
           directory.
         </p>
@@ -59,8 +59,8 @@ export default async function BlogPage({
 
   return (
     <>
-      <h1 className="mb-2 text-4xl font-bold text-gray-900">Blog</h1>
-      <p className="mb-8 text-xl text-gray-600">
+      <h1 className="mb-2 text-4xl font-bold text-foreground">Blog</h1>
+      <p className="mb-8 text-xl text-muted-foreground">
         Thoughts, stories, and ideas about software development and technology.
       </p>
       {filtered.length === 0 ? (
