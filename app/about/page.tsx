@@ -18,16 +18,18 @@ export default function About() {
           />
         </div>
         <div className="flex-1">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4">ENOCK OMONDI</h1>
-          <p className="text-gray-600 mb-2 flex items-center">
+          <h1 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+            ENOCK OMONDI
+          </h1>
+          <p className="mb-2 flex items-center text-muted-foreground">
             <IoBriefcaseOutline className="mr-3" />
             Senior Software Engineer
           </p>
-          <p className="text-gray-600 mb-4 flex items-center">
+          <p className="mb-4 flex items-center text-muted-foreground">
             <IoLocationOutline className="mr-3" />
             Nairobi, Kenya • 🇰🇪
           </p>
-          <p className="text-gray-700 mb-6 text-sm sm:text-base">
+          <p className="mb-6 text-sm text-muted-foreground sm:text-base">
             6+ years of full-stack experience
           </p>
           <Socials />
@@ -36,8 +38,8 @@ export default function About() {
 
       {/* About Section */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-4">About Me</h2>
-        <div className="space-y-4 text-gray-700 leading-relaxed">
+        <h2 className="mb-4 text-2xl font-bold text-foreground">About Me</h2>
+        <div className="space-y-4 leading-relaxed text-muted-foreground">
           <p>
             Hi there! I&lsquo;m Enock, a Software Engineer with over 6 years of
             full-stack experience, currently transitioning into a Software Architect role.
@@ -68,42 +70,44 @@ export default function About() {
 
       {/* Expertise Section */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Areas of Expertise</h2>
+        <h2 className="mb-6 text-2xl font-bold text-foreground">
+          Areas of Expertise
+        </h2>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="p-6 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-900">
+          <div className="rounded-lg bg-muted/50 p-6">
+            <h3 className="mb-3 text-lg font-semibold text-foreground">
               Backend Development
             </h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               Building robust APIs and microservices using Golang, Node.js, and Express.
               Experience with RESTful APIs, GraphQL, and real-time systems using WebSockets.
             </p>
           </div>
-          <div className="p-6 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-900">
+          <div className="rounded-lg bg-muted/50 p-6">
+            <h3 className="mb-3 text-lg font-semibold text-foreground">
               System Architecture
             </h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               Designing scalable, distributed systems with a focus on reliability,
               performance, and maintainability. Experience with microservices architecture
               and cloud-native applications.
             </p>
           </div>
-          <div className="p-6 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-900">
+          <div className="rounded-lg bg-muted/50 p-6">
+            <h3 className="mb-3 text-lg font-semibold text-foreground">
               DevOps & Infrastructure
             </h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               Setting up CI/CD pipelines, containerization with Docker, and deploying
               applications on cloud platforms like AWS. Focus on automation and
               infrastructure as code.
             </p>
           </div>
-          <div className="p-6 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3 text-gray-900">
+          <div className="rounded-lg bg-muted/50 p-6">
+            <h3 className="mb-3 text-lg font-semibold text-foreground">
               Database Design
             </h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               Working with both SQL (PostgreSQL, MySQL) and NoSQL (MongoDB) databases.
               Experience with database optimization, indexing, and query performance tuning.
             </p>
@@ -113,13 +117,15 @@ export default function About() {
 
       {/* Skills Overview */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Technical Skills</h2>
+        <h2 className="mb-6 text-2xl font-bold text-foreground">
+          Technical Skills
+        </h2>
         <div className="space-y-8">
           {skills
             .filter((skillGroup) => skillGroup.title !== "Mobile App Development")
             .map((skillGroup) => (
               <div key={skillGroup.title}>
-                <h3 className="text-base font-semibold mb-3 text-gray-800">
+                <h3 className="mb-3 text-base font-semibold text-foreground">
                   {skillGroup.title}
                 </h3>
                 <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
@@ -131,7 +137,7 @@ export default function About() {
                       return (
                         <div
                           key={skill.title}
-                          className="flex flex-col items-center justify-center aspect-square p-2 bg-gray-50 rounded-lg hover:bg-gray-100 hover:shadow-sm transition-all duration-200 group cursor-default"
+                          className="group flex aspect-square cursor-default flex-col items-center justify-center rounded-lg bg-muted/50 p-2 transition-all duration-200 hover:bg-muted hover:shadow-sm"
                           title={skill.title}
                         >
                           <Image
@@ -151,14 +157,14 @@ export default function About() {
       </section>
 
       {/* Call to Action */}
-      <section className="text-center py-8 border-t border-gray-200">
-        <p className="text-gray-700 mb-4">
+      <section className="border-t border-border py-8 text-center">
+        <p className="mb-4 text-muted-foreground">
           Interested in learning more about my work?
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/blog"
-            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium"
+            className="rounded-md border border-border px-6 py-2 font-medium text-foreground transition-colors duration-200 hover:bg-muted"
           >
             Read Articles
           </Link>
