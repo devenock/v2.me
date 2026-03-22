@@ -43,7 +43,8 @@
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 95%;
     --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 65%;
+    /* Readable secondary text on near-black backgrounds */
+    --muted-foreground: 0 0% 74%;
     --accent: 0 0% 10%;
     --accent-foreground: 0 0% 95%;
     --destructive: 0 62.8% 30.6%;
