@@ -1,8 +1,9 @@
 import createMDX from "@next/mdx";
+import remarkGfm from "remark-gfm";
 
 const withMDX = createMDX({
   options: {
-    // Removed all plugins for minimal config
+    remarkPlugins: [remarkGfm],
   },
 });
 
