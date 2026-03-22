@@ -26,12 +26,12 @@ This guide will walk you through everything you need to know to get started with
 
 Before diving into the technical details, let's understand why Nginx might be the right choice for your infrastructure:
 
-- **High Performance**: Asynchronous, event-driven architecture that can handle thousands of concurrent connections with minimal resource usage
-- **Stability**: Known for its rock-solid reliability even under heavy loads
-- **Flexibility**: Works as a web server, reverse proxy, load balancer, and more
-- **Simple Configuration**: Clean, declarative configuration syntax
-- **Active Development**: Regular updates and improvements
-- **Wide Adoption**: Extensive community support and documentation
+- <Term>High Performance</Term>: Asynchronous, event-driven architecture that can handle thousands of concurrent connections with minimal resource usage
+- <Term>Stability</Term>: Known for its rock-solid reliability even under heavy loads
+- <Term>Flexibility</Term>: Works as a web server, reverse proxy, load balancer, and more
+- <Term>Simple Configuration</Term>: Clean, declarative configuration syntax
+- <Term>Active Development</Term>: Regular updates and improvements
+- <Term>Wide Adoption</Term>: Extensive community support and documentation
 
 ## Installation
 
@@ -102,14 +102,14 @@ Before we dive into configuration, let's understand some key Nginx concepts:
 ### 1. Master and Worker Processes
 
 Nginx operates with a master process and multiple worker processes:
-- **Master Process**: Reads configuration, manages worker processes
-- **Worker Processes**: Handle actual processing of connections
+- <Term>Master Process</Term>: Reads configuration, manages worker processes
+- <Term>Worker Processes</Term>: Handle actual processing of connections
 
 ### 2. Directives and Contexts
 
 The Nginx configuration consists of:
-- **Directives**: Individual configuration instructions (e.g., `server_name example.com;`)
-- **Contexts**: Sections that group related directives (e.g., `http`, `server`, `location`)
+- <Term>Directives</Term>: Individual configuration instructions (e.g., `server_name example.com;`)
+- <Term>Contexts</Term>: Sections that group related directives (e.g., `http`, `server`, `location`)
 
 ### 3. Virtual Hosts (Server Blocks)
 
@@ -507,19 +507,22 @@ error_log /var/log/nginx/error.log debug;
 
 ### Common Issues and Solutions
 
-1. **Permission Problems**
+1. <Term variant="neutral">Permission problems</Term>
+
 ```bash
 sudo chown -R www-data:www-data /var/www/example.com
 sudo chmod -R 755 /var/www/example.com
    ```
 
-2. **Port Binding Issues**
+2. <Term variant="neutral">Port binding issues</Term>
+
 ```bash
 # Check if something else is using port 80
 sudo netstat -tulpn | grep :80
    ```
 
-3. **SSL Certificate Problems**
+3. <Term variant="neutral">SSL certificate problems</Term>
+
 ```bash
 # Verify certificate and key
 sudo openssl x509 -in /etc/nginx/ssl/example.com.crt -text -noout
@@ -528,16 +531,16 @@ sudo openssl rsa -in /etc/nginx/ssl/example.com.key -check
 
 ## Best Practices
 
-1. **Keep configurations in separate files** rather than one monolithic file
-2. **Use includes** to maintain organization
-3. **Version control your configurations** to track changes
-4. **Start with minimal configurations** and add only what you need
-5. **Use meaningful names** for server blocks and upstream groups
-6. **Comment your configuration** for future reference
-7. **Regularly update Nginx** to benefit from security patches and new features
-8. **Monitor performance** and adjust configurations as needed
-9. **Back up configurations** before major changes
-10. **Use staging environments** to test configurations before deploying to production
+1. Keep configurations in separate files rather than one monolithic file.
+2. Use includes to maintain organization.
+3. Version control your configurations to track changes.
+4. Start with minimal configurations and add only what you need.
+5. Use meaningful names for server blocks and upstream groups.
+6. Comment your configuration for future reference.
+7. Regularly update Nginx to benefit from security patches and new features.
+8. Monitor performance and adjust configurations as needed.
+9. Back up configurations before major changes.
+10. Use staging environments to test configurations before deploying to production.
 
 ## Conclusion
 
