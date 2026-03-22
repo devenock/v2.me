@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
 import MDXProvider from "../components/mdx-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,16 +40,25 @@ export default function RootLayout({
 }>) {
   return (
     <ViewTransitions>
-      <html lang="en">
-        <body className={`${inter.className} antialiased bg-gray-100 text-gray-900`}>
-          <MDXProvider>
-            <div className="max-w-screen-xl mx-auto flex flex-col p-4 sm:p-6 lg:p-8">
-              <Header />
-              <main className="flex-grow pt-6">{children}</main>
-              <Footer />
-              <Analytics />
-            </div>
-          </MDXProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${inter.className} min-h-screen antialiased bg-background text-foreground`}
+        >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <MDXProvider>
+              <div className="mx-auto flex max-w-screen-xl flex-col p-4 sm:p-6 lg:p-8">
+                <Header />
+                <main className="flex-grow pt-6">{children}</main>
+                <Footer />
+                <Analytics />
+              </div>
+            </MDXProvider>
+          </ThemeProvider>
         </body>
       </html>
     </ViewTransitions>
