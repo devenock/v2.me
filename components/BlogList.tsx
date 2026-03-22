@@ -36,7 +36,7 @@ export function BlogList({ blogs }: BlogListProps) {
     : blogs.filter(blog => blog.category === selectedCategory);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div>
       {/* Category Filter */}
       <div className="flex flex-wrap gap-2 mb-6">
         {categories.map((category) => (
