@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { navData } from "@/data";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Header() {
   const pathname = usePathname();
@@ -16,7 +17,7 @@ export default function Header() {
         >
           <Image src="/logo.png" alt="logo" width={100} height={100} />
         </Link>
-        <div className="flex items-center space-x-6 sm:space-x-8 mt-3 sm:mt-0">
+        <div className="mt-3 flex flex-wrap items-center gap-4 sm:mt-0 sm:gap-6 md:gap-8">
           {navData.map((item) => {
             const isInternal = item.url.startsWith("/");
             const isActive =
@@ -49,6 +50,7 @@ export default function Header() {
               </Link>
             );
           })}
+          <ThemeToggle />
         </div>
       </nav>
     </header>
