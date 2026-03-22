@@ -5,8 +5,9 @@ import { MDXRemote } from 'next-mdx-remote';
 import remarkGfm from 'remark-gfm';
 import { highlight } from 'sugar-high';
 import React from 'react';
-import { format, isValid, parseISO } from "date-fns";
+import { BlogPostHeader } from "@/components/BlogPostHeader";
 import { MdxPreWithCopy } from "@/components/MdxPreWithCopy";
+import { estimateReadingMinutesFromMarkdown } from "@/lib/readingTime";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -122,10 +123,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const parsedDate = parseISO(blog.date);
-  const displayDate = isValid(parsedDate)
-    ? format(parsedDate, "MMM d, yyyy")
-    : blog.date;
+  const readingMinutes = estimateReadingMinutesFromMarkdown(blog.content);
 
   const mdxSource = await serialize(blog.content, {
     mdxOptions: {
@@ -136,19 +134,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article>
-      <header className="mb-8">
-        <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-          <span className="font-medium text-blue-600">{blog.category}</span>
-          <span>•</span>
-          <time dateTime={blog.date}>{displayDate}</time>
-        </div>
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          {blog.title}
-        </h1>
-        <p className="text-xl text-gray-600">
-          {blog.description}
-        </p>
-      </header>
+      <BlogPostHeader
+        title={blog.title}
+        date={blog.date}
+        minutes={readingMinutes}
+      />
 
       <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-blue-600">
         <MDXRemote {...mdxSource} components={components} />
