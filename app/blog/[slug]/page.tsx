@@ -2,6 +2,7 @@ import { getAllBlogs } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
+import remarkGfm from 'remark-gfm';
 import { highlight } from 'sugar-high';
 import React from 'react';
 import { format, isValid, parseISO } from "date-fns";
@@ -79,6 +80,37 @@ const components = {
       {...props}
     />
   ),
+  table: ({ className, children, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
+    <div className="my-6 w-full overflow-x-auto rounded-lg border border-gray-200">
+      <table
+        className={`w-full min-w-[36rem] border-collapse text-left text-sm text-gray-700 ${className || ''}`}
+        {...props}
+      >
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <thead className={`border-b border-gray-200 bg-gray-50 ${className || ''}`} {...props} />
+  ),
+  tbody: ({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <tbody className={`divide-y divide-gray-200 ${className || ''}`} {...props} />
+  ),
+  tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
+    <tr className={`border-b border-gray-100 last:border-0 ${className || ''}`} {...props} />
+  ),
+  th: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
+    <th
+      className={`px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 ${className || ''}`}
+      {...props}
+    />
+  ),
+  td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
+    <td className={`px-4 py-3 align-top text-gray-800 ${className || ''}`} {...props} />
+  ),
+  hr: ({ className, ...props }: React.HTMLAttributes<HTMLHRElement>) => (
+    <hr className={`my-8 border-t border-gray-200 ${className || ''}`} {...props} />
+  ),
 };
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -97,31 +129,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const mdxSource = await serialize(blog.content, {
     mdxOptions: {
+      remarkPlugins: [remarkGfm],
       development: process.env.NODE_ENV === 'development',
     },
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <article className="max-w-4xl mx-auto px-4 py-12">
-        <header className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-            <span className="font-medium text-blue-600">{blog.category}</span>
-            <span>•</span>
-            <time dateTime={blog.date}>{displayDate}</time>
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {blog.title}
-          </h1>
-          <p className="text-xl text-gray-600">
-            {blog.description}
-          </p>
-        </header>
-
-        <div className="prose prose-lg max-w-none">
-          <MDXRemote {...mdxSource} components={components} />
+    <article>
+      <header className="mb-8">
+        <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
+          <span className="font-medium text-blue-600">{blog.category}</span>
+          <span>•</span>
+          <time dateTime={blog.date}>{displayDate}</time>
         </div>
-      </article>
-    </div>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          {blog.title}
+        </h1>
+        <p className="text-xl text-gray-600">
+          {blog.description}
+        </p>
+      </header>
+
+      <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-blue-600">
+        <MDXRemote {...mdxSource} components={components} />
+      </div>
+    </article>
   );
-} 
+}
