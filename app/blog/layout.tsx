@@ -5,7 +5,7 @@ export default function BlogLayout({
 }) {
   return (
     <div className="w-full py-8 sm:py-10">
-      <div className="max-w-3xl mx-auto w-full">
+      <div className="max-w-4xl mx-auto w-full">
         {/*
           Subtle shell: blends with page (body is gray-100) instead of a stark white card.
         */}
