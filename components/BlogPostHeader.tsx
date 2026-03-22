@@ -18,10 +18,10 @@ export function BlogPostHeader({ title, date, minutes }: BlogPostHeaderProps) {
 
   return (
     <header className="not-prose mb-8">
-      <h1 className="text-2xl font-bold leading-snug tracking-tight text-gray-900 sm:text-xl md:text-2xl">
+      <h1 className="text-2xl font-bold leading-snug tracking-tight text-foreground sm:text-xl md:text-2xl">
         {title}
       </h1>
-      <p className="mt-3 text-sm text-gray-500">
+      <p className="mt-3 text-sm text-muted-foreground">
         <time dateTime={date}>{displayDate}</time>
         <span className="mx-2 select-none" aria-hidden>
           ·
