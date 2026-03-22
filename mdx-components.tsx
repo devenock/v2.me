@@ -14,14 +14,20 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     Term: MdxTerm,
     em: ({ className, ...props }: any) => (
-      <em className={cn("italic text-gray-800", className)} {...props} />
+      <em
+        className={cn("italic text-muted-foreground", className)}
+        {...props}
+      />
     ),
     strong: ({ className, ...props }: any) => (
-      <strong className={cn("font-semibold text-gray-900", className)} {...props} />
+      <strong
+        className={cn("font-semibold text-foreground", className)}
+        {...props}
+      />
     ),
     a: ({ className, href, children, ...props }: any) => {
       const baseClass =
-        "text-blue-600 font-medium hover:text-blue-800 transition-colors duration-200 underline-offset-4 hover:underline";
+        "font-medium text-blue-600 underline-offset-4 transition-colors duration-200 hover:underline dark:text-sky-400 dark:hover:text-sky-300";
       if (href?.startsWith("/")) {
         return (
           <Link href={href} className={cn(baseClass, className)} {...props}>
@@ -52,7 +58,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       const codeHTML = highlight(children as string);
       return (
         <code
-          className="rounded-md bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-900"
+          className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
           dangerouslySetInnerHTML={{ __html: codeHTML }}
           {...props}
         />
@@ -67,9 +73,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <div className="my-4 w-full overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="border-b border-gray-300 bg-gray-50">
+            <tr className="border-b border-border bg-muted/50">
               {data.headers.map((header, index) => (
-                <th key={index} className="px-4 py-2 text-left font-semibold text-gray-900">
+                <th
+                  key={index}
+                  className="px-4 py-2 text-left font-semibold text-foreground"
+                >
                   {header}
                 </th>
               ))}
@@ -77,9 +86,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           </thead>
           <tbody>
             {data.rows.map((row, index) => (
-              <tr key={index} className="border-b border-gray-200">
+              <tr key={index} className="border-b border-border">
                 {row.map((cell, cellIndex) => (
-                  <td key={cellIndex} className="px-4 py-2 text-gray-700">
+                  <td
+                    key={cellIndex}
+                    className="px-4 py-2 text-muted-foreground"
+                  >
                     {cell}
                   </td>
                 ))}
@@ -92,7 +104,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     blockquote: ({ className, ...props }: any) => (
       <blockquote
         className={cn(
-          "my-4 border-l-4 border-sky-400 bg-sky-50/50 pl-4 py-2 text-gray-700 not-italic",
+          "my-4 border-l-4 border-sky-500 bg-sky-500/10 pl-4 py-2 text-muted-foreground not-italic dark:border-sky-400 dark:bg-sky-950/40",
           className
         )}
         {...props}
@@ -101,7 +113,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h1: ({ className, ...props }: any) => (
       <h1
         className={cn(
-          "mt-6 mb-4 text-3xl font-bold tracking-tight text-gray-900 scroll-m-20",
+          "mt-6 mb-4 scroll-m-20 text-3xl font-bold tracking-tight text-foreground",
           className
         )}
         {...props}
@@ -110,7 +122,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h2: ({ className, ...props }: any) => (
       <h2
         className={cn(
-          "mt-8 mb-2 text-xl font-semibold tracking-tight text-gray-900 scroll-mt-20 sm:text-2xl",
+          "mt-8 mb-2 scroll-mt-20 text-xl font-semibold tracking-tight text-foreground sm:text-2xl",
           className
         )}
         {...props}
@@ -119,7 +131,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ className, ...props }: any) => (
       <h3
         className={cn(
-          "mt-6 mb-2 text-lg font-semibold tracking-tight text-gray-900 scroll-mt-20",
+          "mt-6 mb-2 scroll-mt-20 text-lg font-semibold tracking-tight text-foreground",
           className
         )}
         {...props}
@@ -128,7 +140,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h4: ({ className, ...props }: any) => (
       <h4
         className={cn(
-          "mt-4 mb-2 text-lg font-semibold tracking-tight text-gray-900 scroll-m-20",
+          "mt-4 mb-2 scroll-m-20 text-lg font-semibold tracking-tight text-foreground",
           className
         )}
         {...props}
@@ -137,7 +149,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h5: ({ className, ...props }: any) => (
       <h5
         className={cn(
-          "mt-4 mb-2 text-base font-semibold tracking-tight text-gray-900 scroll-m-20",
+          "mt-4 mb-2 scroll-m-20 text-base font-semibold tracking-tight text-foreground",
           className
         )}
         {...props}
@@ -146,7 +158,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h6: ({ className, ...props }: any) => (
       <h6
         className={cn(
-          "mt-4 mb-2 text-sm font-semibold tracking-tight text-gray-900 scroll-m-20",
+          "mt-4 mb-2 scroll-m-20 text-sm font-semibold tracking-tight text-foreground",
           className
         )}
         {...props}
@@ -155,7 +167,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     p: ({ className, ...props }: any) => (
       <p
         className={cn(
-          "leading-relaxed text-gray-700 [&:not(:first-child)]:mt-3",
+          "leading-relaxed text-muted-foreground [&:not(:first-child)]:mt-3",
           className
         )}
         {...props}
@@ -164,7 +176,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: ({ className, ...props }: any) => (
       <ul
         className={cn(
-          "my-3 ml-6 list-disc text-gray-700 space-y-1",
+          "my-3 ml-6 list-disc space-y-1 text-muted-foreground marker:text-muted-foreground",
           className
         )}
         {...props}
@@ -173,7 +185,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ol: ({ className, ...props }: any) => (
       <ol
         className={cn(
-          "my-3 ml-6 list-decimal text-gray-700 space-y-1",
+          "my-3 ml-6 list-decimal space-y-1 text-muted-foreground marker:text-muted-foreground",
           className
         )}
         {...props}
@@ -181,18 +193,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     li: ({ className, ...props }: any) => (
       <li
-        className={cn(
-          "mt-0.5 leading-relaxed text-gray-700",
-          className
-        )}
+        className={cn("mt-0.5 leading-relaxed text-muted-foreground", className)}
         {...props}
       />
     ),
     table: ({ className, children, ...props }: any) => (
-      <div className="my-6 w-full overflow-x-auto rounded-lg border border-gray-200">
+      <div className="my-6 w-full overflow-x-auto rounded-lg border border-border">
         <table
           className={cn(
-            "w-full min-w-[36rem] border-collapse text-left text-sm text-gray-700",
+            "w-full min-w-[36rem] border-collapse text-left text-sm text-muted-foreground",
             className
           )}
           {...props}
@@ -202,28 +211,34 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
     thead: ({ className, ...props }: any) => (
-      <thead className={cn("border-b border-gray-200 bg-gray-50", className)} {...props} />
+      <thead
+        className={cn("border-b border-border bg-muted/50", className)}
+        {...props}
+      />
     ),
     tbody: ({ className, ...props }: any) => (
-      <tbody className={cn("divide-y divide-gray-200", className)} {...props} />
+      <tbody className={cn("divide-y divide-border", className)} {...props} />
     ),
     tr: ({ className, ...props }: any) => (
-      <tr className={cn("border-b border-gray-100 last:border-0", className)} {...props} />
+      <tr className={cn("border-b border-border/60 last:border-0", className)} {...props} />
     ),
     th: ({ className, ...props }: any) => (
       <th
         className={cn(
-          "px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600",
+          "px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground",
           className
         )}
         {...props}
       />
     ),
     td: ({ className, ...props }: any) => (
-      <td className={cn("px-4 py-3 align-top text-gray-800", className)} {...props} />
+      <td
+        className={cn("px-4 py-3 align-top text-muted-foreground", className)}
+        {...props}
+      />
     ),
     hr: ({ ...props }) => (
-      <hr className="my-5 border-t border-gray-200" {...props} />
+      <hr className="my-5 border-t border-border" {...props} />
     ),
     ...components,
   };
