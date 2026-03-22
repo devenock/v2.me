@@ -16,19 +16,22 @@ interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
+const linkClass =
+  "font-medium text-blue-600 underline underline-offset-4 transition-colors hover:text-blue-700 dark:text-sky-400 dark:hover:text-sky-300";
+
 const components = {
   Term: MdxTerm,
   strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <strong className={cn("font-semibold text-gray-900", className)} {...props} />
+    <strong className={cn("font-semibold text-foreground", className)} {...props} />
   ),
   em: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <em className={cn("italic text-gray-800", className)} {...props} />
+    <em className={cn("italic text-muted-foreground", className)} {...props} />
   ),
   code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => {
     const codeHTML = highlight(children as string);
     return (
       <code
-        className="rounded-md bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-900"
+        className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
         dangerouslySetInnerHTML={{ __html: codeHTML }}
         {...props}
       />
@@ -41,14 +44,17 @@ const components = {
   ),
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
-      className={`mt-8 mb-4 text-3xl font-bold tracking-tight text-gray-900 ${className || ''}`}
+      className={cn(
+        "mt-8 mb-4 scroll-m-20 text-3xl font-bold tracking-tight text-foreground",
+        className
+      )}
       {...props}
     />
   ),
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "mt-8 mb-2 scroll-mt-20 text-xl font-semibold tracking-tight text-gray-900 sm:text-2xl",
+        "mt-8 mb-2 scroll-mt-20 text-xl font-semibold tracking-tight text-foreground sm:text-2xl",
         className
       )}
       {...props}
@@ -57,7 +63,7 @@ const components = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "mt-6 mb-2 scroll-mt-20 text-lg font-semibold tracking-tight text-gray-900",
+        "mt-6 mb-2 scroll-mt-20 text-lg font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -66,7 +72,7 @@ const components = {
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        "leading-relaxed text-gray-700 [&:not(:first-child)]:mt-3",
+        "leading-relaxed text-muted-foreground [&:not(:first-child)]:mt-3",
         className
       )}
       {...props}
@@ -75,35 +81,47 @@ const components = {
   a: ({ className, href, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a
       href={href}
-      className={`text-blue-600 hover:text-blue-800 underline underline-offset-4 ${className || ''}`}
+      className={cn(linkClass, className)}
       {...props}
     />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
-      className={cn("my-3 ml-6 list-disc space-y-1 text-gray-700", className)}
+      className={cn(
+        "my-3 ml-6 list-disc space-y-1 text-muted-foreground marker:text-muted-foreground",
+        className
+      )}
       {...props}
     />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
-      className={cn("my-3 ml-6 list-decimal space-y-1 text-gray-700", className)}
+      className={cn(
+        "my-3 ml-6 list-decimal space-y-1 text-muted-foreground marker:text-muted-foreground",
+        className
+      )}
       {...props}
     />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className={cn("mt-0.5 leading-relaxed text-gray-700", className)} {...props} />
+    <li className={cn("mt-0.5 leading-relaxed text-muted-foreground", className)} {...props} />
   ),
   blockquote: ({ className, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className={`mt-4 border-l-4 border-blue-500 bg-blue-50 pl-4 py-2 text-gray-700 italic ${className || ''}`}
+      className={cn(
+        "mt-4 border-l-4 border-sky-500 bg-sky-500/10 py-2 pl-4 text-muted-foreground not-italic dark:border-sky-400 dark:bg-sky-950/40",
+        className
+      )}
       {...props}
     />
   ),
   table: ({ className, children, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
-    <div className="my-6 w-full overflow-x-auto rounded-lg border border-gray-200">
+    <div className="my-6 w-full overflow-x-auto rounded-lg border border-border">
       <table
-        className={`w-full min-w-[36rem] border-collapse text-left text-sm text-gray-700 ${className || ''}`}
+        className={cn(
+          "w-full min-w-[36rem] border-collapse text-left text-sm text-muted-foreground",
+          className
+        )}
         {...props}
       >
         {children}
@@ -111,25 +129,28 @@ const components = {
     </div>
   ),
   thead: ({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
-    <thead className={`border-b border-gray-200 bg-gray-50 ${className || ''}`} {...props} />
+    <thead className={cn("border-b border-border bg-muted/50", className)} {...props} />
   ),
   tbody: ({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
-    <tbody className={`divide-y divide-gray-200 ${className || ''}`} {...props} />
+    <tbody className={cn("divide-y divide-border", className)} {...props} />
   ),
   tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
-    <tr className={`border-b border-gray-100 last:border-0 ${className || ''}`} {...props} />
+    <tr className={cn("border-b border-border/60 last:border-0", className)} {...props} />
   ),
   th: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <th
-      className={`px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 ${className || ''}`}
+      className={cn(
+        "px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-foreground",
+        className
+      )}
       {...props}
     />
   ),
   td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
-    <td className={`px-4 py-3 align-top text-gray-800 ${className || ''}`} {...props} />
+    <td className={cn("px-4 py-3 align-top text-muted-foreground", className)} {...props} />
   ),
   hr: ({ className, ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-    <hr className={cn("my-5 border-t border-gray-200", className)} {...props} />
+    <hr className={cn("my-5 border-t border-border", className)} {...props} />
   ),
 };
 
