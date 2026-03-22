@@ -1,16 +1,18 @@
 import AnimatedName from "../../../../components/AnimatedName";
+import { BlogPostHeader } from "@/components/BlogPostHeader";
 
 export const metadata = {
     title: 'Intro to Backend Architecture Design',
     description:
         'What are Backend Architecture Designs?',
     date: '2026-01-18',
+    readingMinutes: 4,
     alternates: {
         canonical: '/blog/backend/intro_to_backend_architectures',
     },
 };
 
-# Intro to Backend Architecture Design
+<BlogPostHeader title={metadata.title} date={metadata.date} minutes={metadata.readingMinutes} />
 
 <AnimatedName />
 
