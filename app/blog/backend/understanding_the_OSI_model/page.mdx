@@ -16,14 +16,14 @@ export const metadata = {
 
 <AnimatedName />
 
-As backend engineers, we spend most of our time **writting APIs**, **designing databases**, and **shipping business logic**. It is always easy to assume that networking
-is **"someone else's problem"** yet when systems fail, the root cause is often not in the code itself, but rather somewhere in the layers beneath it.
+As backend engineers, we spend most of our time writing APIs, designing databases, and shipping business logic. It is always easy to assume that networking
+is "someone else's problem" yet when systems fail, the root cause is often not in the code itself, but rather somewhere in the layers beneath it.
 
-This is where the **OSI** model becomes more than just a theoretical concept but rather a practical mental framework for **debugging**, **performance tuning**, **security** and **system design**.
+This is where the <Term>OSI</Term> model becomes more than just a theoretical concept but rather a practical mental framework for debugging, performance tuning, security and system design.
 
 ## What the OSI Model Really Is
 
-The **Open Systems Interconnection(OSI)** model is a conceptual framework developed to standardize network communication into seven distinct layers
+The <Term variant="neutral">Open Systems Interconnection (OSI)</Term> model is a conceptual framework developed to standardize network communication into seven distinct layers
 that describes how data travels from one system to another across a network.
 
 Therefore, understanding the OSI model is important because backend systems live and die by networks and the OSI model is the mental 
@@ -34,19 +34,19 @@ map that explains how data moves, where things break, and how to design reliable
 
 ## 7 Layers of The OSI Model
 
-Layer 7: **Application** – HTTP/FTP/gRPC, APIs, business logic
+Layer 7: <Term>Application</Term> – HTTP/FTP/gRPC, APIs, business logic
 
-Layer 6: **Presentation** – Encryption, serialization
+Layer 6: <Term>Presentation</Term> – Encryption, serialization
 
-Layer 5: **Session** – Connection management, TLS
+Layer 5: <Term>Session</Term> – Connection management, TLS
 
-Layer 4: **Transport** – TCP/UDP, ports, reliability
+Layer 4: <Term>Transport</Term> – TCP/UDP, ports, reliability
 
-Layer 3: **Network** – IP addressing, routing
+Layer 3: <Term>Network</Term> – IP addressing, routing
 
-Layer 2: **Data Link** – MAC addresses, switching, frames
+Layer 2: <Term>Data Link</Term> – MAC addresses, switching, frames
 
-Layer 1: **Physical** – Cables, signals, hardware
+Layer 1: <Term>Physical</Term> – Cables, signals, hardware
 
 
 ## Backend Engineers Live at Layer 7, but depends on the others
@@ -58,43 +58,43 @@ Most backend work happens at the Application layer:
 - Business logic and validation
 
 However, when an API becomes unreachable, timeout, or behaves inconsistently, the issue may lie in:
-- **Layer 4(Transport)**: TCP timeouts, port exhaustion
-- **Layer 3(Network)**: DNS failures, routing issues
-- **Layer 6(Presentation)**: TLS Misconfiguration
+- <Term variant="neutral">Layer 4 (Transport)</Term>: TCP timeouts, port exhaustion
+- <Term variant="neutral">Layer 3 (Network)</Term>: DNS failures, routing issues
+- <Term variant="neutral">Layer 6 (Presentation)</Term>: TLS misconfiguration
 
-Therefore, understanding the OSI model prevents a common mistake: **assuming every failure is a code bug**
+Therefore, understanding the OSI model prevents a common mistake: <Term variant="emphasis">assuming every failure is a code bug</Term>.
 
 ## Debugging with OSI
-The OSI model turns debugging from gueswork into a structured process. So instead of asking: **"Why is the API down?"**, you ask:
+The OSI model turns debugging from guesswork into a structured process. So instead of asking: <Term variant="emphasis">"Why is the API down?"</Term>, you ask:
 
-- Can the server be reached? **(Layer 3)**
-- Is the port open and accepting connections? **(Layer 4)**
-- Is the application responding correctly? **(Layer 7)**
+- Can the server be reached? (<Term variant="neutral">Layer 3</Term>)
+- Is the port open and accepting connections? (<Term variant="neutral">Layer 4</Term>)
+- Is the application responding correctly? (<Term variant="neutral">Layer 7</Term>)
 
-This layered thinking dramatically reduces time spent chasing the wrong problem and helps you diagonose the incidents under pressure.
+This layered thinking dramatically reduces time spent chasing the wrong problem and helps you diagnose the incidents under pressure.
 
 ## Performance Issues are Layered Problems
 
-Latency, throughput, and realiability are not just applications concerns.
+Latency, throughput, and reliability are not just application concerns.
 
 Examples
-- Slow responses due to enefficient JSON serialization -> Layer 7
-- High latency caused by TCP retransmissions -> Layer 4
-- Packet loss or poort routing -> Layer 3
+- Slow responses due to inefficient JSON serialization → Layer 7
+- High latency caused by TCP retransmissions → Layer 4
+- Packet loss or poor routing → Layer 3
 
-Backend engineers who understand these layers can distinguish between **code inefficiency** and **network behavior**, leading to better optimization decisions.
+Backend engineers who understand these layers can distinguish between <Term>code inefficiency</Term> and <Term>network behavior</Term>, leading to better optimization decisions.
 
-## Security Maps Cleanely to OSI Layers
+## Security Maps Cleanly to OSI Layers
 
 Security is not a single feature, it's layered, just like the OSI model.
-- **Layer 7**: Authentication, authorization, input validation
-- **Layer 6**: TLS encryption and certificate handling
-- **Layer 4**: Firewalls, port filtering
-- **Layer 3**: IP whitelisting, network segmentation
+- <Term variant="neutral">Layer 7</Term>: Authentication, authorization, input validation
+- <Term variant="neutral">Layer 6</Term>: TLS encryption and certificate handling
+- <Term variant="neutral">Layer 4</Term>: Firewalls, port filtering
+- <Term variant="neutral">Layer 3</Term>: IP whitelisting, network segmentation
 
-Without the OSI awareness, it is easy to rely soley on HTTPS and overlook vulnerabilities that exist at lower layers.
+Without the OSI awareness, it is easy to rely solely on HTTPS and overlook vulnerabilities that exist at lower layers.
 
-## Cloud Infrustructure Is OSI in Disguise
+## Cloud Infrastructure Is OSI in Disguise
 
 Modern backend engineers work in cloud environments where OSI concepts appear everywhere:
 - Load balancers (Layer 4 vs Layer 7)
@@ -103,16 +103,16 @@ Modern backend engineers work in cloud environments where OSI concepts appear ev
 - Service mesh
 - CDNs
 
-Understanding OSI turns cloud infrustructure diagrams from abstract boxes into clear, logical systems.
+Understanding OSI turns cloud infrastructure diagrams from abstract boxes into clear, logical systems.
 
 ## OSI as a System Thinking Tool
 Beyond networking, the OSI model teaches principles every backend engineer needs:
-- Separation of cencerns
+- Separation of concerns
 - Clear boundaries
 - Responsibility isolation
 - Failure containment
 
-These same principles appy to:
+These same principles apply to:
 - Clean architecture
 - Microservices
 - Event-driven systems
@@ -123,8 +123,8 @@ These same principles appy to:
 
 
 ## Conclusion
-The OSI model is not just for network engineers. For backend engineers, it is a **thinking framework** that improves debugging, performance analysis, security decisions, and system design.
+The OSI model is not just for network engineers. For backend engineers, it is a <Term>thinking framework</Term> that improves debugging, performance analysis, security decisions, and system design.
 
-Your code may live at the application layer, but production reality spans all the seven layers hence understanding the OSI model helps you to move from writting backend code to 
-**engineering resilient backend systems**.
+Your code may live at the application layer, but production reality spans all the seven layers hence understanding the OSI model helps you to move from writing backend code to
+<Term variant="emphasis">engineering resilient backend systems</Term>.
 
