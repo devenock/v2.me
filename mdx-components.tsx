@@ -3,6 +3,7 @@ import Link from "next/link";
 import { highlight } from "sugar-high";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "./lib/utils";
+import { MdxPreWithCopy } from "./components/MdxPreWithCopy";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -52,15 +53,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     pre: ({ className, children, ...props }: any) => (
-      <pre
-        className={cn(
-          "my-4 overflow-x-auto rounded-lg bg-gray-900 p-4",
-          className
-        )}
-        {...props}
-      >
+      <MdxPreWithCopy className={className} {...props}>
         {children}
-      </pre>
+      </MdxPreWithCopy>
     ),
     Table: ({ data }: { data: { headers: string[]; rows: string[][] } }) => (
       <div className="my-4 w-full overflow-x-auto">
