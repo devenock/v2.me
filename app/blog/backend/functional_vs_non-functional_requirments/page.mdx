@@ -16,71 +16,71 @@ export const metadata = {
 
 <AnimatedName />
 
-As backend engineers and product builders, we spend most of our time turning **what the system must do** and **how well it must do it** into designs and code. It is easy to focus only on **features**—login, checkout, reports—and treat everything else as an afterthought. Yet **performance**, **security**, **availability**, and **scalability** are not optional extras; they are specified by **non-functional requirements** and often decide whether the system succeeds or fails in production.
+As backend engineers and product builders, we spend most of our time turning what the system must do and how well it must do it into designs and code. It is easy to focus only on features—login, checkout, reports—and treat everything else as an afterthought. Yet <Term>performance</Term>, <Term>security</Term>, <Term>availability</Term>, and <Term>scalability</Term> are not optional extras; they are specified by <Term>non-functional requirements</Term> and often decide whether the system succeeds or fails in production.
 
-This is where the distinction between **functional** and **non-functional** requirements becomes more than theory: it shapes how we write specs, prioritize work, and validate that the system meets both user needs and business constraints.
+This is where the distinction between <Term variant="neutral">functional</Term> and <Term variant="neutral">non-functional</Term> requirements becomes more than theory: it shapes how we write specs, prioritize work, and validate that the system meets both user needs and business constraints.
 
 ## What Functional and Non-Functional Requirements Really Are
 
-**Functional requirements** describe *what* the system does: the behaviors, features, and capabilities that users and other systems can observe. They answer: "What can the user or the system do?" Examples: "The user can log in with email and password," "The API returns the order by ID," "The system sends a confirmation email when payment succeeds."
+<Term variant="neutral">Functional requirements</Term> describe *what* the system does: the behaviors, features, and capabilities that users and other systems can observe. They answer: "What can the user or the system do?" Examples: "The user can log in with email and password," "The API returns the order by ID," "The system sends a confirmation email when payment succeeds."
 
-**Non-functional requirements (NFRs)** describe *how well* the system does what it does: the qualities and constraints that apply across features. They answer: "How fast? How secure? How available? How scalable?" Examples: "The API responds within 200 ms under normal load," "Data at rest is encrypted," "The system is available 99.9% of the time."
+<Term variant="neutral">Non-functional requirements (NFRs)</Term> describe *how well* the system does what it does: the qualities and constraints that apply across features. They answer: "How fast? How secure? How available? How scalable?" Examples: "The API responds within 200 ms under normal load," "Data at rest is encrypted," "The system is available 99.9% of the time."
 
-Therefore, understanding both types is important because **functional requirements** define the product; **non-functional requirements** define whether the product is usable, reliable, and sustainable in the real world.
+Therefore, understanding both types is important because functional requirements define the product; non-functional requirements define whether the product is usable, reliable, and sustainable in the real world.
 
 ---
 
 ## Requirements at a Glance
 
-**Functional (what the system does)**
+<Term variant="neutral">Functional (what the system does)</Term>
 
 - Features, user actions, business rules, integrations, data inputs and outputs.
 - Captured in user stories, use cases, and feature specs.
 - Verified by functional and acceptance tests.
 
-**Non-functional (how well it does it)**
+<Term variant="neutral">Non-functional (how well it does it)</Term>
 
-- **Performance** – Latency, throughput, response time.
-- **Scalability** – Ability to handle growth in load or data.
-- **Availability & Reliability** – Uptime, failure tolerance, mean time to recovery.
-- **Security** – Authentication, authorization, encryption, compliance.
-- **Usability** – Ease of use, accessibility, clarity.
-- **Maintainability** – Ease of change, readability, testability.
-- **Portability & Compatibility** – Platforms, browsers, APIs, versions.
-- **Recoverability** – Backup, restore, disaster recovery.
-- **Capacity & Resource efficiency** – Resource limits, cost.
-- **Compliance** – Legal, regulatory, industry standards.
-- **Interoperability** – Integration with other systems and formats.
-- **Observability & Operability** – Logging, metrics, alerting, operations.
+- <Term>Performance</Term> – Latency, throughput, response time.
+- <Term>Scalability</Term> – Ability to handle growth in load or data.
+- <Term>Availability & Reliability</Term> – Uptime, failure tolerance, mean time to recovery.
+- <Term>Security</Term> – Authentication, authorization, encryption, compliance.
+- <Term>Usability</Term> – Ease of use, accessibility, clarity.
+- <Term>Maintainability</Term> – Ease of change, readability, testability.
+- <Term>Portability & Compatibility</Term> – Platforms, browsers, APIs, versions.
+- <Term>Recoverability</Term> – Backup, restore, disaster recovery.
+- <Term>Capacity & Resource efficiency</Term> – Resource limits, cost.
+- <Term>Compliance</Term> – Legal, regulatory, industry standards.
+- <Term>Interoperability</Term> – Integration with other systems and formats.
+- <Term>Observability & Operability</Term> – Logging, metrics, alerting, operations.
 
 ---
 
 ## Functional Requirements: What the System Does
 
-Functional requirements define the **behavior** of the system. They are **verifiable** in terms of inputs and outputs: given a certain action or input, the system produces a defined result.
+Functional requirements define the <Term>behavior</Term> of the system. They are <Term>verifiable</Term> in terms of inputs and outputs: given a certain action or input, the system produces a defined result.
 
 - **User-facing features:** Login, signup, profile edit, search, checkout, dashboard.
 - **Business logic:** Discount rules, approval workflows, eligibility checks.
 - **Integrations:** "The system syncs orders to the warehouse API every 5 minutes."
 - **Data and reporting:** "Admins can export a CSV of orders for the last 30 days."
 
-They are typically captured as **user stories** ("As a user, I can reset my password so that I can regain access"), **use cases**, or **feature specifications**. Verification is done through **functional tests** and **acceptance criteria**: if the feature behaves as specified, the functional requirement is met. Missing or vague functional requirements lead to scope creep, rework, and products that do not match stakeholder expectations.
+They are typically captured as <Term>user stories</Term> ("As a user, I can reset my password so that I can regain access"), <Term>use cases</Term>, or <Term>feature specifications</Term>. Verification is done through <Term>functional tests</Term> and <Term>acceptance criteria</Term>: if the feature behaves as specified, the functional requirement is met. Missing or vague functional requirements lead to scope creep, rework, and products that do not match stakeholder expectations.
 
 ## Non-Functional Requirements: Why They Matter
 
-Non-functional requirements define **qualities and constraints** that apply to the system as a whole or to many features. They rarely map to a single button or API; they cross-cut the architecture and affect **how** you build, not only **what** you build.
+Non-functional requirements define <Term>qualities and constraints</Term> that apply to the system as a whole or to many features. They rarely map to a single button or API; they cross-cut the architecture and affect *how* you build, not only *what* you build.
 
 - Without clear NFRs, teams argue about "fast enough" or "secure enough" with no shared definition.
 - NFRs drive technology and design choices: databases, caching, auth, monitoring, deployment.
 - Ignored NFRs show up in production as outages, slow pages, security incidents, or costly rewrites.
 
-Therefore, treating NFRs as first-class requirements—written down, prioritized, and measurable—prevents a common mistake: **building the right features with the wrong qualities**.
+Therefore, treating NFRs as first-class requirements—written down, prioritized, and measurable—prevents a common mistake: <Term variant="emphasis">building the right features with the wrong qualities</Term>.
 
 ---
 
 ## Performance: Latency, Throughput, Response Time
 
-**Performance** NFRs specify how quickly and how much work the system can do.
+<Term>Performance</Term> NFRs specify how quickly and how much work the system can do.
 
 - **Response time / Latency:** "The API responds within 200 ms for p95 under normal load." "Search results appear within 1 second."
 - **Throughput:** "The system processes 1,000 orders per minute." "The API supports 500 concurrent users."
@@ -90,27 +90,27 @@ These are specified in measurable terms (percentiles, concurrency, requests per 
 
 ## Scalability
 
-**Scalability** is the ability of the system to handle **growth**—in users, traffic, data volume, or complexity—without a proportional increase in cost or a drop in performance.
+<Term>Scalability</Term> is the ability of the system to handle growth—in users, traffic, data volume, or complexity—without a proportional increase in cost or a drop in performance.
 
 - "The system supports 10x current traffic without architectural change."
 - "Adding more application nodes increases request capacity linearly."
 - "The database can grow to 100 GB without degrading query performance."
 
-Scalability is often split into **horizontal** (add more nodes) and **vertical** (add more resources to a node). It affects stateless design, data partitioning, caches, and queues. Defining scalability targets early helps avoid redesigns when load grows.
+Scalability is often split into <Term variant="neutral">horizontal</Term> (add more nodes) and <Term variant="neutral">vertical</Term> (add more resources to a node). It affects stateless design, data partitioning, caches, and queues. Defining scalability targets early helps avoid redesigns when load grows.
 
 ## Availability and Reliability
 
-**Availability** is the proportion of time the system is up and usable (e.g. 99.9% uptime). **Reliability** is the system's ability to perform correctly over time and under failure (e.g. no data loss, correct results).
+<Term>Availability</Term> is the proportion of time the system is up and usable (e.g. 99.9% uptime). <Term>Reliability</Term> is the system's ability to perform correctly over time and under failure (e.g. no data loss, correct results).
 
 - **Availability:** "The API is available 99.9% of the time per month." "Scheduled maintenance is excluded and communicated."
 - **Reliability:** "Successful payments are never lost." "At least once delivery for order events."
 - **Mean time to recovery (MTTR):** "Recovery from a failed deployment takes less than 15 minutes."
 
-These drive redundancy, health checks, failover, graceful degradation, and incident response. They are often expressed in **SLAs** (contractual) or **SLOs** (internal targets).
+These drive redundancy, health checks, failover, graceful degradation, and incident response. They are often expressed in <Term>SLAs</Term> (contractual) or <Term>SLOs</Term> (internal targets).
 
 ## Security
 
-**Security** NFRs cover confidentiality, integrity, and availability of data and access.
+<Term>Security</Term> NFRs cover confidentiality, integrity, and availability of data and access.
 
 - **Authentication:** "Users authenticate via SSO or email/password with rate limiting."
 - **Authorization:** "Users see only their own data; admins have role-based access."
@@ -122,7 +122,7 @@ Security requirements influence auth mechanisms, encryption, logging, and compli
 
 ## Usability and User Experience
 
-**Usability** and **UX** NFRs describe how easy and effective the system is for its users.
+<Term>Usability</Term> and <Term>UX</Term> NFRs describe how easy and effective the system is for its users.
 
 - "First-time users can complete checkout without help."
 - "The UI meets WCAG 2.1 Level AA for accessibility."
@@ -133,7 +133,7 @@ These apply to both UIs and APIs (e.g. clear docs, consistent status codes). The
 
 ## Maintainability and Modifiability
 
-**Maintainability** is how easily the system can be corrected, improved, or adapted.
+<Term>Maintainability</Term> is how easily the system can be corrected, improved, or adapted.
 
 - "New payment providers can be added without changing core order logic."
 - "Code is covered by unit and integration tests; critical paths have at least 80% coverage."
@@ -152,7 +152,7 @@ These reduce lock-in and integration friction. They are verified by compatibilit
 
 ## Recoverability and Disaster Recovery
 
-**Recoverability** and **disaster recovery (DR)** define how the system recovers from failures or disasters.
+<Term>Recoverability</Term> and <Term variant="neutral">disaster recovery (DR)</Term> define how the system recovers from failures or disasters.
 
 - "Database backups are taken daily; point-in-time restore is possible within 24 hours."
 - "RTO (Recovery Time Objective) is 4 hours; RPO (Recovery Point Objective) is 1 hour."
@@ -162,7 +162,7 @@ RTO and RPO drive backup strategy, replication, and DR procedures. Without them,
 
 ## Capacity and Resource Efficiency
 
-**Capacity** and **resource efficiency** NFRs set limits and cost expectations.
+<Term>Capacity</Term> and <Term>resource efficiency</Term> NFRs set limits and cost expectations.
 
 - "The service runs within a defined budget (e.g. CPU, memory, egress)."
 - "Batch jobs complete within the allocated time window and do not starve online traffic."
@@ -172,7 +172,7 @@ These influence scaling policies, resource quotas, and cost monitoring.
 
 ## Compliance and Legal
 
-**Compliance** NFRs come from law, regulation, or industry standards.
+<Term>Compliance</Term> NFRs come from law, regulation, or industry standards.
 
 - "Personal data is processed in line with GDPR (retention, consent, rights)."
 - "Financial data is handled according to PCI-DSS (or local equivalent)."
@@ -182,7 +182,7 @@ Compliance is non-negotiable in many domains; it affects data handling, retentio
 
 ## Observability and Operability
 
-**Observability** and **operability** define how the system can be monitored and operated.
+<Term>Observability</Term> and <Term>operability</Term> define how the system can be monitored and operated.
 
 - "All services emit structured logs and metrics (latency, errors, throughput)."
 - "Critical failures trigger alerts within 5 minutes; dashboards reflect current health."
@@ -192,7 +192,7 @@ Without observability NFRs, production issues are hard to detect and fix. They d
 
 ## Specifying NFRs: SLAs, SLOs, and SLIs
 
-Non-functional requirements are most useful when they are **measurable** and **tracked**.
+Non-functional requirements are most useful when they are <Term>measurable</Term> and <Term>tracked</Term>.
 
 - **SLI (Service Level Indicator):** A metric that reflects the quality of the service (e.g. "percentage of requests with latency &lt; 200 ms").
 - **SLO (Service Level Objective):** A target for an SLI (e.g. "99% of requests &lt; 200 ms over 30 days").
@@ -202,13 +202,13 @@ Writing NFRs as SLOs (with clear SLIs) makes them testable and reviewable. Examp
 
 ## How Functional and Non-Functional Requirements Work Together
 
-Functional and non-functional requirements are **complementary**. A feature (functional) must also meet the relevant NFRs: the login flow must be **secure**, **fast enough**, and **available**. NFRs often apply to many features: "all APIs" must meet latency and auth requirements.
+Functional and non-functional requirements are <Term variant="neutral">complementary</Term>. A feature (functional) must also meet the relevant NFRs: the login flow must be secure, fast enough, and available. NFRs often apply to many features: "all APIs" must meet latency and auth requirements.
 
 - **Prioritization:** Both can be prioritized (e.g. MoSCoW). NFRs should not be deprioritized by default.
 - **Trade-offs:** Sometimes an NFR constrains a functional requirement (e.g. "real-time" may be relaxed to "near real-time" to meet cost or complexity constraints).
 - **Validation:** Functional requirements are checked with acceptance tests; NFRs with performance tests, security tests, and operational reviews.
 
-Therefore, a complete requirements set includes **what** the system does (functional) and **how well** it does it (non-functional), with both reflected in design and testing.
+Therefore, a complete requirements set includes *what* the system does (functional) and *how well* it does it (non-functional), with both reflected in design and testing.
 
 ## Common Mistakes and How to Avoid Them
 
@@ -224,6 +224,6 @@ Avoiding these mistakes improves alignment between stakeholders, architecture, a
 
 ## Conclusion
 
-Functional requirements define **what** the system does; non-functional requirements define **how well** it does it. Both are essential for building systems that are correct, usable, secure, scalable, and operable.
+Functional requirements define *what* the system does; non-functional requirements define *how well* it does it. Both are essential for building systems that are correct, usable, secure, scalable, and operable.
 
-From **performance** and **scalability** to **availability**, **security**, **maintainability**, and **observability**, NFRs shape architecture and operations. Writing them down, making them measurable, and validating them alongside functional requirements helps you move from **shipping features** to **shipping systems that meet user and business needs in the long run**.
+From performance and scalability to availability, security, maintainability, and observability, NFRs shape architecture and operations. Writing them down, making them measurable, and validating them alongside functional requirements helps you move from shipping features to shipping systems that meet user and business needs in the long run.
