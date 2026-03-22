@@ -7,7 +7,7 @@ import { IoMailOutline } from "react-icons/io5";
 export default function IntroSection() {
   return (
     <section aria-label="Intro" className="w-full">
-      <div className="rounded-2xl bg-white border border-gray-200/70 shadow-sm px-6 py-10 sm:px-10 sm:py-14">
+      <div className="rounded-xl border border-gray-200/35 bg-gray-50/50 px-5 py-9 sm:px-8 sm:py-12 shadow-none">
         <div className="mx-auto max-w-5xl grid grid-cols-1 gap-10 md:grid-cols-[1.3fr_0.7fr] md:items-start">
           <div>
             <p className="text-xs tracking-[0.22em] text-gray-500 uppercase">
@@ -108,11 +108,11 @@ export default function IntroSection() {
               </Link>
             </div>
 
-            <div className="mt-10 h-px w-full bg-gray-200/70" />
+            <div className="mt-10 h-px w-full bg-gray-200/40" />
           </div>
 
           <div className="flex justify-center md:justify-end">
-            <div className="relative h-40 w-40 sm:h-48 sm:w-48 rounded-full overflow-hidden ring-1 ring-gray-200 shadow-sm">
+            <div className="relative h-40 w-40 sm:h-48 sm:w-48 rounded-full overflow-hidden ring-1 ring-gray-200/50 shadow-none">
               <Image
                 src="/images/profile.jpg"
                 alt="Enock Omondi"
