@@ -187,6 +187,40 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
+    table: ({ className, children, ...props }: any) => (
+      <div className="my-6 w-full overflow-x-auto rounded-lg border border-gray-200">
+        <table
+          className={cn(
+            "w-full min-w-[36rem] border-collapse text-left text-sm text-gray-700",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ className, ...props }: any) => (
+      <thead className={cn("border-b border-gray-200 bg-gray-50", className)} {...props} />
+    ),
+    tbody: ({ className, ...props }: any) => (
+      <tbody className={cn("divide-y divide-gray-200", className)} {...props} />
+    ),
+    tr: ({ className, ...props }: any) => (
+      <tr className={cn("border-b border-gray-100 last:border-0", className)} {...props} />
+    ),
+    th: ({ className, ...props }: any) => (
+      <th
+        className={cn(
+          "px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600",
+          className
+        )}
+        {...props}
+      />
+    ),
+    td: ({ className, ...props }: any) => (
+      <td className={cn("px-4 py-3 align-top text-gray-800", className)} {...props} />
+    ),
     hr: ({ ...props }) => (
       <hr className="my-6 border-t border-gray-200" {...props} />
     ),
