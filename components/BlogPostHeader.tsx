@@ -18,7 +18,7 @@ export function BlogPostHeader({ title, date, minutes }: BlogPostHeaderProps) {
 
   return (
     <header className="mb-8">
-      <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      <h1 className="text-lg font-bold leading-snug tracking-tight text-gray-900 sm:text-xl md:text-2xl">
         {title}
       </h1>
       <p className="mt-3 text-sm text-gray-500">
