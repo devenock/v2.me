@@ -7,6 +7,9 @@ import { highlight } from 'sugar-high';
 import React from 'react';
 import { BlogPostHeader } from "@/components/BlogPostHeader";
 import { MdxPreWithCopy } from "@/components/MdxPreWithCopy";
+import { MdxTerm } from "@/components/MdxTerm";
+import { blogMdxProseClassName } from "@/lib/blogMdxProse";
+import { cn } from "@/lib/utils";
 import { estimateReadingMinutesFromMarkdown } from "@/lib/readingTime";
 
 interface BlogPostPageProps {
@@ -14,6 +17,13 @@ interface BlogPostPageProps {
 }
 
 const components = {
+  Term: MdxTerm,
+  strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <strong className={cn("font-semibold text-gray-900", className)} {...props} />
+  ),
+  em: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <em className={cn("italic text-gray-800", className)} {...props} />
+  ),
   code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => {
     const codeHTML = highlight(children as string);
     return (
@@ -37,19 +47,28 @@ const components = {
   ),
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className={`mt-8 mb-4 text-2xl font-semibold tracking-tight text-gray-900 ${className || ''}`}
+      className={cn(
+        "mt-8 mb-2 scroll-mt-20 text-xl font-semibold tracking-tight text-gray-900 sm:text-2xl",
+        className
+      )}
       {...props}
     />
   ),
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
-      className={`mt-6 mb-3 text-xl font-semibold tracking-tight text-gray-900 ${className || ''}`}
+      className={cn(
+        "mt-6 mb-2 scroll-mt-20 text-lg font-semibold tracking-tight text-gray-900",
+        className
+      )}
       {...props}
     />
   ),
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className={`leading-7 text-gray-700 [&:not(:first-child)]:mt-4 ${className || ''}`}
+      className={cn(
+        "leading-relaxed text-gray-700 [&:not(:first-child)]:mt-3",
+        className
+      )}
       {...props}
     />
   ),
@@ -62,18 +81,18 @@ const components = {
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
-      className={`my-4 ml-6 list-disc text-gray-700 space-y-1 ${className || ''}`}
+      className={cn("my-3 ml-6 list-disc space-y-1 text-gray-700", className)}
       {...props}
     />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
-      className={`my-4 ml-6 list-decimal text-gray-700 space-y-1 ${className || ''}`}
+      className={cn("my-3 ml-6 list-decimal space-y-1 text-gray-700", className)}
       {...props}
     />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className={`mt-1 text-gray-700 ${className || ''}`} {...props} />
+    <li className={cn("mt-0.5 leading-relaxed text-gray-700", className)} {...props} />
   ),
   blockquote: ({ className, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
@@ -110,7 +129,7 @@ const components = {
     <td className={`px-4 py-3 align-top text-gray-800 ${className || ''}`} {...props} />
   ),
   hr: ({ className, ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-    <hr className={`my-8 border-t border-gray-200 ${className || ''}`} {...props} />
+    <hr className={cn("my-5 border-t border-gray-200", className)} {...props} />
   ),
 };
 
@@ -140,7 +159,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         minutes={readingMinutes}
       />
 
-      <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-blue-600">
+      <div className={blogMdxProseClassName}>
         <MDXRemote {...mdxSource} components={components} />
       </div>
     </article>

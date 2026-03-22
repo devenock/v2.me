@@ -17,8 +17,8 @@ export function BlogPostHeader({ title, date, minutes }: BlogPostHeaderProps) {
   const safeMinutes = Math.max(1, Math.round(minutes));
 
   return (
-    <header className="mb-8">
-      <h1 className="text-lg font-bold leading-snug tracking-tight text-gray-900 sm:text-xl md:text-2xl">
+    <header className="not-prose mb-8">
+      <h1 className="text-2xl font-bold leading-snug tracking-tight text-gray-900 sm:text-xl md:text-2xl">
         {title}
       </h1>
       <p className="mt-3 text-sm text-gray-500">
