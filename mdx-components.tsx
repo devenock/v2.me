@@ -4,14 +4,20 @@ import { highlight } from "sugar-high";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "./lib/utils";
 import { MdxPreWithCopy } from "./components/MdxPreWithCopy";
+import { MdxTerm } from "./components/MdxTerm";
+import { blogMdxProseClassName } from "./lib/blogMdxProse";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
+    wrapper: ({ children }) => (
+      <div className={blogMdxProseClassName}>{children}</div>
+    ),
+    Term: MdxTerm,
     em: ({ className, ...props }: any) => (
-      <em className={cn("font-medium italic text-gray-700", className)} {...props} />
+      <em className={cn("italic text-gray-800", className)} {...props} />
     ),
     strong: ({ className, ...props }: any) => (
-      <strong className={cn("font-bold text-gray-900", className)} {...props} />
+      <strong className={cn("font-semibold text-gray-900", className)} {...props} />
     ),
     a: ({ className, href, children, ...props }: any) => {
       const baseClass =
@@ -86,7 +92,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     blockquote: ({ className, ...props }: any) => (
       <blockquote
         className={cn(
-          "my-4 border-l-4 border-blue-500 bg-blue-50 pl-4 py-2 text-gray-700 italic",
+          "my-4 border-l-4 border-sky-400 bg-sky-50/50 pl-4 py-2 text-gray-700 not-italic",
           className
         )}
         {...props}
@@ -104,7 +110,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h2: ({ className, ...props }: any) => (
       <h2
         className={cn(
-          "mt-6 mb-3 text-2xl font-semibold tracking-tight text-gray-900 scroll-m-20",
+          "mt-8 mb-2 text-xl font-semibold tracking-tight text-gray-900 scroll-mt-20 sm:text-2xl",
           className
         )}
         {...props}
@@ -113,7 +119,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ className, ...props }: any) => (
       <h3
         className={cn(
-          "mt-5 mb-2 text-xl font-semibold tracking-tight text-gray-900 scroll-m-20",
+          "mt-6 mb-2 text-lg font-semibold tracking-tight text-gray-900 scroll-mt-20",
           className
         )}
         {...props}
@@ -149,7 +155,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     p: ({ className, ...props }: any) => (
       <p
         className={cn(
-          "leading-7 text-gray-700 [&:not(:first-child)]:mt-4",
+          "leading-relaxed text-gray-700 [&:not(:first-child)]:mt-3",
           className
         )}
         {...props}
@@ -158,7 +164,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: ({ className, ...props }: any) => (
       <ul
         className={cn(
-          "my-4 ml-6 list-disc text-gray-700 space-y-1",
+          "my-3 ml-6 list-disc text-gray-700 space-y-1",
           className
         )}
         {...props}
@@ -167,7 +173,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ol: ({ className, ...props }: any) => (
       <ol
         className={cn(
-          "my-4 ml-6 list-decimal text-gray-700 space-y-1",
+          "my-3 ml-6 list-decimal text-gray-700 space-y-1",
           className
         )}
         {...props}
@@ -176,7 +182,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     li: ({ className, ...props }: any) => (
       <li
         className={cn(
-          "mt-1 text-gray-700",
+          "mt-0.5 leading-relaxed text-gray-700",
           className
         )}
         {...props}
@@ -217,7 +223,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <td className={cn("px-4 py-3 align-top text-gray-800", className)} {...props} />
     ),
     hr: ({ ...props }) => (
-      <hr className="my-6 border-t border-gray-200" {...props} />
+      <hr className="my-5 border-t border-gray-200" {...props} />
     ),
     ...components,
   };
