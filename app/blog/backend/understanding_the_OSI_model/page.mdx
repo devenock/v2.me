@@ -1,16 +1,18 @@
 import AnimatedName from "../../../../components/AnimatedName";
+import { BlogPostHeader } from "@/components/BlogPostHeader";
 
 export const metadata = {
     title: 'Understanding the OSI Model as a Backend Engineer',
     description:
         'What is the OSI Model?',
     date: '2026-01-25',
+    readingMinutes: 4,
     alternates: {
         canonical: '/blog/backend/understanding_the_OSI_model',
     },
 };
 
-# Understanding the OSI Model as a Backend Engineer
+<BlogPostHeader title={metadata.title} date={metadata.date} minutes={metadata.readingMinutes} />
 
 <AnimatedName />
 
