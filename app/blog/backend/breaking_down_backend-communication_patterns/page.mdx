@@ -16,13 +16,13 @@ export const metadata = {
 
 <AnimatedName />
 
-As backend engineers, we spend most of our time **designing APIs**, **orchestrating services**, and **moving data** between components. It is always easy to assume that communication is **"just HTTP"** yet the way clients and servers exchange data—**synchronous or asynchronous**, **request-response or push**, **polling or events**—shapes latency, scalability, and reliability.
+As backend engineers, we spend most of our time designing APIs, orchestrating services, and moving data between components. It is always easy to assume that communication is "just HTTP" yet the way clients and servers exchange data—synchronous or asynchronous, request-response or push, polling or events—shapes latency, scalability, and reliability.
 
-This is where **communication patterns** become more than jargon but rather a practical toolkit for **choosing the right contract** between producers and consumers, **reducing wasted work**, and **building systems that scale**.
+This is where <Term>communication patterns</Term> become more than jargon but rather a practical toolkit for choosing the right contract between producers and consumers, reducing wasted work, and building systems that scale.
 
 ## What Backend Communication Patterns Really Are
 
-**Backend communication patterns** are the recurring ways in which clients and servers (or services) exchange data: who initiates, who waits, and how often data flows. No single pattern fits every use case; each trades off **latency**, **simplicity**, **resource usage**, and **coupling**.
+<Term variant="neutral">Backend communication patterns</Term> are the recurring ways in which clients and servers (or services) exchange data: who initiates, who waits, and how often data flows. No single pattern fits every use case; each trades off latency, simplicity, resource usage, and coupling.
 
 Therefore, understanding these patterns is important because backend systems live and die by how well they communicate, and the right pattern explains when to block, when to poll, when to push, and when to publish events.
 
@@ -30,33 +30,33 @@ Therefore, understanding these patterns is important because backend systems liv
 
 ## Communication Patterns at a Glance
 
-**Synchronous** – Client sends a request and **blocks** until the server responds.
+<Term variant="neutral">Synchronous</Term> – Client sends a request and blocks until the server responds.
 
-**Asynchronous** – Client sends a request and **does not block**; the response (or result) may arrive later or be handled via callback.
+<Term variant="neutral">Asynchronous</Term> – Client sends a request and does not block; the response (or result) may arrive later or be handled via callback.
 
-**Request-Response** – One request, one response; the classic **sync** pattern (e.g. REST, gRPC).
+<Term variant="neutral">Request-Response</Term> – One request, one response; the classic sync pattern (e.g. REST, gRPC).
 
-**Polling** – Client **repeatedly asks** the server: "Any new data?" at fixed intervals.
+<Term variant="neutral">Polling</Term> – Client repeatedly asks the server: "Any new data?" at fixed intervals.
 
-**Long Polling** – Client asks once; server **holds the request open** until it has data (or timeout), then responds.
+<Term variant="neutral">Long Polling</Term> – Client asks once; server holds the request open until it has data (or timeout), then responds.
 
-**Server-Sent Events (SSE)** – Server **pushes** a stream of events to the client over a single, long-lived connection.
+<Term variant="neutral">Server-Sent Events (SSE)</Term> – Server pushes a stream of events to the client over a single, long-lived connection.
 
-**Push** – Server **initiates** delivery of data to the client (e.g. push notifications, SSE, WebSockets server-to-client).
+<Term variant="neutral">Push</Term> – Server initiates delivery of data to the client (e.g. push notifications, SSE, WebSockets server-to-client).
 
-**Pub/Sub (Publish-Subscribe)** – Producers **publish** messages to a topic or channel; **subscribers** receive them without knowing the producer; decoupled, often **async**.
+<Term variant="neutral">Pub/Sub (Publish-Subscribe)</Term> – Producers publish messages to a topic or channel; subscribers receive them without knowing the producer; decoupled, often async.
 
 
 ## Synchronous vs Asynchronous: The Foundation
 
-Most backend work starts with a simple question: does the caller need an **immediate answer** or can it **continue and get the result later**?
+Most backend work starts with a simple question: does the caller need an immediate answer or can it continue and get the result later?
 
-- **Synchronous**: The client sends a request and **waits** until the server responds. Simple, easy to reason about, but the client is blocked and the connection is held.
-- **Asynchronous**: The client sends a request and **does not wait**; the server may process in the background and respond later (e.g. via callback, webhook, or another channel). Better for long-running work and resource use, but adds complexity and eventual consistency.
+- <Term>Synchronous</Term>: The client sends a request and waits until the server responds. Simple, easy to reason about, but the client is blocked and the connection is held.
+- <Term>Asynchronous</Term>: The client sends a request and does not wait; the server may process in the background and respond later (e.g. via callback, webhook, or another channel). Better for long-running work and resource use, but adds complexity and eventual consistency.
 
-Therefore, understanding **sync vs async** prevents a common mistake: **using a blocking pattern when the system would be simpler and more scalable with async or push**.
+Therefore, understanding sync vs async prevents a common mistake: <Term variant="emphasis">using a blocking pattern when the system would be simpler and more scalable with async or push</Term>.
 
-**Sync (blocking) in Go:** the caller waits for the result.
+*Sync (blocking) in Go:* the caller waits for the result.
 
 ```go
 // Synchronous: block until response
@@ -70,7 +70,7 @@ body, _ := io.ReadAll(resp.Body)
 processOrder(body)
 ```
 
-**Async (non-blocking):** fire the work and get the result later via channel or callback.
+*Async (non-blocking):* fire the work and get the result later via channel or callback.
 
 ```go
 // Asynchronous: do not block; handle result when ready
@@ -91,20 +91,20 @@ processOrder(body)
 
 ## Request-Response: The Classic Pattern
 
-Request-response is the **synchronous** pattern we use every day: one request, one response. REST and gRPC are built on it.
+Request-response is the synchronous pattern we use every day: one request, one response. REST and gRPC are built on it.
 
 - Clear contract: request in, response out.
 - Easy to debug and test.
 - Client blocks until the server answers; timeouts and connection limits apply.
 
 When an API feels slow or clients hit timeouts, the issue may be:
-- **Long-running work** that should be async (e.g. job queue + webhook).
-- **Heavy payloads** that could be streamed or paginated.
-- **Backend** not optimized for the chosen pattern.
+- Long-running work that should be async (e.g. job queue + webhook).
+- Heavy payloads that could be streamed or paginated.
+- Backend not optimized for the chosen pattern.
 
-So request-response is ideal when the **response can be produced quickly** and the client **needs it immediately**; otherwise, consider async or push.
+So request-response is ideal when the response can be produced quickly and the client needs it immediately; otherwise, consider async or push.
 
-**Server (handler):**
+*Server (handler):*
 
 ```go
 func orderHandler(w http.ResponseWriter, r *http.Request) {
@@ -115,7 +115,7 @@ func orderHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-**Client (one request, one response):**
+*Client (one request, one response):*
 
 ```go
 req, _ := http.NewRequest("GET", "https://api.example.com/order?id=123", nil)
@@ -130,15 +130,15 @@ json.NewDecoder(resp.Body).Decode(&order)
 
 ## Polling and Long Polling: Client-Initiated Checks
 
-When the server cannot or should not push, the client can **ask repeatedly** for updates.
+When the server cannot or should not push, the client can ask repeatedly for updates.
 
-**Polling**: The client sends requests at **fixed intervals** (e.g. every 5 seconds). Simple, but wasteful when nothing has changed and adds latency (up to one interval) before the client sees new data.
+<Term>Polling</Term>: The client sends requests at fixed intervals (e.g. every 5 seconds). Simple, but wasteful when nothing has changed and adds latency (up to one interval) before the client sees new data.
 
-**Long polling**: The client sends **one** request; the server **holds it open** until it has new data (or a timeout). The client then gets a response and may immediately send another long poll. This reduces empty responses and often improves perceived latency compared to short-interval polling.
+<Term variant="neutral">Long polling</Term>: The client sends one request; the server holds it open until it has new data (or a timeout). The client then gets a response and may immediately send another long poll. This reduces empty responses and often improves perceived latency compared to short-interval polling.
 
-Both patterns keep **initiative on the client** and work through firewalls and proxies that allow outbound HTTP but not arbitrary server push. Use them when you cannot use SSE or WebSockets, but prefer long polling over tight polling when you need near-real-time updates without full push.
+Both patterns keep initiative on the client and work through firewalls and proxies that allow outbound HTTP but not arbitrary server push. Use them when you cannot use SSE or WebSockets, but prefer long polling over tight polling when you need near-real-time updates without full push.
 
-**Polling (client asks at fixed intervals):**
+*Polling (client asks at fixed intervals):*
 
 ```go
 ticker := time.NewTicker(5 * time.Second)
@@ -157,7 +157,7 @@ for range ticker.C {
 }
 ```
 
-**Long polling (server holds request until data or timeout):**
+*Long polling (server holds request until data or timeout):*
 
 ```go
 // Server: hold until data ready or context cancelled
@@ -178,15 +178,15 @@ resp, err := http.Get("https://api.example.com/updates?wait=30")
 
 ## Server-Sent Events and Push: Server-Initiated Delivery
 
-When the server has new data and the client can hold an open connection, **push** avoids repeated client requests.
+When the server has new data and the client can hold an open connection, push avoids repeated client requests.
 
-**Server-Sent Events (SSE)**: The client opens a **single, long-lived HTTP connection**; the server **pushes** events as they happen (one-way, server → client). Simple, text-based, and auto-reconnecting in browsers. Ideal for live feeds, notifications, and progress updates.
+<Term variant="neutral">Server-Sent Events (SSE)</Term>: The client opens a single, long-lived HTTP connection; the server pushes events as they happen (one-way, server → client). Simple, text-based, and auto-reconnecting in browsers. Ideal for live feeds, notifications, and progress updates.
 
-**Push (in general)**: Any mechanism where the **server initiates** delivery—SSE, WebSocket server messages, push notifications (e.g. FCM, APNs). Reduces polling and keeps clients up to date with lower latency and less wasted traffic.
+<Term>Push</Term> (in general): Any mechanism where the server initiates delivery—SSE, WebSocket server messages, push notifications (e.g. FCM, APNs). Reduces polling and keeps clients up to date with lower latency and less wasted traffic.
 
-Therefore, when you need **live updates** and the client can maintain a connection, **SSE or push** is often better than polling or long polling; reserve request-response for discrete, on-demand operations.
+Therefore, when you need live updates and the client can maintain a connection, SSE or push is often better than polling or long polling; reserve request-response for discrete, on-demand operations.
 
-**SSE server (push events over one connection):**
+*SSE server (push events over one connection):*
 
 ```go
 func sseHandler(w http.ResponseWriter, r *http.Request) {
@@ -205,7 +205,7 @@ func sseHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-**SSE client (read stream):**
+*SSE client (read stream):*
 
 ```go
 req, _ := http.NewRequestWithContext(ctx, "GET", "https://api.example.com/events", nil)
@@ -225,15 +225,15 @@ for scanner.Scan() {
 
 ## Pub/Sub: Decoupled, Event-Driven Communication
 
-**Publish-Subscribe** decouples producers from consumers: producers **publish** messages to a topic or channel; **subscribers** receive only the messages they care about, without knowing who produced them.
+<Term variant="neutral">Publish-Subscribe</Term> decouples producers from consumers: producers publish messages to a topic or channel; subscribers receive only the messages they care about, without knowing who produced them.
 
-- **Asynchronous** by nature: publishers do not wait for subscribers to process.
-- **Scalable**: add subscribers without changing publishers; message brokers (e.g. Kafka, RabbitMQ) handle distribution.
-- **Resilient**: subscribers can be offline and catch up (depending on broker and retention).
+- Asynchronous by nature: publishers do not wait for subscribers to process.
+- Scalable: add subscribers without changing publishers; message brokers (e.g. Kafka, RabbitMQ) handle distribution.
+- Resilient: subscribers can be offline and catch up (depending on broker and retention).
 
-Use pub/sub when multiple consumers need the same events, when you want **loose coupling** and **async processing**, and when ordering or delivery guarantees (at-least-once, exactly-once) are important to design for.
+Use pub/sub when multiple consumers need the same events, when you want loose coupling and async processing, and when ordering or delivery guarantees (at-least-once, exactly-once) are important to design for.
 
-**In-memory pub/sub with channels (conceptually the same as a broker):**
+*In-memory pub/sub with channels (conceptually the same as a broker):*
 
 ```go
 type PubSub struct {
@@ -270,30 +270,30 @@ for msg := range ps.Subscribe("orders") {
 }
 ```
 
-In production you'd typically use a broker (e.g. Redis Streams, NATS, Kafka) instead of in-memory channels, but the **publish** and **subscribe** contract is the same.
+In production you'd typically use a broker (e.g. Redis Streams, NATS, Kafka) instead of in-memory channels, but the publish and subscribe contract is the same.
 
 ## Choosing the Right Pattern
 
 No single pattern fits every scenario. A few heuristics:
 
-- **Need an immediate result?** → **Request-response (sync)**.
-- **Long-running or one-way work?** → **Async** (job queue, webhook, or callback).
-- **Client must "check" for updates and cannot hold a connection?** → **Polling** or **long polling**.
-- **Server has a stream of updates and client can hold a connection?** → **SSE** or **push**.
-- **Multiple consumers, decoupling, events?** → **Pub/sub**.
+- Need an immediate result? → Request-response (sync).
+- Long-running or one-way work? → Async (job queue, webhook, or callback).
+- Client must "check" for updates and cannot hold a connection? → Polling or long polling.
+- Server has a stream of updates and client can hold a connection? → SSE or push.
+- Multiple consumers, decoupling, events? → Pub/sub.
 
-Backend engineers who understand these patterns can avoid **over-polling**, **blocking when async would scale**, and **tight coupling** when pub/sub would simplify the system.
+Backend engineers who understand these patterns can avoid over-polling, blocking when async would scale, and tight coupling when pub/sub would simplify the system.
 
 ## Patterns in Practice: They Often Coexist
 
-Real systems mix patterns: a **REST API** for request-response, **SSE** for live dashboard updates, **pub/sub** for order or event processing, and **async jobs** for emails and reports. The same service might expose both sync endpoints and async or push channels.
+Real systems mix patterns: a REST API for request-response, SSE for live dashboard updates, pub/sub for order or event processing, and async jobs for emails and reports. The same service might expose both sync endpoints and async or push channels.
 
-Understanding each pattern—**synchronous vs asynchronous**, **request-response**, **polling**, **long polling**, **SSE**, **push**, and **pub/sub**—helps you choose the right one per use case and document expectations for latency, consistency, and failure handling.
+Understanding each pattern—synchronous vs asynchronous, request-response, polling, long polling, SSE, push, and pub/sub—helps you choose the right one per use case and document expectations for latency, consistency, and failure handling.
 
 ---
 
 ## Conclusion
 
-Backend communication patterns are not just theory. For backend engineers, they are a **practical toolkit** that improves API design, reduces wasted work, and makes systems easier to scale and operate.
+Backend communication patterns are not just theory. For backend engineers, they are a <Term>practical toolkit</Term> that improves API design, reduces wasted work, and makes systems easier to scale and operate.
 
-Your APIs may start with request-response, but production reality often needs **polling**, **long polling**, **SSE**, **push**, and **pub/sub** in the right places. Understanding these patterns helps you move from **writing endpoints** to **engineering resilient, efficient backend communication**.
+Your APIs may start with request-response, but production reality often needs polling, long polling, SSE, push, and pub/sub in the right places. Understanding these patterns helps you move from <Term>writing endpoints</Term> to <Term variant="emphasis">engineering resilient, efficient backend communication</Term>.
