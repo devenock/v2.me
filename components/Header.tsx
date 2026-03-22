@@ -11,11 +11,18 @@ export default function Header() {
   return (
     <header className="py-4 px-4 sm:px-6 lg:px-8 border-b border-border/60">
       <nav className="flex flex-wrap items-center justify-between">
-        <Link 
-          href="/" 
-          className="w-28 sm:w-32 transition-opacity hover:opacity-80"
+        <Link
+          href="/"
+          className="w-28 transition-opacity hover:opacity-80 sm:w-32"
         >
-          <Image src="/logo.png" alt="logo" width={100} height={100} />
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={100}
+            height={100}
+            className="h-auto w-full dark:brightness-0 dark:invert"
+            priority
+          />
         </Link>
         <div className="mt-3 flex flex-wrap items-center gap-4 sm:mt-0 sm:gap-6 md:gap-8">
           {navData.map((item) => {
