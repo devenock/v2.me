@@ -1,16 +1,18 @@
 import AnimatedName from "../../../../components/AnimatedName";
+import { BlogPostHeader } from "@/components/BlogPostHeader";
 
 export const metadata = {
     title: 'Getting Started with Go',
     description:
         'Go, also known as Golang, is an open-source programming language created by Google.',
     date: '2025-08-24',
+    readingMinutes: 3,
     alternates: {
         canonical: '/blog/go/getting-started',
     },
 };
 
-# Getting Started with Go
+<BlogPostHeader title={metadata.title} date={metadata.date} minutes={metadata.readingMinutes} />
 
 <AnimatedName />
 
