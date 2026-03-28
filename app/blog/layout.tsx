@@ -1,3 +1,4 @@
+import { BlogEngagementSection } from "@/components/BlogEngagementSection";
 import { BlogScrollToTop } from "@/components/BlogScrollToTop";
 
 export default function BlogLayout({
@@ -13,6 +14,7 @@ export default function BlogLayout({
         */}
         <div className="rounded-xl border border-border/50 bg-card/40 px-5 py-9 shadow-none backdrop-blur-sm sm:px-8 sm:py-10 dark:bg-card/25">
           {children}
+          <BlogEngagementSection />
         </div>
       </div>
       <BlogScrollToTop />
