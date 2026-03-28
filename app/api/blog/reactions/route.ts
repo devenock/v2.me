@@ -1,21 +1,16 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { getBlogEngagementStore } from "@/lib/blogEngagement/get-store";
-import { isAllowedEmoji, normalizePostSlug } from "@/lib/blogEngagement/validate";
+import {
+  isAllowedEmoji,
+  normalizePostSlugParam,
+} from "@/lib/blogEngagement/validate";
 import {
   VISITOR_COOKIE,
   newVisitorId,
   parseVisitorId,
   setVisitorCookie,
 } from "@/lib/blogEngagement/visitor-cookie";
-
-type RouteCtx = { params: Promise<{ slug: string[] }> };
-
-async function resolveSlug(ctx: RouteCtx): Promise<string | null> {
-  const { slug: parts } = await ctx.params;
-  if (!parts?.length) return null;
-  return normalizePostSlug(parts);
-}
 
 function jsonWithVisitor(
   data: unknown,
@@ -27,10 +22,15 @@ function jsonWithVisitor(
   return res;
 }
 
-export async function GET(_request: NextRequest, ctx: RouteCtx) {
-  const postSlug = await resolveSlug(ctx);
+export async function GET(request: NextRequest) {
+  const postSlug = normalizePostSlugParam(
+    request.nextUrl.searchParams.get("post")
+  );
   if (!postSlug) {
-    return NextResponse.json({ error: "Invalid post slug" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Missing or invalid post query (?post=)" },
+      { status: 400 }
+    );
   }
 
   const cookieStore = await cookies();
@@ -46,23 +46,33 @@ export async function GET(_request: NextRequest, ctx: RouteCtx) {
   } catch (err) {
     console.error("[blog reactions GET]", err);
     return NextResponse.json(
-      { error: "Could not load reactions. If using Postgres, ensure tables exist (see scripts/blog-engagement-schema.sql)." },
+      {
+        error:
+          "Could not load reactions. If using Postgres, ensure tables exist (see scripts/blog-engagement-schema.sql).",
+      },
       { status: 503 }
     );
   }
 }
 
-export async function POST(request: NextRequest, ctx: RouteCtx) {
-  const postSlug = await resolveSlug(ctx);
-  if (!postSlug) {
-    return NextResponse.json({ error: "Invalid post slug" }, { status: 400 });
-  }
-
+export async function POST(request: NextRequest) {
   let body: unknown;
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const postRaw =
+    typeof body === "object" && body !== null && "postSlug" in body
+      ? String((body as { postSlug: unknown }).postSlug)
+      : "";
+  const postSlug = normalizePostSlugParam(postRaw);
+  if (!postSlug) {
+    return NextResponse.json(
+      { error: "Invalid or missing postSlug in body" },
+      { status: 400 }
+    );
   }
 
   const emoji =

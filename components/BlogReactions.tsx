@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { ALLOWED_REACTION_EMOJIS } from "@/lib/blogEngagement/types";
-import { blogEngagementApiBase } from "@/lib/blogEngagement/client-api-path";
+import { blogEngagementPostQuery } from "@/lib/blogEngagement/client-api-path";
 import { cn } from "@/lib/utils";
 
 type Props = { postSlug: string };
@@ -17,12 +17,12 @@ export function BlogReactions({ postSlug }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<string | null>(null);
 
-  const base = blogEngagementApiBase(postSlug);
+  const reactionsUrl = `/api/blog/reactions?${blogEngagementPostQuery(postSlug)}`;
 
   const load = useCallback(async () => {
     setError(null);
     try {
-      const res = await fetch(`${base}/reactions`, { credentials: "include" });
+      const res = await fetch(reactionsUrl, { credentials: "include" });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
         throw new Error((j as { error?: string }).error ?? res.statusText);
@@ -32,7 +32,7 @@ export function BlogReactions({ postSlug }: Props) {
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to load reactions");
     }
-  }, [base]);
+  }, [reactionsUrl]);
 
   useEffect(() => {
     load();
@@ -42,11 +42,11 @@ export function BlogReactions({ postSlug }: Props) {
     setPending(emoji);
     setError(null);
     try {
-      const res = await fetch(`${base}/reactions`, {
+      const res = await fetch("/api/blog/reactions", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ emoji }),
+        body: JSON.stringify({ postSlug, emoji }),
       });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));

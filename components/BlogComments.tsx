@@ -3,7 +3,7 @@
 import { format, isValid, parseISO } from "date-fns";
 import { useCallback, useEffect, useState } from "react";
 import type { BlogComment } from "@/lib/blogEngagement/types";
-import { blogEngagementApiBase } from "@/lib/blogEngagement/client-api-path";
+import { blogEngagementPostQuery } from "@/lib/blogEngagement/client-api-path";
 import { cn } from "@/lib/utils";
 
 type Props = { postSlug: string };
@@ -21,13 +21,13 @@ export function BlogComments({ postSlug }: Props) {
   const [body, setBody] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const base = blogEngagementApiBase(postSlug);
+  const commentsUrl = `/api/blog/comments?${blogEngagementPostQuery(postSlug)}`;
 
   const load = useCallback(async () => {
     setError(null);
     setLoading(true);
     try {
-      const res = await fetch(`${base}/comments`, { credentials: "include" });
+      const res = await fetch(commentsUrl, { credentials: "include" });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
         throw new Error((j as { error?: string }).error ?? res.statusText);
@@ -39,7 +39,7 @@ export function BlogComments({ postSlug }: Props) {
     } finally {
       setLoading(false);
     }
-  }, [base]);
+  }, [commentsUrl]);
 
   useEffect(() => {
     load();
@@ -50,11 +50,11 @@ export function BlogComments({ postSlug }: Props) {
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch(`${base}/comments`, {
+      const res = await fetch("/api/blog/comments", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ authorName, body }),
+        body: JSON.stringify({ postSlug, authorName, body }),
       });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
