@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import type { BlogComment, ReactionsState } from "./types";
+import type { BlogComment } from "./types";
 import type { BlogEngagementStore } from "./store-interface";
 
 type ReactionRow = { postSlug: string; visitorId: string; emoji: string };
