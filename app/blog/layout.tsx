@@ -1,4 +1,3 @@
-import { BlogEngagementSection } from "@/components/BlogEngagementSection";
 import { BlogScrollToTop } from "@/components/BlogScrollToTop";
 
 export default function BlogLayout({
