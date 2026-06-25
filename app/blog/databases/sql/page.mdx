@@ -1,0 +1,349 @@
+import AnimatedName from "../../../../components/AnimatedName";
+import { BlogPostHeader } from "@/components/BlogPostHeader";
+
+export const metadata = {
+    title: 'WHERE vs HAVING in SQL',
+    description:
+        'A practical guide to how and when you can use WHERE and HAVING clauses in your SQL queries.',
+    date: '2026-06-25',
+    readingMinutes: 5,
+    alternates: {
+        canonical: '/blog/databases/sql/where_vs_having',
+    },
+};
+
+<BlogPostHeader title={metadata.title} date={metadata.date} minutes={metadata.readingMinutes} />
+
+<AnimatedName />
+
+
+Two of the most commonly confused clauses in SQL are `WHERE` and `HAVING`. Both filter data, but they operate at fundamentally different stages of query execution and serve distinct purposes. Understanding this difference separates engineers who write correct queries from those who write *fast* ones.
+
+---
+
+## The Core Difference in One Sentence
+
+> **`WHERE` filters rows before aggregation. `HAVING` filters groups after aggregation.**
+
+That single distinction drives everything else.
+
+---
+
+## Setting Up the Examples
+
+Throughout this article, we'll work with two tables from a fictional e-commerce system.
+
+**`orders` table:**
+
+| order_id | customer_id | product    | amount | status    |
+|----------|-------------|------------|--------|-----------|
+| 1        | 101         | Laptop     | 1200   | completed |
+| 2        | 102         | Phone      | 800    | completed |
+| 3        | 101         | Mouse      | 25     | completed |
+| 4        | 103         | Keyboard   | 75     | pending   |
+| 5        | 102         | Monitor    | 450    | completed |
+| 6        | 103         | Webcam     | 90     | completed |
+| 7        | 104         | Headphones | 200    | cancelled |
+| 8        | 101         | Desk       | 600    | completed |
+
+**`customers` table:**
+
+| customer_id | name    | country |
+|-------------|---------|---------|
+| 101         | Alice   | Kenya   |
+| 102         | Bob     | Uganda  |
+| 103         | Carol   | Kenya   |
+| 104         | David   | Tanzania|
+
+---
+
+## The WHERE Clause
+
+`WHERE` is a **row-level filter**. It acts on individual rows in the source table(s) before any grouping or aggregation takes place. You can use it with or without `GROUP BY`.
+
+### Syntax
+
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE condition;
+```
+
+### Example 1 — Simple row filter
+
+Get all completed orders:
+
+```sql
+SELECT order_id, customer_id, amount
+FROM orders
+WHERE status = 'completed';
+```
+
+**Result:**
+
+| order_id | customer_id | amount |
+|----------|-------------|--------|
+| 1        | 101         | 1200   |
+| 2        | 102         | 800    |
+| 3        | 101         | 25     |
+| 5        | 102         | 450    |
+| 6        | 103         | 90     |
+| 8        | 101         | 600    |
+
+`WHERE` evaluated every row and discarded `order_id 4` (pending) and `order_id 7` (cancelled) before returning results.
+
+### Example 2 — WHERE before GROUP BY
+
+Find the total spend per customer, but only count completed orders:
+
+```sql
+SELECT customer_id, SUM(amount) AS total_spend
+FROM orders
+WHERE status = 'completed'
+GROUP BY customer_id;
+```
+
+**Result:**
+
+| customer_id | total_spend |
+|-------------|-------------|
+| 101         | 1825        |
+| 102         | 1250        |
+| 103         | 90          |
+
+Here, `WHERE` strips out the non-completed rows *first*, then `GROUP BY` aggregates what remains. Customer 104 (David) disappears entirely — his only order was cancelled.
+
+### What You Can and Cannot Do in WHERE
+
+`WHERE` works with raw column values. You **cannot** reference an aggregate function like `SUM()`, `COUNT()`, or `AVG()` in a `WHERE` clause, because those are computed after the rows are grouped.
+
+```sql
+-- THIS WILL FAIL
+SELECT customer_id, SUM(amount) AS total_spend
+FROM orders
+WHERE SUM(amount) > 500   -- ❌ Error: aggregate not allowed in WHERE
+GROUP BY customer_id;
+```
+
+This is exactly the problem `HAVING` was designed to solve.
+
+---
+
+## The HAVING Clause
+
+`HAVING` is a **group-level filter**. It runs after `GROUP BY` has collapsed rows into groups and after aggregate functions have been computed. You use it to filter entire groups based on the result of an aggregation.
+
+### Syntax
+
+```sql
+SELECT column1, AGG_FUNC(column2)
+FROM table_name
+GROUP BY column1
+HAVING condition_on_aggregate;
+```
+
+### Example 3 — Filter groups by aggregate value
+
+Find customers who have spent more than 500 in total (across all order statuses):
+
+```sql
+SELECT customer_id, SUM(amount) AS total_spend
+FROM orders
+GROUP BY customer_id
+HAVING SUM(amount) > 500;
+```
+
+**Result:**
+
+| customer_id | total_spend |
+|-------------|-------------|
+| 101         | 1825        |
+| 102         | 1450        |
+
+Customers 103 (165 total) and 104 (200 total) are excluded because their group totals don't meet the condition.
+
+### Example 4 — HAVING with COUNT
+
+Find customers who have placed more than 2 orders:
+
+```sql
+SELECT customer_id, COUNT(order_id) AS order_count
+FROM orders
+GROUP BY customer_id
+HAVING COUNT(order_id) > 2;
+```
+
+**Result:**
+
+| customer_id | order_count |
+|-------------|-------------|
+| 101         | 3           |
+
+Only Alice (customer 101) has placed more than 2 orders.
+
+---
+
+## Combining WHERE and HAVING
+
+This is where the real power lies. You can use both clauses in the same query — `WHERE` narrows the rows first, then `HAVING` filters the resulting groups.
+
+### Example 5 — WHERE + HAVING together
+
+Find customers who have spent more than 500 on completed orders only:
+
+```sql
+SELECT customer_id, SUM(amount) AS total_spend
+FROM orders
+WHERE status = 'completed'
+GROUP BY customer_id
+HAVING SUM(amount) > 500;
+```
+
+**Step-by-step execution:**
+
+1. `WHERE status = 'completed'` — eliminates orders 4 and 7, leaving 6 rows.
+2. `GROUP BY customer_id` — groups the remaining rows: 101 → [1200, 25, 600], 102 → [800, 450], 103 → [90].
+3. `SUM(amount)` — computed per group: 101 → 1825, 102 → 1250, 103 → 90.
+4. `HAVING SUM(amount) > 500` — drops customer 103 (90 is below threshold).
+
+**Result:**
+
+| customer_id | total_spend |
+|-------------|-------------|
+| 101         | 1825        |
+| 102         | 1250        |
+
+### Example 6 — A more realistic query
+
+Get the name and total completed spend of customers from Kenya who have spent more than 1000:
+
+```sql
+SELECT c.name, SUM(o.amount) AS total_spend
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+WHERE o.status = 'completed'
+  AND c.country = 'Kenya'
+GROUP BY c.customer_id, c.name
+HAVING SUM(o.amount) > 1000;
+```
+
+**Result:**
+
+| name  | total_spend |
+|-------|-------------|
+| Alice | 1825        |
+
+Carol is Kenyan but only spent 90 on completed orders — `HAVING` filters her out.
+
+---
+
+## The SQL Execution Order
+
+Understanding *when* each clause executes is the key to writing correct queries. SQL does not execute in the order you write it:
+
+```
+1. FROM      — identify the source tables
+2. JOIN      — combine tables
+3. WHERE     — filter individual rows
+4. GROUP BY  — group the filtered rows
+5. HAVING    — filter the groups
+6. SELECT    — compute the output columns
+7. ORDER BY  — sort the result
+8. LIMIT     — truncate the result
+```
+
+`WHERE` lives at step 3. `HAVING` lives at step 5. This is why you can't use a `SELECT` alias inside `WHERE` — the alias doesn't exist yet at that point in execution.
+
+### Example 7 — The alias trap
+
+```sql
+-- THIS FAILS in most databases
+SELECT customer_id, SUM(amount) AS total_spend
+FROM orders
+WHERE total_spend > 500     -- ❌ "total_spend" doesn't exist yet at WHERE stage
+GROUP BY customer_id;
+
+-- THIS WORKS
+SELECT customer_id, SUM(amount) AS total_spend
+FROM orders
+GROUP BY customer_id
+HAVING SUM(amount) > 500;   -- ✅ aggregate is computed before HAVING runs
+```
+
+> **Note:** Some databases like PostgreSQL and MySQL allow aliases in `HAVING`, but referencing them in `WHERE` is universally unsupported. Don't rely on alias support in `HAVING` for portability.
+
+---
+
+## Performance Implications
+
+This isn't just a correctness issue — it's a performance one.
+
+`WHERE` reduces the number of rows *before* grouping. Fewer rows going into `GROUP BY` means less memory, less sorting, and faster aggregation. `HAVING` can only discard groups *after* the database has already done the aggregation work.
+
+**Rule of thumb:** Push as much filtering as possible into `WHERE`. Only use `HAVING` for conditions that genuinely depend on aggregate results.
+
+### Example 8 — Inefficient vs efficient
+
+**Inefficient — filtering a non-aggregate column in HAVING:**
+
+```sql
+-- Works but slow: groups ALL rows, then discards non-Kenya groups
+SELECT customer_id, SUM(amount)
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+GROUP BY customer_id, c.country
+HAVING c.country = 'Kenya';   -- ❌ This should be a WHERE condition
+```
+
+**Efficient — move the non-aggregate filter to WHERE:**
+
+```sql
+-- Correct: filters Kenya rows before grouping
+SELECT customer_id, SUM(amount)
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+WHERE c.country = 'Kenya'     -- ✅ narrows rows early
+GROUP BY customer_id
+```
+
+Both return the same result. The second query does a fraction of the work.
+
+---
+
+## HAVING Without GROUP BY
+
+`HAVING` can technically be used without `GROUP BY`. In that case, the entire result set is treated as a single group.
+
+```sql
+-- Returns the sum only if the entire table's total exceeds 3000
+SELECT SUM(amount) AS grand_total
+FROM orders
+HAVING SUM(amount) > 3000;
+```
+
+This is rare in practice, but valid SQL. It's useful for existence-style checks on aggregate values.
+
+---
+
+## Quick Reference
+
+| Feature | WHERE | HAVING |
+|---|---|---|
+| Filters | Individual rows | Groups |
+| Executes | Before GROUP BY | After GROUP BY |
+| Works with aggregates? | No | Yes |
+| Requires GROUP BY? | No | No (but usually used with it) |
+| Can filter on raw columns? | Yes | Yes (but inefficient) |
+| Performance role | Reduces input to aggregation | Reduces output of aggregation |
+
+---
+
+## Summary
+
+- Use `WHERE` to filter rows based on raw column values — before any grouping happens.
+- Use `HAVING` to filter groups based on the result of aggregate functions like `SUM`, `COUNT`, `AVG`, `MIN`, or `MAX`.
+- Use both together when you need to narrow rows *and* filter aggregated groups in the same query.
+- Never put an aggregate function inside `WHERE` — that's what `HAVING` is for.
+- Always prefer `WHERE` over `HAVING` for non-aggregate conditions — it's faster.
+
+Once you internalize the SQL execution order, the right clause to use becomes obvious every time.
