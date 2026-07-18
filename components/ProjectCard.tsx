@@ -69,9 +69,9 @@ export default function ProjectCard({
           <Link
             href={liveUrl || "#"}
             target="_blank"
-            className="flex-1 flex items-center w-1/4 justify-center shadow-md rounded-md px-3 py-4 text-sm md:text-base"
+            className="flex-1 flex items-center justify-center gap-2 rounded-md border border-border bg-muted px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted/70"
           >
-            <Play className="mr-2 h-4 w-4" />
+            <Play className="h-4 w-4" />
             Demo
           </Link>
         )}
@@ -79,9 +79,9 @@ export default function ProjectCard({
           <Link
             href={githubUrl || "#"}
             target="_blank"
-            className="flex-1 flex items-center w-1/4 justify-center shadow-md rounded-md px-3 py-4 text-sm md:text-base"
+            className="flex-1 flex items-center justify-center gap-2 rounded-md border border-border bg-muted px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted/70"
           >
-            <Github className="mr-2 h-4 w-4" />
+            <Github className="h-4 w-4" />
             Source Code
           </Link>
         )}

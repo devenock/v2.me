@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
-import MDXProvider from "../components/mdx-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,14 +42,12 @@ export default function RootLayout({
         <body
           className={`${inter.className} min-h-screen antialiased bg-background text-foreground`}
         >
-          <MDXProvider>
-            <div className="mx-auto flex max-w-screen-xl flex-col p-4 sm:p-6 lg:p-8">
-              <Header />
-              <main className="flex-grow pt-6">{children}</main>
-              <Footer />
-              <Analytics />
-            </div>
-          </MDXProvider>
+          <div className="mx-auto flex max-w-screen-xl flex-col p-4 sm:p-6 lg:p-8">
+            <Header />
+            <main className="flex-grow pt-6">{children}</main>
+            <Footer />
+            <Analytics />
+          </div>
         </body>
       </html>
     </ViewTransitions>
