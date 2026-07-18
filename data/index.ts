@@ -365,7 +365,8 @@ export const experiences = [
 
 export const navData = [
   // { url: "/about", name: "About" },
-  // { url: "/projects", name: "Projects" },
+  { url: "/projects", name: "Projects" },
+  { url: "/experience", name: "Experience" },
   { url: "/blog", name: "Blog" },
   { url: "https://docs.google.com/document/d/1OaVbbR2J91AN8g7fFlnqSnA50u819qYixI2vHwaOWw0/edit?usp=sharing", name: "Resume", external: true },
 ];
