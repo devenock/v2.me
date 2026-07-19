@@ -261,6 +261,10 @@ export const Databases = [
   { name: "MySQL", icon: "/images/mysql.svg" },
 ];
 
+export const Analytics = [
+  { name: "Metabase", icon: "/images/metabase.svg" },
+];
+
 export const Tools = [
   { name: "AWS", icon: "/images/aws.svg" },
   { name: "Vercel", icon: "/images/vercel.svg" },
