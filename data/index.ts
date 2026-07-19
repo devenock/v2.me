@@ -247,6 +247,8 @@ export const Frameworks = [
   { name: "Expo", icon: "/images/expo.svg" },
   { name: "NestJS", icon: "/images/nestjs.svg" },
   { name: "Gin", icon: "/images/gin.png" },
+  { name: "Chi", icon: "/images/chi.png" },
+  { name: "Fiber", icon: "/images/fiber.png" },
   { name: "Node.js", icon: "/images/nodejs.svg" },
   { name: "Express", icon: "/images/express.svg" },
   { name: "Redux Toolkit", icon: "/images/redux.svg" },
