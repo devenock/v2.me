@@ -68,11 +68,7 @@ export default function Header() {
 
             <Link
               href="/hire-me"
-              className={`rounded-md border px-4 py-1.5 text-sm font-medium tracking-wide transition-colors duration-200 ${
-                pathname === "/hire-me"
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border bg-transparent text-foreground hover:bg-foreground hover:text-background"
-              }`}
+              className="rounded-md border border-foreground bg-foreground px-4 py-1.5 text-sm font-medium tracking-wide text-background transition-colors duration-200 hover:bg-transparent hover:text-foreground"
             >
               Hire Me
             </Link>
