@@ -282,6 +282,8 @@ export const Tools = [
 export const experiences = [
   {
     company: "Altech Group",
+    description:
+      "Altech Group is a technology holding company delivering PAYGO and fintech solutions across Africa.",
     roles: [
       {
         title: "Senior Software Engineer",
@@ -294,78 +296,94 @@ export const experiences = [
           "Integrating secure payment wallet systems into PAYGO platform, processing 10K+ daily transactions.",
           "Developing responsive React gaming dashboard with real-time analytics, improving player engagement by 35%.",
         ],
+        tags: ["Golang", "NestJS", "React", "GitHub Actions", "Jenkins", "PostgreSQL", "Redis"],
       },
     ],
   },
   {
     company: "Riverbank Solutions Limited",
+    description:
+      "Riverbank Solutions is a digital payments and software consultancy building fintech platforms across East Africa.",
     roles: [
       {
         title: "Software Engineer",
         dates: "April 2023 — August 2024",
         highlights: [
-          "Spearheaded the development of Zed Payments portal's, employing NextJS and NodeJs to enhance visual appeal, foster modular code, and accelerate performance by 40%.",
+          "Spearheaded the development of Zed Payments portal, employing Next.js and Node.js to enhance visual appeal, foster modular code, and accelerate performance by 40%.",
           "Implemented design thinking approaches to identify user pain points and develop innovative solutions, improving user satisfaction by 50%.",
           "Led cross-functional collaboration to define product goals and translate user needs into actionable development tasks.",
           "Implemented Docker containerization, reducing deployment time by 60% across environments.",
         ],
+        tags: ["Next.js", "Node.js", "Docker", "TypeScript", "PostgreSQL"],
       },
     ],
   },
   {
     company: "ZED Payments",
+    description:
+      "ZED Payments is a Kenyan fintech platform enabling seamless digital payment solutions for businesses and consumers.",
     roles: [
       {
         title: "Senior Frontend Engineer",
         dates: "April 2023 — August 2024",
         highlights: [
-          "Developed highly responsive user-interface components using React concepts, improving accessibility by 30%.",
+          "Developed highly responsive user-interface components using React, improving accessibility by 30%.",
           "Optimized front-end performance by streamlining CSS code, reducing load time by 40% and increasing overall performance by 25%.",
           "Conducted thorough bug identification and resolution, enhancing web functionality and speed by 50%.",
-          "Developed ChatGPT prompts for customer service automation, improving response time by 45%.",
+          "Developed AI-powered prompts for customer service automation, improving response time by 45%.",
         ],
+        tags: ["React", "TypeScript", "CSS", "Redux Toolkit", "REST APIs"],
       },
     ],
   },
   {
     company: "Whrrl Tech",
+    description:
+      "Whrrl Tech is a startup building financial tools and mobile applications to serve emerging markets.",
     roles: [
       {
         title: "Software Engineer",
         dates: "June 2022 — August 2023",
         highlights: [
-          "Engineered and tested RESTful APIs using Go and NestJS to dynamically serve data to a React front-end handling over 20,000 concurrent users, ensuring robust performance and responsiveness at scale.",
+          "Engineered and tested RESTful APIs using Go and NestJS to serve a React front-end handling over 20,000 concurrent users.",
           "Facilitated agile product development processes, leading to a 70% improvement in code quality and team productivity.",
-          "Developed and launched the official BruFinance mobile application using React Native and Expo, enhancing user engagement and streamlining financial services.",
+          "Developed and launched the BruFinance mobile application using React Native and Expo, enhancing user engagement and streamlining financial services.",
         ],
+        tags: ["Go", "NestJS", "React", "React Native", "Expo", "PostgreSQL"],
       },
     ],
   },
   {
     company: "Mortgage Ezy",
+    description:
+      "Mortgage Ezy is an Australian fintech company providing online mortgage brokering and lending solutions.",
     roles: [
       {
         title: "Software Engineer",
         dates: "June 2021 — May 2022",
         highlights: [
-          "Implemented a robust testing strategy by writing unit tests for various React components, contributing to enhanced application performance by an impressive 50%.",
-          "Re-architected a multi-page dashboard into a single-page web app, resulting in a remarkable 50% improvement in user experience.",
-          "Collaborated with cross-functional teams to design and implement features, ensuring seamless performance across iOS and Android platforms.",
+          "Implemented a robust testing strategy by writing unit tests for React components, improving application performance by 50%.",
+          "Re-architected a multi-page dashboard into a single-page web app, resulting in a 50% improvement in user experience.",
+          "Collaborated with cross-functional teams to design and implement features across iOS and Android platforms.",
         ],
+        tags: ["React", "Jest", "TypeScript", "React Native"],
       },
     ],
   },
   {
     company: "Outgrowify",
+    description:
+      "Outgrowify is a digital marketing and growth agency delivering web solutions for clients across various industries.",
     roles: [
       {
         title: "Frontend Developer",
         dates: "October 2019 — April 2021",
         highlights: [
-          "Collaborated with UX designers to translate wireframes and mockups into responsive web applications, ensuring pixel-perfect implementation and cross-browser compatibility.",
-          "Integrated RESTful APIs endpoints with the frontend, implementing efficient state management solutions using Redux to handle complex data flows.",
+          "Collaborated with UX designers to translate wireframes into responsive web applications, ensuring pixel-perfect implementation and cross-browser compatibility.",
+          "Integrated RESTful API endpoints with the frontend, implementing efficient state management with Redux.",
           "Participated in code reviews, fostering best practices in React development and improving team productivity by 20%.",
         ],
+        tags: ["React", "Redux", "JavaScript", "HTML", "CSS", "REST APIs"],
       },
     ],
   },
