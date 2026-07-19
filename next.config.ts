@@ -1,22 +1,18 @@
 import createMDX from "@next/mdx";
-import remarkGfm from "remark-gfm";
 
-const withMDX = createMDX({
-  options: {
-    remarkPlugins: [remarkGfm],
-  },
-});
+// No remarkPlugins here — Turbopack can't serialize function references.
+// GFM support (tables, strikethrough, etc.) is enabled via mdxRs below.
+const withMDX = createMDX({});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   experimental: {
-    mdxRs: false, // Keep MDX RS disabled for now
+    // Rust-based MDX compiler: Turbopack-native and supports GFM out of the box.
+    // Replaces the JS remark-gfm plugin that broke Turbopack serialization.
+    mdxRs: { mdxType: "gfm" as const },
   },
-  // Hide the floating Next.js (N) dev indicator in the corner; errors still surface normally
   devIndicators: false as const,
-  // Optionally, add any other Next.js config below
 };
 
 export default withMDX(nextConfig);
