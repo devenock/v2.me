@@ -14,6 +14,7 @@ export default function About() {
             src="/images/profile.jpg"
             alt="Enock Omondi"
             fill
+            sizes="(min-width: 640px) 256px, 192px"
             className="object-cover"
           />
         </div>
