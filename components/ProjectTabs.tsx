@@ -12,7 +12,7 @@ const TABS: { value: ProjectCategory | "all"; label: string }[] = [
 export default function ProjectTabs() {
   return (
     <Tabs defaultValue="all" className="w-full">
-      <TabsList className="mb-8 h-auto gap-1 bg-muted/50 p-1">
+      <TabsList className="mb-8 h-auto flex-wrap gap-1 bg-muted/50 p-1">
         {TABS.map((tab) => (
           <TabsTrigger
             key={tab.value}
