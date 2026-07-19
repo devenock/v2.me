@@ -26,7 +26,7 @@ export default function ExpertisePage() {
                 Frameworks
               </TabsTrigger>
               <TabsTrigger value="databases" className="px-5 py-2 text-sm font-medium">
-                Databases
+                DBs &amp; ORMs
               </TabsTrigger>
               <TabsTrigger value="tools" className="px-5 py-2 text-sm font-medium">
                 Tools & Infra

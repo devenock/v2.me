@@ -259,6 +259,11 @@ export const Databases = [
   { name: "PostgreSQL", icon: "/images/postgresql.svg" },
   { name: "MongoDB", icon: "/images/mongodb.svg" },
   { name: "MySQL", icon: "/images/mysql.svg" },
+  { name: "SQLite", icon: "/images/sqlite.svg" },
+  { name: "Supabase", icon: "/images/supabase.svg" },
+  { name: "Firebase", icon: "/images/firebase.svg" },
+  { name: "Prisma", icon: "/images/prisma.svg" },
+  { name: "TypeORM", icon: "/images/typeorm.png" },
 ];
 
 export const Analytics = [
