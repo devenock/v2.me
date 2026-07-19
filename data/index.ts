@@ -393,5 +393,5 @@ export const navData = [
   { url: "/projects", name: "Projects" },
   { url: "/experience", name: "Experience" },
   { url: "/expertise", name: "Expertise" },
-  { url: "https://docs.google.com/document/d/1OaVbbR2J91AN8g7fFlnqSnA50u819qYixI2vHwaOWw0/edit?usp=sharing", name: "Resume", external: true },
+  { url: "/blog", name: "Blog" },
 ];
