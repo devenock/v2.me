@@ -42,12 +42,12 @@ export default function RootLayout({
         <body
           className={`${inter.className} min-h-screen antialiased bg-background text-foreground`}
         >
-          <div className="mx-auto flex max-w-screen-xl flex-col p-4 sm:p-6 lg:p-8">
             <Header />
-            <main className="flex-grow pt-6">{children}</main>
+          <div className="mx-auto flex w-full max-w-screen-xl flex-col px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+            <main className="flex-grow">{children}</main>
             <Footer />
-            <Analytics />
           </div>
+          <Analytics />
         </body>
       </html>
     </ViewTransitions>

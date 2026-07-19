@@ -12,7 +12,7 @@ export default function IntroSection() {
     <section aria-label="Intro" className="w-full">
       <div className="rounded-xl border border-border/50 bg-card/40 px-5 py-9 shadow-none backdrop-blur-sm sm:px-8 sm:py-12 dark:bg-card/25">
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-[1.3fr_0.7fr] md:items-start">
-          <div>
+          <div className="order-2 md:order-1">
             <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
               Hello
             </p>
@@ -115,12 +115,13 @@ export default function IntroSection() {
             <div className="mt-10 h-px w-full bg-border/60" />
           </div>
 
-          <div className="flex justify-center md:justify-end">
+          <div className="order-1 flex justify-center md:order-2 md:justify-end">
             <div className="relative h-40 w-40 overflow-hidden rounded-full shadow-none ring-1 ring-border/60 sm:h-48 sm:w-48">
               <Image
                 src="/images/profile.jpg"
                 alt="Enock Omondi"
                 fill
+                sizes="(min-width: 640px) 192px, 160px"
                 className="object-cover"
                 priority
               />
