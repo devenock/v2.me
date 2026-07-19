@@ -40,7 +40,7 @@ export default function ProjectCard({
   return (
     <Card className="flex flex-col overflow-hidden">
       <div className="relative aspect-[16/9] md:aspect-[2/1] overflow-hidden">
-        <Image src={image} alt={title} fill className="object-cover" priority />
+        <Image src={image} alt={title} fill sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" className="object-cover" priority />
       </div>
       <CardHeader className="p-4 md:pb-4">
         <div className="flex flex-col gap-2 md:flex-row md:justify-between">
