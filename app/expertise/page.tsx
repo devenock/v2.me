@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToolsGrid } from "@/components/ToolsGrid";
-import { Databases, Frameworks, Languages, Tools } from "@/data";
+import { Analytics, Databases, Frameworks, Languages, Tools } from "@/data";
 
 export const metadata = {
   title: "Expertise",
@@ -31,6 +31,9 @@ export default function ExpertisePage() {
               <TabsTrigger value="tools" className="px-5 py-2 text-sm font-medium">
                 Tools & Infra
               </TabsTrigger>
+              <TabsTrigger value="analytics" className="px-5 py-2 text-sm font-medium">
+                Analytics
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="languages">
@@ -44,6 +47,9 @@ export default function ExpertisePage() {
             </TabsContent>
             <TabsContent value="tools">
               <ToolsGrid tools={Tools} />
+            </TabsContent>
+            <TabsContent value="analytics">
+              <ToolsGrid tools={Analytics} />
             </TabsContent>
           </Tabs>
         </div>
