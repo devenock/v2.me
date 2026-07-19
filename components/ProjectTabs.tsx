@@ -2,7 +2,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProjectCard from "@/components/ProjectCard";
 import { projects, ProjectCategory } from "@/data";
 
-const TABS: { value: ProjectCategory; label: string }[] = [
+const TABS: { value: ProjectCategory | "all"; label: string }[] = [
+  { value: "all", label: "All" },
   { value: "api", label: "APIs" },
   { value: "cli", label: "CLIs" },
   { value: "web", label: "Web" },
@@ -10,7 +11,7 @@ const TABS: { value: ProjectCategory; label: string }[] = [
 
 export default function ProjectTabs() {
   return (
-    <Tabs defaultValue="api" className="w-full">
+    <Tabs defaultValue="all" className="w-full">
       <TabsList className="mb-8 h-auto gap-1 bg-muted/50 p-1">
         {TABS.map((tab) => (
           <TabsTrigger
@@ -24,7 +25,10 @@ export default function ProjectTabs() {
       </TabsList>
 
       {TABS.map((tab) => {
-        const filtered = projects.filter((p) => p.category === tab.value);
+        const filtered =
+          tab.value === "all"
+            ? projects
+            : projects.filter((p) => p.category === tab.value);
         return (
           <TabsContent key={tab.value} value={tab.value}>
             {filtered.length === 0 ? (
