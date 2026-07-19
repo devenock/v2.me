@@ -145,6 +145,8 @@ export const skills: ISkillListItem[] = [
 
 // projects
 
+export type ProjectCategory = "web" | "api" | "cli";
+
 export const projects = [
   {
     title: "dweaver",
@@ -157,6 +159,7 @@ export const projects = [
     hasSource: true,
     hasDemo: false,
     githubUrl: "https://github.com/devenock/d_weaver",
+    category: "web" as ProjectCategory,
   },
   {
     title: "Event Management API",
@@ -170,6 +173,7 @@ export const projects = [
     hasSource: true,
     hasDemo: false,
     githubUrl: "",
+    category: "api" as ProjectCategory,
   },
   {
     title: "Vendre",
@@ -183,6 +187,7 @@ export const projects = [
     hasSource: true,
     liveUrl: "https://vender-eta.vercel.app/",
     githubUrl: "https://github.com/devenock/vender",
+    category: "web" as ProjectCategory,
   },
   {
     title: "Shopper API",
@@ -196,6 +201,7 @@ export const projects = [
     hasSource: true,
     liveUrl: "https://expressjs-shoppers-api.onrender.com/api/v1/docs/",
     githubUrl: "https://github.com/devenock/expressjs-shoppers-api",
+    category: "api" as ProjectCategory,
   },
   // {
   //   title: "SQLift",
@@ -208,6 +214,7 @@ export const projects = [
   //   hasSource: true,
   //   liveUrl: "https://github.com/devenock/SQLift",
   //   githubUrl: "https://github.com/devenock/SQLift",
+  //   category: "web" as ProjectCategory,
   // },
   {
     title: "Apitestdoc",
@@ -221,6 +228,7 @@ export const projects = [
     hasSource: true,
     liveUrl: "https://devenock.github.io/apitestdoc/",
     githubUrl: "https://github.com/devenock/apitestdoc",
+    category: "cli" as ProjectCategory,
   },
 ];
 

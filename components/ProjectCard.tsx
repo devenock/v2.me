@@ -21,6 +21,7 @@ interface ProjectCardProps {
   hasSource?: boolean;
   liveUrl?: string;
   githubUrl?: string;
+  category?: string;
 }
 
 export default function ProjectCard({
