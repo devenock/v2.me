@@ -39,8 +39,8 @@ export default function Header() {
                 className={`
                   relative text-sm font-medium tracking-wide
                   transition-all duration-200 ease-in-out
-                  ${isActive 
-                    ? "text-foreground" 
+                  ${isActive
+                    ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                   }
                   group
@@ -56,6 +56,19 @@ export default function Header() {
               </Link>
             );
           })}
+
+          <Link
+            href="/hire-me"
+            className={`
+              rounded-md border px-4 py-1.5 text-sm font-medium tracking-wide transition-colors duration-200
+              ${pathname === "/hire-me"
+                ? "border-foreground bg-foreground text-background"
+                : "border-border bg-transparent text-foreground hover:bg-foreground hover:text-background"
+              }
+            `}
+          >
+            Hire Me
+          </Link>
         </div>
       </nav>
     </header>
