@@ -1,0 +1,93 @@
+import AnimatedName from "../../../../components/AnimatedName";
+import { BlogPostHeader } from "@/components/BlogPostHeader";
+import { AsciiDiagram } from "@/components/AsciiDiagram";
+
+export const metadata = {
+    title: 'Go Struct Tags: db vs. json',
+    description:
+        "Two tags, two completely different readers — what db and json actually do on a Go struct, and why your database schema shouldn't dictate your API.",
+    date: '2026-07-21',
+    readingMinutes: 5,
+    alternates: {
+        canonical: '/blog/go/struct-tags-db-vs-json',
+    },
+};
+
+<BlogPostHeader title={metadata.title} date={metadata.date} minutes={metadata.readingMinutes} />
+
+<AnimatedName />
+
+If you've spent any time in a Go codebase that talks to both a database and an HTTP client, you've seen a field like `ID int64` tagged with `db:"user_id" json:"id"`. The first time I ran into a struct field carrying two tags, I assumed one of them was probably redundant — surely you don't need to tell Go the same thing twice. You do, though, just not for the reason it looks like at a glance.
+
+Struct tags are metadata strings, read at runtime through Go's `reflect` package. Nothing forces `db` and `json` to agree with each other, because they're not written for the same audience.
+
+---
+
+## Two different readers
+
+`encoding/json` reads the `json` tag when it turns a struct into a JSON payload, or turns incoming JSON back into a struct. Your database library — `sqlx`, `gorm`, `bun`, whatever you're using — reads the `db` tag (or its own equivalent) when it maps struct fields to SQL columns. Same struct, two separate libraries, and neither one so much as glances at the other's tag.
+
+Roughly:
+
+<AsciiDiagram>{`
+                    ┌───────────────┐
+                    │   Go Struct   │
+                    └───────────────┘
+                            │
+            ┌───────────────┴───────────────┐
+            ▼                               ▼
+      Read by: json                    Read by: db
+ Used by: encoding/json         Used by: sqlx, gorm, bun
+            ▼                               ▼
+  ┌──────────────────┐            ┌──────────────────┐
+  │   JSON payload   │            │   SQL database   │
+  │ (web/mobile/API) │            │ (Postgres/MySQL) │
+  └──────────────────┘            └──────────────────┘
+`}</AsciiDiagram>
+
+## A User struct, in practice
+
+Here's a fairly ordinary `User` struct that has to satisfy both a Postgres table and a JSON API:
+
+```go
+package main
+
+import "time"
+
+type User struct {
+	ID           int64     `db:"user_id" json:"id"`
+	EmailAddress string    `db:"email_address" json:"emailAddress"`
+	PasswordHash string    `db:"password_hash" json:"-"`
+	CreatedAt    time.Time `db:"created_at" json:"createdAt"`
+}
+```
+
+Two things are worth pointing out. First, the naming mismatch is intentional, not sloppy — the Postgres column is `email_address`, the frontend wants `emailAddress`, and having both tags means neither side has to bend its own convention. Second, look at `PasswordHash`. It needs a `db` tag because the app has to pull it out of the database to check a login, but it has no business ever leaving the server. `json:"-"` tells `encoding/json` to skip the field entirely, so no handler — no matter how it's written — can accidentally leak it in a response.
+
+## What splitting them actually buys you
+
+**Scanning rows without hand-written glue.** Point `sqlx` at a query and it matches result columns to struct fields using the `db` tags:
+
+```go
+var users []User
+err := db.Select(&users, "SELECT user_id, email_address, password_hash, created_at FROM users")
+```
+
+No manual `rows.Scan(&user.ID, &user.Email, ...)`, no throwaway variables — the tags do the mapping for you.
+
+**Smaller responses.** Skip the `json` tag entirely and Go just uses the field name as-is, so `EmailAddress` shows up capitalized in every payload. A short tag like `json:"email"` isn't just tidier to read, it's fewer bytes on every single response, which starts to matter once you're serving real traffic.
+
+**Your schema and your API can move independently.** Rename a column from `email_address` to `contact_email` and you touch one `db` tag. The JSON contract — `json:"emailAddress"` — doesn't change, so nothing on the frontend or in a third-party integration breaks. That's the part that actually matters at scale: your database gets to evolve without your API pretending nothing happened.
+
+## Side by side
+
+| Aspect | `db` tag | `json` tag |
+|--------|----------|------------|
+| Read by | `sqlx`, `gorm`, `bun` | `encoding/json` |
+| Naming | `snake_case` | `camelCase`, usually |
+| Job | Maps a field to a SQL column | Shapes the JSON payload |
+| Omit a field | Depends on the library, e.g. `gorm:"-"` | `json:"-"` |
+
+## Where this leaves you
+
+None of this means every struct needs both tags. If a type only ever moves data in or out of the database — a repository-layer object with no business being serialized — the `json` tag is dead weight. If it's a pure API payload that never touches SQL, drop `db`. The two-tag pattern earns its keep specifically when one struct is doing double duty as both, which happens often enough in smaller Go codebases that it's worth knowing exactly why it works, rather than just copying it because you've seen it everywhere else.
