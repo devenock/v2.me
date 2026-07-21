@@ -19,6 +19,15 @@ interface BlogPostPageProps {
 const linkClass =
   "font-medium text-blue-600 underline underline-offset-4 transition-colors hover:text-blue-700 dark:text-sky-400 dark:hover:text-sky-300";
 
+// The Rust MDX/GFM table compiler emits whitespace-only text nodes between
+// <table>/<thead>/<tbody>/<tr> and their element children, which React
+// rejects as invalid table children during hydration. Strip them.
+function stripWhitespaceChildren(children: React.ReactNode): React.ReactNode {
+  return React.Children.toArray(children).filter(
+    (child) => !(typeof child === "string" && child.trim() === "")
+  );
+}
+
 const components = {
   Term: MdxTerm,
   strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
@@ -124,18 +133,24 @@ const components = {
         )}
         {...props}
       >
-        {children}
+        {stripWhitespaceChildren(children)}
       </table>
     </div>
   ),
-  thead: ({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
-    <thead className={cn("border-b border-border bg-muted/50", className)} {...props} />
+  thead: ({ className, children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <thead className={cn("border-b border-border bg-muted/50", className)} {...props}>
+      {stripWhitespaceChildren(children)}
+    </thead>
   ),
-  tbody: ({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
-    <tbody className={cn("divide-y divide-border", className)} {...props} />
+  tbody: ({ className, children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <tbody className={cn("divide-y divide-border", className)} {...props}>
+      {stripWhitespaceChildren(children)}
+    </tbody>
   ),
-  tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
-    <tr className={cn("border-b border-border/60 last:border-0", className)} {...props} />
+  tr: ({ className, children, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
+    <tr className={cn("border-b border-border/60 last:border-0", className)} {...props}>
+      {stripWhitespaceChildren(children)}
+    </tr>
   ),
   th: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <th
