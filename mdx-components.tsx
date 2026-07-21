@@ -7,6 +7,15 @@ import { MdxPreWithCopy } from "./components/MdxPreWithCopy";
 import { MdxTerm } from "./components/MdxTerm";
 import { blogMdxProseClassName } from "./lib/blogMdxProse";
 
+// The Rust MDX/GFM table compiler emits whitespace-only text nodes between
+// <table>/<thead>/<tbody>/<tr> and their element children, which React
+// rejects as invalid table children during hydration. Strip them.
+function stripWhitespaceChildren(children: React.ReactNode): React.ReactNode {
+  return React.Children.toArray(children).filter(
+    (child) => !(typeof child === "string" && child.trim() === "")
+  );
+}
+
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     wrapper: ({ children }) => (
@@ -206,21 +215,27 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           )}
           {...props}
         >
-          {children}
+          {stripWhitespaceChildren(children)}
         </table>
       </div>
     ),
-    thead: ({ className, ...props }: any) => (
+    thead: ({ className, children, ...props }: any) => (
       <thead
         className={cn("border-b border-border bg-muted/50", className)}
         {...props}
-      />
+      >
+        {stripWhitespaceChildren(children)}
+      </thead>
     ),
-    tbody: ({ className, ...props }: any) => (
-      <tbody className={cn("divide-y divide-border", className)} {...props} />
+    tbody: ({ className, children, ...props }: any) => (
+      <tbody className={cn("divide-y divide-border", className)} {...props}>
+        {stripWhitespaceChildren(children)}
+      </tbody>
     ),
-    tr: ({ className, ...props }: any) => (
-      <tr className={cn("border-b border-border/60 last:border-0", className)} {...props} />
+    tr: ({ className, children, ...props }: any) => (
+      <tr className={cn("border-b border-border/60 last:border-0", className)} {...props}>
+        {stripWhitespaceChildren(children)}
+      </tr>
     ),
     th: ({ className, ...props }: any) => (
       <th
