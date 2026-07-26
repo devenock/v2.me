@@ -16,17 +16,17 @@ export const metadata = {
 
 <AnimatedName />
 
-If you've worked with databases in Go for any reasonable amount of time, you've almost certainly run into the nullable column problem. A column in your database allows `NULL`, and now you have to figure out how to represent that in your Go struct. The standard library gives you `sql.NullString`, `sql.NullInt64`, `sql.NullBool` and friends — and at first glance, they seem like the right tool for the job.
+If you have worked with databases in Go for any reasonable amount of time, you have almost certainly run into the nullable column problem. A column in your database allows `NULL`, and now you have to figure out how to represent that in your Go struct. The standard library gives you `sql.NullString`, `sql.NullInt64`, `sql.NullBool` and friends. At first glance, they seem like the right tool for the job.
 
 They scan correctly. They handle `NULL` without panicking. Problem solved, right?
 
-Not quite. The moment you try to serialize one of those structs to JSON, you'll understand why a lot of experienced Go developers quietly avoid `sql.Null*` types and reach for pointer types instead.
+Not quite. The moment you try to serialize one of those structs to JSON, you will understand why a lot of experienced Go developers quietly avoid `sql.Null*` types and reach for pointer types instead.
 
 ---
 
 ## The sql.NullString trap
 
-Let's say you have a `users` table where the `bio` column is nullable. A user might not have filled it in yet. Here's how most people start:
+Say you have a `users` table where the `bio` column is nullable. A user might not have filled it in yet. Here is how most people start:
 
 ```go
 type User struct {
@@ -60,7 +60,7 @@ No errors. The data is there. Now you serialize it to JSON and send it to your f
 }
 ```
 
-That is not what you wanted. Your frontend expected either a string value or `null`. Instead it got an object with two fields — `String` and `Valid` — that it now has to know how to interpret. Every client consuming this API has to understand your internal Go database scanning logic, which is a leaky abstraction in the worst possible way.
+That is not what you wanted. Your frontend expected either a string value or `null`. Instead it got an object with two fields, `String` and `Valid`, that it now has to know how to interpret. Every client consuming this API has to understand your internal Go database scanning logic, which is a leaky abstraction in the worst possible way.
 
 And if the bio *does* have a value:
 
@@ -100,7 +100,7 @@ var user User
 err := row.Scan(&user.ID, &user.Name, &user.Email, &user.Bio)
 ```
 
-The `database/sql` package knows how to scan a nullable column into a pointer. If the column is `NULL`, the pointer is set to `nil`. If there's a value, the pointer is set to a newly allocated string containing that value.
+The `database/sql` package knows how to scan a nullable column into a pointer. If the column is `NULL`, the pointer is set to `nil`. If there is a value, the pointer is set to a newly allocated string containing that value.
 
 Now serialize to JSON:
 
@@ -124,11 +124,11 @@ Or when the bio has a value:
 }
 ```
 
-`encoding/json` handles pointer types natively. A nil pointer serializes to JSON `null`. A non-nil pointer serializes to the value it points to. No wrapper object, no `Valid` field leaking into your API response — just clean, predictable JSON.
+`encoding/json` handles pointer types natively. A nil pointer serializes to JSON `null`. A non-nil pointer serializes to the value it points to. No wrapper object, no `Valid` field leaking into your API response: just clean, predictable JSON.
 
 ## A more complete example
 
-Let's make this more realistic. Here's a `users` table with several nullable columns:
+Take this a step further. Here is a `users` table with several nullable columns:
 
 ```sql
 CREATE TABLE users (
@@ -198,7 +198,7 @@ And the JSON output for a user where only `name` and `email` are filled in:
 }
 ```
 
-Compare that to what you'd get with `sql.Null*` types — five nested objects with `String`/`Valid` pairs. The pointer approach is what clean API responses look like.
+Compare that to what you would get with `sql.Null*` types: five nested objects with `String`/`Valid` pairs. The pointer approach is what clean API responses look like.
 
 ## Writing back to the database
 
@@ -216,7 +216,7 @@ func UpdateUserBio(db *sql.DB, userID int, bio *string) error {
 
 Pass `nil` to set the column to `NULL`. Pass a pointer to a string to set a value. The `database/sql` driver handles both cases correctly.
 
-If you're building an update endpoint and want to clear a user's bio:
+If you are building an update endpoint and want to clear a user's bio:
 
 ```go
 err := UpdateUserBio(db, 3, nil) // sets bio to NULL in the database
@@ -231,7 +231,7 @@ err := UpdateUserBio(db, 3, &bio)
 
 ## When sql.NullString is still useful
 
-To be fair, `sql.Null*` types aren't completely useless. They give you explicit access to the `Valid` field, which can matter when you need to distinguish between a zero value and a `NULL` at the application logic level — not at the serialization level.
+To be fair, `sql.Null*` types are not completely useless. They give you explicit access to the `Valid` field, which can matter when you need to distinguish between a zero value and a `NULL` at the application logic level, not at the serialization level.
 
 For example:
 
@@ -246,7 +246,7 @@ if score.Valid {
 }
 ```
 
-This is readable and explicit. But the moment that struct needs to go into a JSON response or be passed through any serialization layer, you're back to the same problem.
+This is readable and explicit. But the moment that struct needs to go into a JSON response or be passed through any serialization layer, you are back to the same problem.
 
 A pointer gives you the same information with less ceremony:
 
@@ -265,7 +265,7 @@ Same logic. Cleaner type. Works natively with JSON.
 
 ## One thing to watch out for
 
-When you dereference a pointer, make sure it's not nil first. This is the one real discipline pointer types require:
+When you dereference a pointer, make sure it is not nil first. This is the one real discipline pointer types require:
 
 ```go
 user, _ := GetUserByID(db, 3)
@@ -279,12 +279,12 @@ if user.Bio != nil {
 }
 ```
 
-It's easy to get comfortable with the non-nil happy path and forget. If you're using a library like `sqlx` or an ORM like `ent` or `gorm`, most of them handle pointer fields gracefully. But in plain `database/sql` code, the discipline is on you.
+It is easy to get comfortable with the non-nil happy path and forget. If you are using a library like `sqlx` or an ORM like `ent` or `gorm`, most of them handle pointer fields gracefully. But in plain `database/sql` code, the discipline is on you.
 
 ## The bottom line
 
-`sql.NullString` and its siblings solve the scanning problem but create a serialization problem. Pointer types solve both at once — they scan correctly from the database, they serialize cleanly to JSON, and they read naturally in Go code.
+`sql.NullString` and its siblings solve the scanning problem but create a serialization problem. Pointer types solve both at once: they scan correctly from the database, they serialize cleanly to JSON, and they read naturally in Go code.
 
-The rule is simple: if a column is nullable, use a pointer type. `*string` for text, `*int` for integers, `*bool` for booleans, `*time.Time` for timestamps. Your API clients will get clean JSON, your code will stay readable, and you won't have to write custom `MarshalJSON` methods just to undo what `sql.NullString` broke.
+The rule is simple: if a column is nullable, use a pointer type. `*string` for text, `*int` for integers, `*bool` for booleans, `*time.Time` for timestamps. Your API clients will get clean JSON, your code will stay readable, and you will not have to write custom `MarshalJSON` methods just to undo what `sql.NullString` broke.
 
-It's one of those small Go decisions that compounds quietly — the right choice here means one less thing to explain to every new engineer who joins the team and wonders why the API is returning `{ "String": "", "Valid": false }`.
+It is one of those small Go decisions that compounds quietly: the right choice here means one less thing to explain to every new engineer who joins the team and wonders why the API is returning `{ "String": "", "Valid": false }`.
