@@ -1,0 +1,243 @@
+import AnimatedName from "../../../../components/AnimatedName";
+import { BlogPostHeader } from "@/components/BlogPostHeader";
+
+export const metadata = {
+    title: 'Why You Should Be Wrapping Errors with %w in Go (And What It Actually Does)',
+    description:
+        "The difference between %v and %w in fmt.Errorf, and why %w is what makes errors.Is and errors.As work correctly once an error crosses package boundaries.",
+    date: '2026-08-03',
+    readingMinutes: 7,
+    alternates: {
+        canonical: '/blog/go/error-formatting',
+    },
+};
+
+<BlogPostHeader title={metadata.title} date={metadata.date} minutes={metadata.readingMinutes} />
+
+<AnimatedName />
+
+Error handling in Go is one of those things that looks simple on the surface. You return an error, you check if it is nil, you move on. But once your codebase grows past a few packages, you start running into a problem that every Go developer hits eventually: you get an error back and you have no idea where it came from. I ran into this constantly before `%w` existed, and I still catch people on my team reaching for `%v` out of habit.
+
+The standard library introduced `%w` in Go 1.13 specifically to fix this. It is a small addition to `fmt.Errorf` that changes how errors are structured, not just how they are displayed. If you are still using `fmt.Errorf("something failed: %v", err)` everywhere, this is worth understanding.
+
+---
+
+## The problem with %v
+
+Before `%w` existed, the common way to add context to an error was `%v`:
+
+```go
+func getUser(id int) (*User, error) {
+    user, err := db.QueryUser(id)
+    if err != nil {
+        return nil, fmt.Errorf("getUser failed: %v", err)
+    }
+    return user, nil
+}
+```
+
+This works fine for logging. The error message reads clearly: `getUser failed: connection refused`. You can print it, you can log it, and a human reading the logs will understand what happened.
+
+But the moment you want to inspect that error programmatically, say check if it is a specific error type, or unwrap it to see what is underneath, you are stuck. `%v` converts the original error into a plain string. The original error is gone. It has been baked into a new error with no way to retrieve it.
+
+```go
+err := getUser(5)
+
+// This will never be true — the original error was converted to a string
+if errors.Is(err, sql.ErrNoRows) {
+    // handle not found
+}
+```
+
+That `errors.Is` check fails silently. You think you are handling `sql.ErrNoRows` but you are not, because `%v` destroyed the original error's identity the moment you wrapped it.
+
+## What %w does differently
+
+`%w` wraps the error instead of converting it. The resulting error still has a readable message, but it also holds a reference to the original error internally. That original error can be retrieved later using `errors.Unwrap`, `errors.Is`, and `errors.As`.
+
+```go
+func getUser(id int) (*User, error) {
+    user, err := db.QueryUser(id)
+    if err != nil {
+        return nil, fmt.Errorf("getUser failed: %w", err)
+    }
+    return user, nil
+}
+```
+
+The error message looks identical to before. But now the original error is preserved inside the wrapper, and you can inspect it:
+
+```go
+err := getUser(5)
+
+if errors.Is(err, sql.ErrNoRows) {
+    // This now works correctly
+    fmt.Println("User not found")
+}
+```
+
+`errors.Is` walks the error chain automatically, unwrapping it layer by layer until it either finds a match or runs out of layers. With `%v`, there is no chain to walk. With `%w`, there is.
+
+## A real example: errors crossing package boundaries
+
+This is where `%w` earns its keep. In a real application, an error typically originates deep in a data layer and bubbles up through several functions before it reaches the handler that decides what to do with it.
+
+```go
+// data layer
+func queryUserFromDB(id int) (*User, error) {
+    var user User
+    err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&user.ID, &user.Name)
+    if err != nil {
+        return nil, fmt.Errorf("queryUserFromDB: %w", err)
+    }
+    return &user, nil
+}
+
+// service layer
+func GetUser(id int) (*User, error) {
+    user, err := queryUserFromDB(id)
+    if err != nil {
+        return nil, fmt.Errorf("GetUser: %w", err)
+    }
+    return user, nil
+}
+
+// handler
+func handleGetUser(w http.ResponseWriter, r *http.Request) {
+    id := getIDFromRequest(r)
+
+    user, err := GetUser(id)
+    if err != nil {
+        if errors.Is(err, sql.ErrNoRows) {
+            http.Error(w, "user not found", http.StatusNotFound)
+            return
+        }
+        http.Error(w, "internal server error", http.StatusInternalServerError)
+        return
+    }
+
+    json.NewEncoder(w).Encode(user)
+}
+```
+
+The error travels from `queryUserFromDB` to `GetUser` to `handleGetUser`, picking up context at each layer. By the time it reaches the handler, the error message looks like this:
+
+```
+GetUser: queryUserFromDB: sql: no rows in result set
+```
+
+That is a full breadcrumb trail from handler down to the database. And `errors.Is(err, sql.ErrNoRows)` still returns `true` at the handler level, because `%w` preserved the original error through both wrapping layers.
+
+With `%v` at either layer, that `errors.Is` check breaks and you lose the ability to handle specific errors gracefully.
+
+## errors.As: unwrapping to a specific type
+
+`%w` also unlocks `errors.As`, which lets you extract the original error as a specific type rather than just checking if it matches a sentinel value.
+
+Say you have a custom error type for validation:
+
+```go
+type ValidationError struct {
+    Field   string
+    Message string
+}
+
+func (e *ValidationError) Error() string {
+    return fmt.Sprintf("validation failed on field '%s': %s", e.Field, e.Message)
+}
+```
+
+And somewhere in your service you return it wrapped:
+
+```go
+func createUser(name, email string) error {
+    if name == "" {
+        return fmt.Errorf("createUser: %w", &ValidationError{
+            Field:   "name",
+            Message: "cannot be empty",
+        })
+    }
+    // ...
+}
+```
+
+At the handler level, you can extract the original `ValidationError` and use its fields directly:
+
+```go
+err := createUser("", "alice@example.com")
+
+var valErr *ValidationError
+if errors.As(err, &valErr) {
+    fmt.Printf("Bad request: field '%s' — %s\n", valErr.Field, valErr.Message)
+    // Output: Bad request: field 'name' — cannot be empty
+}
+```
+
+`errors.As` unwraps the chain until it finds an error that can be assigned to the target type. Without `%w`, this is impossible: the original `*ValidationError` is gone the moment you use `%v`.
+
+## The difference between %w and errors.New
+
+One thing worth clarifying: `%w` is for wrapping an existing error with additional context. If you are creating a brand new error with no underlying cause, `errors.New` is still the right choice:
+
+```go
+// Creating a new sentinel error — use errors.New
+var ErrUserNotFound = errors.New("user not found")
+
+// Adding context to an existing error — use %w
+return fmt.Errorf("GetUser: %w", ErrUserNotFound)
+```
+
+Think of `errors.New` as the origin point and `%w` as the chain that connects that origin to wherever the error ends up being handled.
+
+## What the error chain looks like
+
+It helps to visualize what `%w` actually builds under the hood. Given this code:
+
+```go
+original := sql.ErrNoRows
+wrapped1 := fmt.Errorf("queryUserFromDB: %w", original)
+wrapped2 := fmt.Errorf("GetUser: %w", wrapped1)
+```
+
+The structure is:
+
+```
+wrapped2
+  └── wrapped1
+        └── original (sql.ErrNoRows)
+```
+
+`errors.Is(wrapped2, sql.ErrNoRows)` walks this chain:
+
+1. Is `wrapped2` equal to `sql.ErrNoRows`? No.
+2. Unwrap `wrapped2` to get `wrapped1`. Is `wrapped1` equal to `sql.ErrNoRows`? No.
+3. Unwrap `wrapped1` to get `original`. Is `original` equal to `sql.ErrNoRows`? Yes.
+
+With `%v`, unwrapping returns nothing, because the chain simply does not exist.
+
+## One thing to avoid
+
+Do not use `%w` more than once in the same `fmt.Errorf` call. Go only supports a single wrapping verb per call, and passing two will cause a panic at runtime:
+
+```go
+// This will panic
+err := fmt.Errorf("two errors: %w and %w", err1, err2)
+```
+
+If you genuinely need to combine multiple errors, use `errors.Join`, available from Go 1.20:
+
+```go
+combined := errors.Join(err1, err2)
+```
+
+`errors.Join` creates an error that wraps both, and `errors.Is` and `errors.As` work correctly against either of them.
+
+## The bottom line
+
+`%v` formats an error into a string and discards the original. `%w` formats the same string but keeps the original error alive inside the wrapper, making it inspectable at any point up the call stack.
+
+The practical impact is that `errors.Is` and `errors.As` work correctly across your entire application. You can handle specific error types at the right layer without leaking database internals up to your HTTP handlers, and without losing the ability to distinguish between a `sql.ErrNoRows` and a connection timeout.
+
+The rule is simple: whenever you are wrapping an existing error with context, use `%w`. Reserve `%v` for situations where you genuinely want to convert the error to a string and have no need to inspect it further, logging being the obvious case, though even there, most structured loggers accept the error directly.
+
+It is a one-character change from `%v` to `%w` that gives your error handling a proper backbone. Once you get used to `errors.Is` checks that actually work, going back to `%v` feels careless.
