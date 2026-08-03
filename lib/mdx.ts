@@ -35,20 +35,33 @@ function getAllFiles(dir: string): string[] {
   return files;
 }
 
+// Extracts a `key: '...'` or `key: "..."` string value, honoring escaped
+// quotes and allowing the other quote character to appear unescaped inside
+// (e.g. title: 'What "Backend Architecture" Means' or title: 'Isn\'t this great').
+function extractQuotedField(source: string, key: string): string | undefined {
+  const re = new RegExp(
+    `${key}\\s*:\\s*(?:'((?:[^'\\\\]|\\\\.)*)'|"((?:[^"\\\\]|\\\\.)*)")`
+  );
+  const match = source.match(re);
+  if (!match) return undefined;
+  const raw = match[1] !== undefined ? match[1] : match[2];
+  return raw.replace(/\\(['"])/g, '$1');
+}
+
 function extractMetadata(content: string): { title: string; description: string; date?: string } {
   // First try to find Next.js metadata
   // Use a non-greedy multiline match so nested objects (e.g. alternates) don't break parsing
   const metadataMatch = content.match(/export const metadata\s*=\s*\{([\s\S]*?)\}\s*;?/);
   if (metadataMatch) {
     const metadataStr = metadataMatch[1];
-    const titleMatch = metadataStr.match(/title:\s*['"]([^'"]+)['"]/);
-    const descriptionMatch = metadataStr.match(/description:\s*['"]([^'"]+)['"]/);
-    const dateMatch = metadataStr.match(/date:\s*['"]([^'"]+)['"]/);
+    const title = extractQuotedField(metadataStr, 'title');
+    const description = extractQuotedField(metadataStr, 'description');
+    const date = extractQuotedField(metadataStr, 'date');
 
     return {
-      title: titleMatch ? titleMatch[1] : 'Untitled',
-      description: descriptionMatch ? descriptionMatch[1] : 'No description available',
-      date: dateMatch ? dateMatch[1] : undefined,
+      title: title ?? 'Untitled',
+      description: description ?? 'No description available',
+      date,
     };
   }
 
