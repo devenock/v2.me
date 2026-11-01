@@ -14,19 +14,3 @@ export interface ISkillItem {
   level?: SkillLevel;
   icon?: string;
 }
-
-export interface BlogPost {
-  id: string;
-  title: string;
-  date: string;
-  description: string;
-  image: string;
-  socialLinks?: {
-    facebook?: string;
-    twitter?: string;
-    youtube?: string;
-    whatsapp?: string;
-    uber?: string;
-    medium?: string;
-  };
-}
