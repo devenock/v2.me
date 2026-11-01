@@ -29,7 +29,6 @@ export default function ExperienceSection() {
             >
               {exp.roles.map((role) => (
                 <div key={`${exp.company}-${role.title}`}>
-                  {/* Header */}
                   <button
                     onClick={() => toggle(i)}
                     aria-expanded={isOpen}
@@ -55,7 +54,6 @@ export default function ExperienceSection() {
                     )}
                   </button>
 
-                  {/* Expandable body */}
                   {isOpen && (
                     <div className="px-5 pb-5 border-t border-border/50">
                       {exp.description && (

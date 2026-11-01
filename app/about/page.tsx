@@ -7,7 +7,6 @@ import { skills } from "@/data";
 export default function About() {
   return (
     <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8 max-w-4xl">
-      {/* Header Section */}
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mb-12">
         <div className="w-48 h-48 sm:w-64 sm:h-64 relative rounded-full overflow-hidden shrink-0">
           <Image
@@ -37,7 +36,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* About Section */}
       <section className="mb-12">
         <h2 className="mb-4 text-2xl font-bold text-foreground">About Me</h2>
         <div className="space-y-4 leading-relaxed text-muted-foreground">
@@ -69,7 +67,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Expertise Section */}
       <section className="mb-12">
         <h2 className="mb-6 text-2xl font-bold text-foreground">
           Areas of Expertise
@@ -116,7 +113,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Skills Overview */}
       <section className="mb-12">
         <h2 className="mb-6 text-2xl font-bold text-foreground">
           Technical Skills
@@ -157,7 +153,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Call to Action */}
       <section className="border-t border-border py-8 text-center">
         <p className="mb-4 text-muted-foreground">
           Interested in learning more about my work?

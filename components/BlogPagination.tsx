@@ -8,9 +8,6 @@ type Props = {
   category: string;
 };
 
-/**
- * Previous / next + compact page links for the blog index.
- */
 export function BlogPagination({ currentPage, totalPages, category }: Props) {
   if (totalPages <= 1) return null;
 

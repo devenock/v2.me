@@ -1,6 +1,5 @@
 import { cn } from "./utils";
 
-/** Shared prose wrapper for MDX article bodies (file-based + MDXRemote). */
 export const blogMdxProseClassName = cn(
   "prose prose-gray max-w-none text-[15px] leading-relaxed text-foreground",
   "prose-headings:font-semibold prose-headings:text-foreground",

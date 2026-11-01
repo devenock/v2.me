@@ -7,9 +7,7 @@ import { MdxPreWithCopy } from "./components/MdxPreWithCopy";
 import { MdxTerm } from "./components/MdxTerm";
 import { blogMdxProseClassName } from "./lib/blogMdxProse";
 
-// The Rust MDX/GFM table compiler emits whitespace-only text nodes between
-// <table>/<thead>/<tbody>/<tr> and their element children, which React
-// rejects as invalid table children during hydration. Strip them.
+// mdxRs emits whitespace text nodes inside table elements, which breaks React hydration.
 function stripWhitespaceChildren(children: React.ReactNode): React.ReactNode {
   return React.Children.toArray(children).filter(
     (child) => !(typeof child === "string" && child.trim() === "")

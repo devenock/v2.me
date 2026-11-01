@@ -59,7 +59,6 @@ export default function HireMePage() {
           Reach out through any of the channels below.
         </p>
 
-        {/* Open for */}
         <div className="mt-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
             Open For
@@ -89,7 +88,6 @@ export default function HireMePage() {
           </div>
         </div>
 
-        {/* Primary — Email */}
         <div className="mt-10">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
             Primary Contact
@@ -111,7 +109,6 @@ export default function HireMePage() {
           </Link>
         </div>
 
-        {/* Other platforms */}
         <div className="mt-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
             Other Platforms
