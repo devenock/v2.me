@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 export type BlogListProps = {
   blogs: Blog[];
-  /** Includes `all` plus sorted unique categories from the full index */
   categories: string[];
   selectedCategory: string;
   currentPage: number;
@@ -26,9 +25,6 @@ function categoryLabel(category: string) {
   return category.charAt(0).toUpperCase() + category.slice(1);
 }
 
-/**
- * Blog index list (server-rendered). Category + pagination use URL search params.
- */
 export function BlogList({
   blogs,
   categories,

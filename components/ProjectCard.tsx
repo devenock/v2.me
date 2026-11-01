@@ -27,8 +27,6 @@ interface ProjectCardProps {
 export default function ProjectCard({
   title,
   icon,
-  // date,
-  // stars,
   description,
   tags,
   image,
@@ -48,9 +46,6 @@ export default function ProjectCard({
             <Image src={icon} width={30} height={30} alt={icon} priority />
             <h2 className="text-lg md:text-xl font-semibold">{title}</h2>
           </div>
-          {/*<div className="text-sm text-muted-foreground">*/}
-          {/*  <span>{date}</span> • ⭐ {stars}*/}
-          {/*</div>*/}
         </div>
       </CardHeader>
       <CardContent className="flex-1 px-4">

@@ -143,8 +143,6 @@ export const skills: ISkillListItem[] = [
   },
 ];
 
-// projects
-
 export type ProjectCategory = "web" | "api" | "cli";
 
 export const projects = [
@@ -203,19 +201,6 @@ export const projects = [
     githubUrl: "https://github.com/devenock/expressjs-shoppers-api",
     category: "api" as ProjectCategory,
   },
-  // {
-  //   title: "SQLift",
-  //   icon: "/icons/sql.svg",
-  //   date: "Jun 2023",
-  //   stars: 0,
-  //   description: "SQL Playground with challenges to help you upskill.",
-  //   tags: ["SQL", "db"],
-  //   image: "/images/sqlift.png",
-  //   hasSource: true,
-  //   liveUrl: "https://github.com/devenock/SQLift",
-  //   githubUrl: "https://github.com/devenock/SQLift",
-  //   category: "web" as ProjectCategory,
-  // },
   {
     title: "Apitestdoc",
     icon: "/icons/api.svg",
@@ -289,7 +274,6 @@ export const Tools = [
   { name: "GitHub Actions", icon: "/images/gh.svg" },
 ];
 
-// experience (used on landing page)
 export const experiences = [
   {
     company: "Altech Group",

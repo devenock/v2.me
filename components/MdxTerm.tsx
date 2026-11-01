@@ -8,10 +8,6 @@ type Props = {
   className?: string;
 };
 
-/**
- * Highlights important terms with color (light theme first; dark: ready for theme toggle).
- * Use instead of excessive **bold** for scan-friendly vocabulary.
- */
 export function MdxTerm({
   children,
   variant = "accent",

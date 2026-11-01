@@ -2,9 +2,7 @@ import { format, isValid, parseISO } from "date-fns";
 
 type BlogPostHeaderProps = {
   title: string;
-  /** ISO date string */
-  date: string;
-  /** Whole minutes, shown as e.g. 5min */
+  date: string; // ISO 8601
   minutes: number;
 };
 

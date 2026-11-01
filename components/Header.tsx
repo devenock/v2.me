@@ -28,7 +28,6 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur-sm">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <nav className="flex h-16 items-center justify-between">
-          {/* Logo */}
           <Link
             href="/"
             className="w-24 shrink-0 transition-opacity hover:opacity-80 sm:w-28"
@@ -43,7 +42,6 @@ export default function Header() {
             />
           </Link>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navData.map((item) => (
               <Link
@@ -74,7 +72,6 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
           <button
             className="md:hidden rounded-md p-2 text-muted-foreground hover:text-foreground transition-colors"
             onClick={() => setMenuOpen((o) => !o)}
@@ -84,7 +81,6 @@ export default function Header() {
           </button>
         </nav>
 
-        {/* Mobile dropdown */}
         {menuOpen && (
           <div className="md:hidden border-t border-border/60 py-4 space-y-1">
             {navData.map((item) => {

@@ -6,9 +6,6 @@ import { cn } from "@/lib/utils";
 
 const SHOW_AFTER_PX = 320;
 
-/**
- * Fixed scroll-to-top control for long reading pages (blog).
- */
 export function BlogScrollToTop() {
   const [visible, setVisible] = useState(false);
 
